@@ -1,6 +1,6 @@
-import { RouterProvider } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import router from './utils/Routes';
+import BackgroundTemplate from "./components/BackgroundTemplate";
 
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
   return (
     <>
       <RecoilRoot>
-          <RouterProvider router={router} />
+          <BackgroundTemplate/>
+          <Outlet/>
       </RecoilRoot>
     </>
   )
