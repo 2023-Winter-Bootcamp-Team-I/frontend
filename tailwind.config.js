@@ -7,6 +7,7 @@ export default {
       'main-color': '#AED1FF',
       'button-blue': '#1D92FF',
       white: '#FFFFFF',
+      shadowGray: '#849EC0',
     },
   },
   plugins: [],
