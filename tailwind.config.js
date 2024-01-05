@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {},
     colors: {
-      'main-color': '#AED1FF', // 메인 백그라운드 컬러
-      'button-blue': '#1D92FF', // 버튼 컬러
+      mainColor: '#AED1FF', // 메인 백그라운드 컬러
+      buttonBlue: '#1D92FF', // 버튼 컬러
+      white: '#FFFFFF',
     },
   },
   plugins: [],
