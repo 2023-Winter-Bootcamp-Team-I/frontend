@@ -1,8 +1,5 @@
-
 const BackgroundTemplate = () => {
-  return (
-    <div className=" bg-blue-100">BackgroundTemplate</div>
-  )
-}
+  return <div className=" bg-blue-100">BackgroundTemplate</div>;
+};
 
-export default BackgroundTemplate
+export default BackgroundTemplate;
