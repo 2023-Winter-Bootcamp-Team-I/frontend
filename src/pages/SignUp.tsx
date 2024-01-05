@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function SignUp() {
   return (
@@ -84,7 +84,7 @@ function SignUp() {
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>{' '}
       </div>
     </>
   );
