@@ -10,8 +10,10 @@ function SignUp() {
             <div className="flex">
               <img className="flex mx-auto min-h-full w-auto" src="../public/pencil.svg" alt="pencil_character" />
               <div className="">
-                <h2 className="flex mt-5 text-center text-4xl font-bold text-button-blue">회원가입을 위해</h2>
-                <h2 className="flex mt-2 text-center text-4xl font-bold text-button-blue">정보를 입력해주세요</h2>
+                <h2 className="flex mt-5 font-jua text-center text-4xl font-bold text-button-blue">회원가입을 위해</h2>
+                <h2 className="flex mt-2 font-jua text-center text-4xl font-bold text-button-blue">
+                  정보를 입력해주세요
+                </h2>
               </div>
             </div>
           </div>
@@ -68,10 +70,10 @@ function SignUp() {
               </div>
 
               <div className="flex flex-row">
-                <button className="flex basis-1/2 justify-center rounded-full bg-white px-14 py-2.5 text-lg font-bold leading-6 text-button-blue border-b-2 border-r-2 border-shadowGray mr-2">
+                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-white px-14 py-2.5 text-lg font-bold leading-6 text-button-blue border-b-2 border-r-2 border-shadowGray mr-2">
                   가입 취소
                 </button>
-                <button className="flex basis-1/2 justify-center rounded-full bg-button-blue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2">
+                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-button-blue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2">
                   가입 완료
                 </button>
               </div>
