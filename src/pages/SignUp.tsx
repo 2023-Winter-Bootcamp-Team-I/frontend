@@ -1,4 +1,5 @@
 import React from 'react';
+import pencil from '../assets/images/pencil.svg';
 
 function SignUp() {
   return (
@@ -8,7 +9,7 @@ function SignUp() {
         <div className="flex flex-1 flex-col justify-center">
           <div className="flex flex-row sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="flex">
-              <img className="flex mx-auto min-h-full w-auto" src="../public/pencil.svg" alt="pencil_character" />
+              <img className="flex mx-auto min-h-full w-auto" src={pencil} alt="pencil_character" />
               <div className="">
                 <h2 className="flex mt-5 font-jua text-center text-4xl font-bold text-button-blue">회원가입을 위해</h2>
                 <h2 className="flex mt-2 font-jua text-center text-4xl font-bold text-button-blue">

@@ -5,13 +5,13 @@
 @font-face {
     font-family: 'Dongle';
     src: local('Dongle'),
-    url('./fonts/Dongle/Dongle-Regular.ttf');
+    url('./assets/fonts/Dongle/Dongle-Regular.ttf');
     font-weight: regular;
 }
 
 @font-face {
     font-family: 'Jua';
     src: local('Jua'),
-    url('./fonts/Jua/Jua-Regular.ttf');
+    url('./assets/fonts/Jua/Jua-Regular.ttf');
     font-weight: regular;
 }
