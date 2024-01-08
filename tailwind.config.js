@@ -9,10 +9,11 @@ export default {
       },
     },
     colors: {
-      'main-color': '#AED1FF',
-      'button-blue': '#1D92FF',
+      mainColor: '#AED1FF', // 메인 백그라운드 컬러
+      buttonBlue: '#1D92FF', // 버튼 컬러
       white: '#FFFFFF',
       shadowGray: '#849EC0',
+      mainBlue: '#3CA5FF',
     },
   },
   plugins: [],
