@@ -16,7 +16,7 @@ const BackgroundTemplate: React.FC<{ children: ReactNode }> = ({ children }) => 
       <img src={jelly4} className="absolute top-80 left-0 w-36 h-40" />
       <img src={jelly5} className="absolute bottom-1/4 right-0 w-68 h-52" />
       <img src={jelly6} className="absolute bottom-0 left-12 w-60 h-40" />
-      <img src={jelly7} className="absolute bottom-0 right-20 w-60 h-24" />
+      <img src={jelly7} className="absolute bottom-0 right-8 w-60 h-24" />
       {children}
     </div>
   );

@@ -54,6 +54,7 @@ body {
   /* font-weight: 300;
   font-family: Inter; */
   color:black;
+  overflow: hidden;
 }
 a {
   text-decoration:none;
@@ -63,13 +64,12 @@ a {
 @font-face {
     font-family: 'Dongle';
     src: local('Dongle'),
-    url('./assets/fonts/Dongle/Dongle-Regular.ttf');
-    font-weight: regular;
+    url('./assets/fonts/Dongle/Dongle-Regular.ttf');
+    font-weight: 400;
 }
 
 @font-face {
     font-family: 'Jua';
     src: local('Jua'),
-    url('./assets/fonts/Jua/Jua-Regular.ttf');
-    font-weight: regular;
+    url('./assets/fonts/Jua/Jua-Regular.ttf');
 }
