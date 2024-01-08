@@ -59,3 +59,17 @@ a {
   text-decoration:none;
   color:inherit;
 }
+
+@font-face {
+    font-family: 'Dongle';
+    src: local('Dongle'),
+    url('./assets/fonts/Dongle/Dongle-Regular.ttf');
+    font-weight: regular;
+}
+
+@font-face {
+    font-family: 'Jua';
+    src: local('Jua'),
+    url('./assets/fonts/Jua/Jua-Regular.ttf');
+    font-weight: regular;
+}
