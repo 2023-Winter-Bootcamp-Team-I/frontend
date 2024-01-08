@@ -10,7 +10,7 @@ function LogInModal() {
         <div className="flex min-h-screen justify-center p-4 text-center sm:items-center sm:p-0">
           {/* Modal code starts from the below line */}
           <div className="relative rounded-lg shadow-xl transition-all my-8 w-2/3">
-            <div className="flex flex-row h-[55vh]">
+            <div className="flex flex-row h-[60vh]">
               <div className="flex flex-col bg-loginBlue basis-1/3">
                 <div className="flex basis-2/3 justify-center">
                   <img className="mx-auto min-h-full w-1/2" src={heartImg} alt="heart_character" />
@@ -20,7 +20,7 @@ function LogInModal() {
                 </div>
               </div>
               <div className="flex flex-col bg-mainColor basis-2/3 h-full">
-                <div className="flex text-white font-jua text-5xl justify-center mt-20 mb-[5vh]">로그인</div>
+                <div className="flex text-white font-jua text-5xl justify-center mt-20 mb-[8vh]">로그인</div>
                 <div className="flex justify-center">
                   <img
                     className="flex mx-auto min-h-full w-auto opacity-50 -mr-20 ml-10 w-10"
@@ -36,7 +36,7 @@ function LogInModal() {
                     className="block w-3/4 text-xl rounded-full border-0 px-20 py-3 border-2 border-shadowGray"
                   />
                 </div>
-                <div className="flex mt-8 mb-[6vh] justify-center">
+                <div className="flex mt-8 mb-[8vh] justify-center">
                   <img
                     className="flex mx-auto min-h-full w-auto opacity-50 -mr-20 ml-10 w-10"
                     src={lockImg}
