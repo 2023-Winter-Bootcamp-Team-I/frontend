@@ -6,6 +6,7 @@ export default {
     colors: {
       'main-color': '#AED1FF', // 메인 백그라운드 컬러
       'button-blue': '#1D92FF', // 버튼 컬러
+      white: '#FFFFFF',
     },
   },
   plugins: [],
