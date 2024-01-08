@@ -1,5 +1,5 @@
-import BackgroundTemplate from '@/components/BackgroundTemplate';
 import CreateInfoPage from '@/pages/CreateInfoPage';
+import App from '@/App';
 import MainPage from '@/pages/MainPage';
 import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
@@ -7,23 +7,22 @@ import { createBrowserRouter } from 'react-router-dom';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <BackgroundTemplate />,
+    element: <App />,
     children: [
       {
         path: '',
         element: <MainPage />,
       },
       {
-        path: '/createinfopage',
+        path: 'signup',
+        element: <SignUp />,
+      },
+      {
+        path: 'createinfopage',
         element: <CreateInfoPage />,
       },
     ],
   },
-  {
-    path: '/signup',
-    element: <SignUp />,
-  },
-
   // {
   //     path: "*",
   //     element: <NotfoundPage />,

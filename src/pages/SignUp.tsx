@@ -1,4 +1,3 @@
-import React from 'react';
 import pencil from '../assets/images/pencil.svg';
 
 function SignUp() {
