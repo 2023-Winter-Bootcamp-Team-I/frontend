@@ -8,6 +8,7 @@ export default {
       buttonBlue: '#1D92FF', // 버튼 컬러
       white: '#FFFFFF',
       mainBlue: '#3CA5FF',
+      
     },
   },
   plugins: [],

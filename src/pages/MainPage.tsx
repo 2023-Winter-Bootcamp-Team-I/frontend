@@ -4,7 +4,7 @@ import cutebook from '@/assets/images/Background/bookicon.svg';
 const MainPage = () => {
   return (
     <div className=" flex flex-col">
-      <div className="w-screen h-52 bg-mainBlue relative mt-28 flex items-center justify-center gap-52">
+      <div className="w-screen h-48 bg-mainBlue relative mt-24 flex items-center justify-center gap-52">
         <img src={bookmark} className=" w-44 h-52 -ml-80 -mt-16" />
         <p className="text-9xl font-normal text-white ">북그북그</p>
       </div>
