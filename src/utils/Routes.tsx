@@ -13,16 +13,17 @@ const router = createBrowserRouter([
         path: '',
         element: <MainPage />,
       },
+      {
+        path: '/createinfopage',
+        element: <CreateInfoPage />,
+      },
     ],
   },
   {
     path: '/signup',
     element: <SignUp />,
   },
-  {
-    path: '/createinfopage',
-    element: <CreateInfoPage />,
-  },
+
   // {
   //     path: "*",
   //     element: <NotfoundPage />,
