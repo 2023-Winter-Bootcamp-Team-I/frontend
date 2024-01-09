@@ -33,7 +33,7 @@ function LogInModal() {
                     type="email"
                     placeholder="이메일을 입력해주세요"
                     required
-                    className="block w-3/4 text-xl rounded-full border-0 px-24 py-[18px] border-2 border-shadowGray"
+                    className="block w-3/4 text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
                   />
                 </div>
                 <div className="flex mt-8 mb-[7vh] justify-center">
@@ -48,15 +48,15 @@ function LogInModal() {
                     type="password"
                     placeholder="비밀번호를 입력해주세요"
                     required
-                    className="block w-3/4 text-xl rounded-full border-0 px-24 py-[18px] border-2 border-shadowGray"
+                    className="block w-3/4 text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
                   />
                 </div>
                 <div className="flex justify-center">
-                  <div className="flex flex-row w-3/4">
-                    <button className="flex basis-1/2 justify-center font-jua rounded-3xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2">
+                  <div className="flex flex-row w-2/3">
+                    <button className="flex basis-1/2 justify-center align-middle font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2">
                       로그인
                     </button>
-                    <button className="flex basis-1/2 justify-center font-jua rounded-3xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
+                    <button className="flex basis-1/2 justify-center align-middle font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
                       회원 가입
                     </button>
                   </div>
