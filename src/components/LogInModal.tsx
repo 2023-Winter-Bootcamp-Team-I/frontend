@@ -8,7 +8,7 @@ function LogInModal() {
       <div className="flex justify-center text-center sm:items-center sm:p-0">
         {/* Modal code starts from the below line */}
         <div className="relative rounded-lg shadow-xl transition-all my-8 w-1/2">
-          <div className="flex flex-row h-[65vh]">
+          <div className="flex flex-row h-[70vh]">
             <div className="flex flex-col bg-loginBlue basis-1/3">
               <div className="flex basis-2/3 justify-center">
                 <img className="mx-auto min-h-full w-2/3" src={heartImg} alt="heart_character" />
