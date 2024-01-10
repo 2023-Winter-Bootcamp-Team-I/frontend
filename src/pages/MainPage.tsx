@@ -11,8 +11,8 @@ const MainPage = () => {
           <p className="text-[150px] font-normal text-[#3462BB] font-dongle">북그북그</p>
         </div>
       </div>
-      <div className="flex mt-20 mx-auto mr-12 gap-8">
-        <div className=" flex flex-col gap-6 font-light text-white mr-12">
+      <div className="flex mt-24 mx-auto my-0 gap-8 w-[1100px] h-auto justify-evenly">
+        <div className=" flex flex-col gap-6 font-light pl-8 text-white w-2/3">
           <div className="text-6xl font-[Dongle] mt-8">우리 아이가 동화책 주인공이라면? </div>
           <div className="text-6xl font-[Dongle] mb-8">AI와 함께 만드는 우리 아이 동화책 </div>
           <div className="flex gap-12 h-20 font-[Jua]">
@@ -28,7 +28,7 @@ const MainPage = () => {
             <div className=" w-60 h-16 bg-[#AAAAAA] text-4xl rounded-3xl " />
           </div> */}
         </div>
-        <img src={cutebook} className=" w-2/5 h-1/3 ml-4" />
+        <img src={cutebook} className=" w-[38rem] h-[25rem] -mt-4 -mr-12" />
       </div>
     </div>
   );
