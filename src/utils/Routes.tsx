@@ -1,8 +1,12 @@
+import CreateInfoPage from '@/pages/CreateInfoPage';
 import App from '@/App';
+import FrontCoverPage from '@/pages/FrontCoverPage';
 import LibraryPage from '@/pages/LibraryPage';
 import MainPage from '@/pages/MainPage';
 import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
+import CreateBookPage from '@/pages/CreateBookPage';
+import StoryChoiceModal from '@/pages/StoryChoiceModal';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +20,22 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignUp />,
+      },
+      {
+        path: 'createinfopage',
+        element: <CreateInfoPage />,
+      },
+      {
+        path: 'createbookpage',
+        element: <CreateBookPage />,
+      },
+      {
+        path: 'storychoicemodal',
+        element: <StoryChoiceModal />,
+      },
+      {
+        path: 'frontcover',
+        element: <FrontCoverPage />,
       },
       {
         path: 'library',
