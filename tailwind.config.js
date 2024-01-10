@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import scrollbar from 'tailwind-scrollbar';
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -17,5 +19,5 @@ export default {
       loginBlue: '#6EB0FF',
     },
   },
-  plugins: [],
+  plugins: [scrollbar({ nocompatible: true })],
 };
