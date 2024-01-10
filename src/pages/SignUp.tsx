@@ -1,4 +1,3 @@
-import React from 'react';
 import pencilImg from '@/assets/images/pencil.svg';
 import LogInModal from '@/components/LogInModal';
 
