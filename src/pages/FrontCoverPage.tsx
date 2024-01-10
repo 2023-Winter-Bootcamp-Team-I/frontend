@@ -2,7 +2,6 @@ import React from 'react';
 import robotImg from '@/assets/images/robot.svg';
 import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
-// import bookcover from '@/assets/images/bookcover.svg';
 
 function FrontCoverPage() {
   return (
