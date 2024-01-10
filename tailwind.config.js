@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import scrollbar from 'tailwind-scrollbar';
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -10,7 +12,6 @@ export default {
     },
     colors: {
       mainColor: '#AED1FF', // 메인 백그라운드 컬러
-      buttonBlue: '#1D92FF', // 버튼 컬러
       white: '#FFFFFF',
       shadowGray: '#849EC0', // 버튼 보더/그림자 컬러
       mainBlue: '#3CA5FF',
@@ -19,7 +20,9 @@ export default {
       bookCoverLine: '#97D1F2',
       bookCoverTextBox: '#C1DDFF',
       bookCoverTextBoxBorder: '#AAB6DD',
+      signupButtonBlue: '#1D92FF',
+      loginBlue: '#6EB0FF',
     },
   },
-  plugins: [],
+  plugins: [scrollbar({ nocompatible: true })],
 };
