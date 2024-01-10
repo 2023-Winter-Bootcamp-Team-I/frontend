@@ -1,4 +1,5 @@
 import App from '@/App';
+import FrontCoverPage from '@/pages/FrontCoverPage';
 import LibraryPage from '@/pages/LibraryPage';
 import MainPage from '@/pages/MainPage';
 import SignUp from '@/pages/SignUp';
@@ -18,8 +19,13 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
+        path: 'frontcover',
+        element: <FrontCoverPage />,
+      },
+      {
         path: 'library',
         element: <LibraryPage />,
+
       },
     ],
   },
