@@ -12,10 +12,11 @@ export default {
     },
     colors: {
       mainColor: '#AED1FF', // 메인 백그라운드 컬러
-      buttonBlue: '#1D92FF', // 버튼 컬러
       white: '#FFFFFF',
       shadowGray: '#849EC0',
       mainBlue: '#3CA5FF',
+      signupButtonBlue: '#1D92FF',
+      loginBlue: '#6EB0FF',
     },
   },
   plugins: [scrollbar({ nocompatible: true })],
