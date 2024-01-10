@@ -1,17 +1,23 @@
-import pencil from '../assets/images/pencil.svg';
+import React from 'react';
+import pencilImg from '@/assets/images/pencil.svg';
+import LogInModal from '@/components/LogInModal';
 
 function SignUp() {
   return (
     <>
+      {/* 테스트용으로 일단 여기 구현해두었어요 */}
+      <LogInModal></LogInModal>
       {/* 전체 백그라운드 색 설정 */}
-      <div className="flex w-screen h-screen bg-main-color">
+      <div className="flex w-screen h-screen bg-mainColor">
         <div className="flex flex-1 flex-col justify-center">
           <div className="flex flex-row sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="flex">
-              <img className="flex mx-auto min-h-full w-auto" src={pencil} alt="pencil_character" />
+              <img className="flex mx-auto min-h-full w-auto" src={pencilImg} alt="pencil_character" />
               <div className="">
-                <h2 className="flex mt-5 font-jua text-center text-4xl font-bold text-button-blue">회원가입을 위해</h2>
-                <h2 className="flex mt-2 font-jua text-center text-4xl font-bold text-button-blue">
+                <h2 className="flex mt-5 font-jua text-center text-4xl font-bold text-signupButtonBlue">
+                  회원가입을 위해
+                </h2>
+                <h2 className="flex mt-2 font-jua text-center text-4xl font-bold text-signupButtonBlue">
                   정보를 입력해주세요
                 </h2>
               </div>
@@ -70,10 +76,10 @@ function SignUp() {
               </div>
 
               <div className="flex flex-row">
-                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-white px-14 py-2.5 text-lg font-bold leading-6 text-button-blue border-b-2 border-r-2 border-shadowGray mr-2">
+                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-white px-14 py-2.5 text-lg font-bold leading-6 text-signupButtonBlue border-b-2 border-r-2 border-shadowGray mr-2">
                   가입 취소
                 </button>
-                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-button-blue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2">
+                <button className="flex basis-1/2 justify-center font-jua rounded-full bg-signupButtonBlue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2">
                   가입 완료
                 </button>
               </div>
