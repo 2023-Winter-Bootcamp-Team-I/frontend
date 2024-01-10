@@ -5,12 +5,14 @@ const StoryChoiceModal = () => {
   return (
     <div>
       <div className="w-screen h-screen bg-white bg-opacity-70 absolute z-50">
+        <div className="w-3/4 h-4/6  left-[13%] top-[25%] shadow bg-[#E6E6E6] rounded-2xl absolute z-60"></div>
+        <div className="w-1/3 h-96 left-[15%] top-[31%] bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl absolute z-70"></div>
+        <div className="w-1/3 h-96 left-[53%] top-[31%] bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl absolute z-70"></div>
         <div>
-          <img src={Robot} className="w-1/6 left-[10%]  top-[5%] z-50 absolute "></img>
-          <p className=" left-[30%] top-[20%] font-dongle text-8xl text-[#002875] z-50 absolute">
+          <img src={Robot} className="w-44 left-[15%]  top-[0%] z-50 absolute "></img>
+          <p className=" left-[30%] top-[8%] font-dongle font-medium text-8xl  text-[#002875] z-50 absolute">
             다음은 어떤 장면이 펼쳐질까?
           </p>{' '}
-          <div className="w-full mx-60 my-72 bg-[#E6E6E6] rounded-2xl absolute z-60"></div>
         </div>
       </div>
       <div className="flex flex-col w-screen h-screen bg-mainColor bg-opacity-15 relative z-5">
@@ -37,12 +39,12 @@ const StoryChoiceModal = () => {
               <div className="box-border w-[540px] h-[300px] top-[24.5%] left-[-8%] relative bg-white rounded-2xl z-20"></div>
 
               <div>
-                <button className="">
-                  {/* <img
+                {/* <button className="">
+                  <img
               src={NextButton}
               className="absolute w-[90px] h-[90px] left-[-4.5%] top-[45%] rotate-180 z-30"
-            ></img> */}
-                </button>
+            ></img>
+                </button> */}
               </div>
             </div>
           </div>
