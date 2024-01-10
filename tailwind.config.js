@@ -19,6 +19,8 @@ export default {
       bookCoverLine: '#97D1F2',
       bookCoverTextBox: '#C1DDFF',
       bookCoverTextBoxBorder: '#AAB6DD',
+      moveButtonColor: 'rgba(51, 160, 244, 0.79);',
+      titleColor: '#001062',
     },
   },
   plugins: [],
