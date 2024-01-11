@@ -26,5 +26,5 @@ export default {
       loginBlue: '#6EB0FF',
     },
   },
-  plugins: [scrollbar({ nocompatible: true })],
+  // plugins: [scrollbar({ nocompatible: true })],
 };

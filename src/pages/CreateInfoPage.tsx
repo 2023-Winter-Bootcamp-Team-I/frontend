@@ -38,7 +38,7 @@ const CreateInfoPage = () => {
         <div>
           <div className="w-[400px] h-[50px] left-[20%] top-[55%] absolute bg-[#659AFF] rounded-full">
             <img src={Pencil} className="absolute w-[80px] h-[100px] top-[-40px] left-[-10px]"></img>
-            <p className="px-12 py-2 font-[Jua] text-3xl text-white">너의 몇살이야?</p>
+            <p className="px-12 py-2 font-[Jua] text-3xl text-white">너는 몇 살이야?</p>
             <input
               type="text"
               placeholder="나이 쓰기"
@@ -62,7 +62,7 @@ const CreateInfoPage = () => {
           <div className="w-[470px] h-[50px] left-[55%] top-[40%] absolute bg-[#659AFF] rounded-full">
             <img src={Pencil} className="absolute w-[80px] h-[100px] top-[-40px] left-[-10px]"></img>
             <p className=" px-12 py-2 font-j  ua text-3xl text-white font-jua">무슨 동화책을 고르고싶어?</p>
-            <select className="w-[470px] h-[50px]  rounded-none mt-3 bg-white font-jua border p-2 rounded-md text-3xl">
+            <select className="w-[400px] h-[50px] left-9  mt-3 font-jua  p-2 text-3xl absolute">
               <option value="Snow White">백설 공주</option>
               <option value="Three pig">아기 돼지 삼형제</option>
               <option value="Cinderella">신데렐라</option>
