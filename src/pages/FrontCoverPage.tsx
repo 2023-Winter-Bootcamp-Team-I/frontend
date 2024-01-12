@@ -6,10 +6,10 @@ import nextButtonImg from '@/assets/images/nextButton.svg';
 function FrontCoverPage() {
   return (
     <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
-      <div className="flex flex-row">
-        <div className="absolute top-[45%] bg-moveButtonColor rounded-full h-24 w-24 ml-10 z-20">
-          <img className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
-        </div>
+      <div className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 ml-10 z-20">
+        <img className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
+      </div>
+      <div className="flex flex-row w-[1500px] mx-auto my-0">
         <div className="flex flex-col basis-1/2 h-screen justify-center">
           <div className="flex basis-1/2 justify-center">
             <img className="flex mx-auto min-h-full z-20 w-80 mt-28" src={robotImg} alt="robot_character" />
@@ -30,9 +30,9 @@ function FrontCoverPage() {
             </div>
           </div>
         </div>
-        <div className="absolute top-[45%] right-10 bg-moveButtonColor rounded-full h-24 w-24 z-20 items-end">
-          <img className="w-20 z-20 mx-auto my-0" src={nextButtonImg} alt="next_button" />
-        </div>
+      </div>
+      <div className="absolute top-[45%] right-10 bg-moveButtonColor rounded-full h-24 w-24 z-20 items-end">
+        <img className="w-20 z-20 mx-auto my-0" src={nextButtonImg} alt="next_button" />
       </div>
     </div>
   );
