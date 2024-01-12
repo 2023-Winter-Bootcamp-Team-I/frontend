@@ -2,17 +2,24 @@ import Robot from '@/assets/image/StoryChoice/Robot.svg';
 
 const StoryChoiceModal = () => {
   return (
-    <div>
-      <div className="flex w-screen h-screen bg-white bg-opacity-70 absolute z-50">
-        <div className=" flex flex-col mx-auto my-0 bg-[#000000] w-[75rem] z-90">
-          <div className="w-3/4 h-4/6  left-[13%] top-[25%] shadow bg-[#E6E6E6] rounded-2xl absolute z-60"></div>
-          <div className="w-1/3 h-96 left-[15%] top-[31%] bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl absolute z-70"></div>
-          <div className="w-1/3 h-96 left-[53%] top-[31%] bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl absolute z-70"></div>
-          <div>
-            <img src={Robot} className="w-44 left-[15%]  top-[0%] z-50 absolute "></img>
-            <p className=" left-[30%] top-[8%] font-dongle font-medium text-8xl  text-[#002875] z-50 absolute">
-              다음은 어떤 장면이 펼쳐질까?
-            </p>{' '}
+    // 배경 뿌옇게
+    <div className=" flex mx-auto my-0 w-[75rem]">
+      <div className="bg-white bg-opacity-70 w-full h-screen z-10">
+        {/* 로봇 이미지 + 멘트  */}
+        <div className="flex flex-row justify-center">
+          <img src={Robot} className="w-1/6 z-20"></img>
+          <div className="mt-20 font-dongle font-medium text-8xl text-[#002875] z-20 ">
+            다음은 어떤 장면이 펼쳐질까?
+          </div>
+        </div>
+        {/* 박스 3개 */}
+        <div className="flex flex-row justify-center h-full">
+          {/* 큰 박스 */}
+          <div className=" w-5/6 h-[60%] bg-[#E6E6E6] rounded-2xl  flex flex-row justify-center z-20">
+            {/* 왼쪽 박스 */}
+            <div className="w-2/5 my-5 mx-12 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"></div>
+            {/* 오른쪽 박스 */}
+            <div className="w-2/5 my-5 mx-12 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl  z-30"></div>
           </div>
         </div>
       </div>
