@@ -2,11 +2,15 @@ import homeicon from '@/assets/images/Library/Home Page.svg';
 import translation from '@/assets/images/Library/Translation.svg';
 import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getBooks } from '@/api/books';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState(false);
 
+  useEffect(() => {
+    getBooks(2);
+  }, []);
   return (
     <>
       <div className="flex flex-col w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
