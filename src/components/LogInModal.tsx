@@ -1,8 +1,18 @@
 import heartImg from '@/assets/images/heart.svg';
 import letterImg from '@/assets/images/letter.svg';
 import lockImg from '@/assets/images/lock.svg';
+import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
+import { useState } from 'react';
 
 function LogInModal() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    // loginUser 함수 호출
+    await loginUser({ email, password });
+  };
+
   return (
     <div className=" z-10 absolute top-[15%] w-screen h-screen">
       <div className="flex justify-center text-center sm:items-center sm:p-0">
@@ -31,6 +41,7 @@ function LogInModal() {
                     placeholder="이메일을 입력해주세요"
                     required
                     className="block w-[80%] h-[4.2rem] text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="flex mt-8 mb-[7vh] justify-center">
@@ -46,13 +57,17 @@ function LogInModal() {
                     placeholder="비밀번호를 입력해주세요"
                     required
                     className="block w-[80%] h-[4.2rem] text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-row gap-2 ml-2 justify-center">
-                  <button className=" w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2">
+                  <button
+                    className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
+                    onClick={handleLogin}
+                  >
                     로그인
                   </button>
-                  <button className=" w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
+                  <button className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
                     회원 가입
                   </button>
                 </div>
