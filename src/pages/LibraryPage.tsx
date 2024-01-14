@@ -7,8 +7,9 @@ import { Book, getBooks, updateTitle } from '@/api/books';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState(false);
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<Book[]>([]); // 불러온 책들을 스테이트에 저장합니다
 
+  // 책 업데이트 할때 쓸 함수 입니다 이 페이지에선 안 쓸 확률이 크지만 일단 여기에 주석처리해서 둘게요
   // const handleUpdateTitle = async (bookId: number, newTitle: string) => {
   //   try {
   //     const updatedBook = await updateTitle(bookId, newTitle);
@@ -19,6 +20,7 @@ const LibraryPage = () => {
   //   }
   // };
 
+  // 처음 페이지가 로딩 될 때 getBooks 함수를 불러 책들을 로딩하고 setBooks 스테이트에 저장합니다
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,6 +57,7 @@ const LibraryPage = () => {
               나의 도서관
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
+              {/* books를 iterate 하며 박스?를 생성합니다 */}
               {books.map((book) => (
                 <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
                   <div className="w-64 h-64">
