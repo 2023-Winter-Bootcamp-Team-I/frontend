@@ -23,7 +23,7 @@ function SignUp() {
   const handleSignUp = async () => {
     await signUpUser(userData);
   };
-  console.log(userData);
+  console.log(import.meta.env.VITE_BASE_URL_DEV);
   return (
     <>
       <div className="flex w-screen h-screen bg-mainColor">

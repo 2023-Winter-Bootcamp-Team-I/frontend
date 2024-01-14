@@ -1,6 +1,4 @@
-// import api from './api';
-
-import axios from 'axios';
+import api from './api';
 
 interface SignUpData {
   password: string;
@@ -10,7 +8,7 @@ interface SignUpData {
 
 export const signUpUser = async (userData: SignUpData): Promise<void> => {
   try {
-    const response = await axios.post('/api/v1/users/signup/', userData);
+    const response = await api.post('/users/signup/', userData);
 
     // 서버 응답이 성공인 경우
     console.log('User created:', response.data);
