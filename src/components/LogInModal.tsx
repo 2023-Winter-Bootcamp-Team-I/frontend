@@ -9,14 +9,14 @@ import { userIDState } from '@/states/atom';
 function LogInModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setAccessToken = useSetRecoilState(userIDState);
+  const setUserID = useSetRecoilState(userIDState);
 
   const handleLogin = async () => {
     // loginUser 함수 호출
     const response = await loginUser({ email, password });
     const userID = response.data['result']['user_id'];
 
-    setAccessToken(userID);
+    setUserID(userID);
   };
 
   return (
