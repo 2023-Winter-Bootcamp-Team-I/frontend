@@ -22,9 +22,8 @@ const WebsocketTest: React.FC = () => {
     const ws = new WebSocket('ws://localhost:8000/');
 
     ws.onopen = () => {
-      ws.send(JSON.stringify(data));
-
       setSocket(ws);
+      ws.send(JSON.stringify(data));
     };
 
     ws.onmessage = (event) => {

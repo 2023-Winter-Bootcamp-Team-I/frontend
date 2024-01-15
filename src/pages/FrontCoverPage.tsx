@@ -21,11 +21,10 @@ function FrontCoverPage() {
   const [message, setMessage] = useState<string>('');
 
   const websocket = (data: WsData): void => {
-    const ws = new WebSocket('ws://localhost:8000/');
+    const ws = new WebSocket('ws://localhost:8000/ws/books/');
 
     ws.onopen = () => {
       ws.send(JSON.stringify(data));
-
       setSocket(ws);
     };
 
@@ -45,19 +44,24 @@ function FrontCoverPage() {
   };
 
   const tempdata: WsData = {
-    type: 'ing',
-    pageCnt: 1,
-    choice: 1,
-    koContent: '나중에 state값 들어갈듯',
-    enContent: 'later state값 들어갈듯',
+    type: 'start',
+    pageCnt: 0,
+    userName: '송유림',
+    fairyTale: '백설공주',
+    gender: '여',
+    age: 20,
+    language: 'ko',
   };
 
+  //화면 들어가면 바로 웹소켓 실행
   useEffect(() => {
     websocket(tempdata);
   });
 
   //스트림 데이터 받아오는거 출력
-  console.log(message);
+  if (message != '') {
+    console.log(message);
+  }
 
   //나중에 선택한 스토리 보낼 때
   socket?.send(
