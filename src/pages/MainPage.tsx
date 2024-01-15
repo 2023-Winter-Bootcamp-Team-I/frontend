@@ -1,5 +1,6 @@
 import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
+import { Link } from 'react-router-dom';
 
 const MainPage = () => {
   return (
@@ -16,12 +17,16 @@ const MainPage = () => {
           <div className="text-6xl font-[Dongle] mt-8">우리 아이가 동화책 주인공이라면? </div>
           <div className="text-6xl font-[Dongle] mb-8">AI와 함께 만드는 우리 아이 동화책 </div>
           <div className="flex gap-12 h-20 font-[Jua]">
-            <button className=" w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]">
-              로그인
-            </button>
-            <button className=" w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]">
-              회원가입
-            </button>
+            <Link to="/loginmodal">
+              <button className=" w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]">
+                로그인
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button className=" w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]">
+                회원가입
+              </button>
+            </Link>
           </div>
           {/* <div className="flex gap-16 relative">
             <div className=" w-60 h-16 bg-[#4695D9] absolute bottom-16 left-2 text-4xl rounded-3xl " />
