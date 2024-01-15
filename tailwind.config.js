@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import scrollbar from 'tailwind-scrollbar';
 
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
@@ -8,6 +7,10 @@ export default {
       fontFamily: {
         jua: ['Jua', 'sans-serif'],
         dongle: ['Dongle', 'sans-serif'],
+      },
+      backgroundImage: {
+        'radial-gradient':
+          'radial-gradient(50% 50% at 50% 50%, rgba(244, 244, 244, 0.59) 0%, rgba(119, 165, 255, 0.00) 100%)',
       },
     },
     colors: {
