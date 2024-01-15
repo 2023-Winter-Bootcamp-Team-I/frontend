@@ -3,14 +3,20 @@ import letterImg from '@/assets/images/letter.svg';
 import lockImg from '@/assets/images/lock.svg';
 import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { userIDState } from '@/states/atom';
 
 function LogInModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setAccessToken = useSetRecoilState(userIDState);
 
   const handleLogin = async () => {
     // loginUser 함수 호출
-    await loginUser({ email, password });
+    const response = await loginUser({ email, password });
+    const userID = response.data['result']['user_id'];
+
+    setAccessToken(userID);
   };
 
   return (
