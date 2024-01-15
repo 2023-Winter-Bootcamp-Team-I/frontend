@@ -8,6 +8,7 @@ import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import CreateBookPage from '@/pages/CreateBookPage';
 import StoryChoiceModal from '@/pages/StoryChoiceModal';
+import LogInModal from '@/components/LogInModal';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'library',
         element: <LibraryPage />,
+      },
+      {
+        path: 'loginmodal',
+        element: <LogInModal />,
       },
     ],
   },

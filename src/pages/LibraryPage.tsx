@@ -4,10 +4,13 @@ import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, updateTitle } from '@/api/books';
+import { useRecoilValue } from 'recoil';
+import { userIDState } from '@/states/atom';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState(false);
   const [books, setBooks] = useState<Book[]>([]); // 불러온 책들을 스테이트에 저장합니다
+  const userID = useRecoilValue(userIDState);
 
   // 책 업데이트 할때 쓸 함수 입니다 이 페이지에선 안 쓸 확률이 크지만 일단 여기에 주석처리해서 둘게요
   // const handleUpdateTitle = async (bookId: number, newTitle: string) => {
@@ -24,7 +27,7 @@ const LibraryPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedBooks = await getBooks(1);
+        const fetchedBooks = await getBooks(userID);
         setBooks(fetchedBooks);
       } catch (error) {
         console.error('Error fetching books:', error.message);
