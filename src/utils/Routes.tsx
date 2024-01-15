@@ -8,7 +8,6 @@ import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import CreateBookPage from '@/pages/CreateBookPage';
 import StoryChoiceModal from '@/pages/StoryChoiceModal';
-import CreateTitleModal from '@/components/CreateTitleModal';
 
 const router = createBrowserRouter([
   {
@@ -46,10 +45,6 @@ const router = createBrowserRouter([
       {
         path: 'library',
         element: <LibraryPage />,
-      },
-      {
-        path: 'title',
-        element: <CreateTitleModal />,
       },
     ],
   },
