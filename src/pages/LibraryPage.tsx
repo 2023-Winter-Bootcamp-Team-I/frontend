@@ -3,7 +3,7 @@ import translation from '@/assets/images/Library/Translation.svg';
 import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
-import { Book, getBooks, updateTitle } from '@/api/books';
+import { Book, getBooks, deleteBook } from '@/api/books';
 import { useRecoilValue } from 'recoil';
 import { userIDState } from '@/states/atom';
 
@@ -82,6 +82,7 @@ const LibraryPage = () => {
                       onMouseLeave={() => {
                         setHovered(false);
                       }}
+                      onClick={() => deleteBook(book.book_id)}
                     >
                       <path
                         stroke-linecap="round"

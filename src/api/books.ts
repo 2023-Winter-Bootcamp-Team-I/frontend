@@ -35,3 +35,13 @@ export const updateTitle = async (bookId: number, newTitle: string): Promise<Boo
     throw error;
   }
 };
+
+// /books/{book_id}
+export const deleteBook = async (bookId: number): Promise<void> => {
+  try {
+    await api.delete(`/books/${bookId}`);
+  } catch (error) {
+    console.error('Error deleting book:', error.message);
+    throw error;
+  }
+};
