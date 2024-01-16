@@ -56,23 +56,23 @@ function FrontCoverPage() {
   //화면 들어가면 바로 웹소켓 실행
   useEffect(() => {
     websocket(tempdata);
-  });
+  }, []);
 
   //스트림 데이터 받아오는거 출력
   if (message != '') {
     console.log(message);
   }
 
-  //나중에 선택한 스토리 보낼 때
-  socket?.send(
-    JSON.stringify({
-      type: 'ing',
-      pageCnt: 1,
-      choice: '1',
-      koContent: '나중에 state값 들어갈듯',
-      enContent: 'later state값 들어갈듯',
-    })
-  );
+  // //나중에 선택한 스토리 보낼 때
+  // socket?.send(
+  //   JSON.stringify({
+  //     type: 'ing',
+  //     pageCnt: 1,
+  //     choice: '1',
+  //     koContent: '나중에 state값 들어갈듯',
+  //     enContent: 'later state값 들어갈듯',
+  //   })
+  // );
 
   return (
     <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
