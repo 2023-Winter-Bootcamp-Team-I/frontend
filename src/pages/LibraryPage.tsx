@@ -8,8 +8,8 @@ import { useRecoilValue } from 'recoil';
 import { userIDState } from '@/states/atom';
 
 const LibraryPage = () => {
-  const [hovered, setHovered] = useState(false);
-  const [books, setBooks] = useState<Book[]>([]); // 불러온 책들을 스테이트에 저장합니다
+  const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
+  const [books, setBooks] = useState<Book[]>([]);
   const userID = useRecoilValue(userIDState);
 
   // 책 업데이트 할때 쓸 함수 입니다 이 페이지에선 안 쓸 확률이 크지만 일단 여기에 주석처리해서 둘게요
@@ -29,6 +29,13 @@ const LibraryPage = () => {
       try {
         const fetchedBooks = await getBooks(userID);
         setBooks(fetchedBooks);
+
+        // Initialize hovered state for each book
+        const initialHoveredState: { [key: number]: boolean } = {};
+        fetchedBooks.forEach((book) => {
+          initialHoveredState[book.book_id] = false;
+        });
+        setHovered(initialHoveredState);
       } catch (error) {
         console.error('Error fetching books:', error.message);
       }
@@ -36,6 +43,15 @@ const LibraryPage = () => {
 
     fetchData();
   }, []);
+
+  const handleMouseEnter = (bookId: number) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [bookId]: true }));
+  };
+
+  const handleMouseLeave = (bookId: number) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [bookId]: false }));
+  };
+
   return (
     <>
       <div className="flex flex-col w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
@@ -74,14 +90,10 @@ const LibraryPage = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
-                      stroke={hovered ? '#ee0202' : '#797979'}
+                      stroke={hovered[book.book_id] ? '#ee0202' : '#797979'}
                       className="w-6 h-6 ml-[2.5rem] cursor-pointer "
-                      onMouseEnter={() => {
-                        setHovered(true);
-                      }}
-                      onMouseLeave={() => {
-                        setHovered(false);
-                      }}
+                      onMouseEnter={() => handleMouseEnter(book.book_id)}
+                      onMouseLeave={() => handleMouseLeave(book.book_id)}
                       onClick={() => deleteBook(book.book_id)}
                     >
                       <path
