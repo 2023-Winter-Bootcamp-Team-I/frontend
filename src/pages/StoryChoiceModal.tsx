@@ -13,7 +13,7 @@ const StoryChoiceModal = () => {
         {/* 박스 3개 */}
         <div className="flex flex-row justify-center h-[800px] pb-10 z-20">
           {/* 큰 박스 */}
-          <div className=" w-[95%] h-[75%] -mt-20 bg-[#E6E6E6] rounded-2xl  flex flex-row justify-center z-20">
+          <div className=" w-[95%] h-[70%] bg-[#E6E6E6] rounded-2xl  flex flex-row justify-center z-20">
             {/* 왼쪽 박스 */}
             <div className="w-2/4 h-[80%]  mt-[4.5rem] ml-10 mr-10  bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"></div>
             {/* 오른쪽 박스 */}
