@@ -5,6 +5,7 @@ import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
+import { Link } from 'react-router-dom';
 
 function LogInModal() {
   const [email, setEmail] = useState('');
@@ -67,15 +68,19 @@ function LogInModal() {
                   />
                 </div>
                 <div className="flex flex-row gap-2 ml-2 justify-center">
-                  <button
-                    className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
-                    onClick={handleLogin}
-                  >
-                    로그인
-                  </button>
-                  <button className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
-                    회원 가입
-                  </button>
+                  <Link to="/library">
+                    <button
+                      className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
+                      onClick={handleLogin}
+                    >
+                      로그인
+                    </button>
+                  </Link>
+                  <Link to="/signup">
+                    <button className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2">
+                      회원 가입
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
