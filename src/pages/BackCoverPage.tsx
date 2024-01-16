@@ -1,6 +1,6 @@
 import React from 'react';
-import barcodeImg from '@/assets/images/barcode.svg';
 import prevButtonImg from '@/assets/images/prevButton.svg';
+import barcodeImg from '@/assets/images/barcode.svg';
 
 function BackCoverPage() {
   return (
