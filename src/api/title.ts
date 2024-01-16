@@ -1,31 +1,18 @@
+// title.ts
+
 import api from './api';
 
-export interface title {
+export interface Title {
+  book_id: number;
   title: string;
 }
 
-export const getBooks = async (user_id: number): Book[] => {
+export const updateTitle = async (bookId: number, newTitle: string): Promise<Title> => {
   try {
-    const response = await api.get(`/books/?user_id=${user_id}`);
-    return response.data.result as Book[];
+    const response = await api.put(`/books/${bookId}`, { title: newTitle });
+    return response.data.result as Title;
   } catch (error) {
-    console.error('Error fetching books:', error.message);
+    console.error('책 제목 업데이트 중 오류 발생:', error.message);
     throw error;
   }
 };
-
-export const updateTitle = async (bookId: number, newTitle: string): Promise<Book> => {
-  try {
-    const updatedData = {
-      title: newTitle,
-    };
-
-    const response = await api.put(`/books/${bookId}`, updatedData);
-    return response.data.result as Book;
-  } catch (error) {
-    console.error('Error updating title:', error.message);
-    throw error;
-  }
-};
-
-export default { getBooks, updateTitle };

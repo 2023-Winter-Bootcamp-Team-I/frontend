@@ -25,6 +25,10 @@ export default {
       signupButtonBlue: '#1D92FF',
       loginBlue: '#6EB0FF',
     },
+    backgroundImage: {
+      'radial-gradient':
+        'radial-gradient(50% 50% at 50% 50%, rgba(244, 244, 244, 0.59) 0%, rgba(119, 165, 255, 0.00) 100%)',
+    },
   },
   // plugins: [scrollbar({ nocompatible: true })],
 };
