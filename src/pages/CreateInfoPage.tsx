@@ -2,6 +2,8 @@ import nextButtonImg from '@/assets/images/nextButton.svg';
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
 import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
 import { useState } from 'react';
+import { useWebSocket } from '@/websocket/WebSocketProvider';
+import { useNavigate } from 'react-router-dom';
 
 type WsData = {
   type: string;
@@ -34,8 +36,21 @@ function CreateInfoPage() {
     }));
   };
 
+  //웹소켓 연결
+  const { send } = useWebSocket();
+
+  const sendDataToServer = () => {
+    send(userInfo);
+  };
+
+  const navigate = useNavigate();
+
   const handleNextButtonClick = () => {
-    // 여기에서 userInfo를 이용하여 원하는 동작 수행
+    navigate('/storychoicemodal');
+    setTimeout(() => {
+      sendDataToServer();
+    }, 3000);
+
     console.log('User Info:', userInfo);
   };
 

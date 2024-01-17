@@ -15,6 +15,7 @@ const StoryChoiceModal = () => {
 
   useEffect(() => {
     if (socket) {
+      // console.log('socket connecting');
       socket.onmessage = (event) => {
         // Buffer를 문자열로 변환
         const data = JSON.parse(event.data.toString());

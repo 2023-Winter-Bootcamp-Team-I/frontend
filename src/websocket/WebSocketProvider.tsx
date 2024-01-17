@@ -7,7 +7,7 @@ type WsData = {
   userName?: string;
   fairyTale?: string;
   gender?: string;
-  age?: number;
+  age?: string;
   language?: string;
   choice?: number;
   koContent?: string;
@@ -31,11 +31,11 @@ export const WebSocketProvider: React.FC<{ children: ReactNode }> = ({ children 
       setSocket(ws);
     };
 
-    return () => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.close();
-      }
-    };
+    // return () => {
+    //   if (ws.readyState === WebSocket.OPEN) {
+    //     ws.close();
+    //   }
+    // };
   }, []);
 
   const send = (data: WsData) => {
