@@ -3,6 +3,7 @@ import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import { useEffect, useState } from 'react';
 
+//웹소켓
 type WsData = {
   type: string;
   pageCnt: number;
@@ -16,9 +17,16 @@ type WsData = {
   enContent?: string;
 };
 
+interface Story {
+  language: string;
+  content: string;
+}
+
 function FrontCoverPage() {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [message, setMessage] = useState<string>('');
+  const [choiceArr, setChoiceArr] = useState<Story[]>([]);
+  const [prevChoiceArr, setPrevChoiceArr] = useState<Story[]>([]);
 
   const websocket = (data: WsData): void => {
     const ws = new WebSocket('ws://localhost:8000/ws/books/');
@@ -31,15 +39,32 @@ function FrontCoverPage() {
     ws.onmessage = (event) => {
       // Buffer를 문자열로 변환
       const data = JSON.parse(event.data.toString());
-      console.log('Message from server:', data.message);
+      // console.log('Message from server:', data.message);
       const message: string = data.message;
 
       //한글자씩 받아오는?
       setMessage((m) => m + message);
+
+      // "한국어" 또는 "영어"라는 문자열을 기준으로 나누어 저장
+      setChoiceArr((prevArr) => {
+        const lastItem = prevArr[prevArr.length - 1]; //배열의 마지막 요소
+
+        if (message === '국' || message === '영') {
+          // 새로운 이야기 시작
+          return [...prevArr, { language: message, content: '' }];
+        } else if (lastItem) {
+          // 이전 이야기에 내용 추가
+          lastItem.content += message;
+          return [...prevArr.slice(0, -1), lastItem];
+        }
+
+        return prevArr;
+      });
     };
 
     ws.onclose = () => {
       setSocket(null);
+      // console.log(choiceArr);
     };
   };
 
@@ -47,7 +72,7 @@ function FrontCoverPage() {
     type: 'start',
     pageCnt: 0,
     userName: '송유림',
-    fairyTale: '백설공주',
+    fairyTale: '신데렐라',
     gender: '여',
     age: 20,
     language: 'ko',
@@ -58,21 +83,44 @@ function FrontCoverPage() {
     websocket(tempdata);
   }, []);
 
+  // console.log(choiceArr);
+
+  useEffect(() => {
+    // choiceArr 상태가 업데이트되면서 변경이 있을 때만 콘솔에 출력하고 요청을 보냄
+    if (JSON.stringify(prevChoiceArr) !== JSON.stringify(choiceArr)) {
+      console.log(choiceArr);
+      setPrevChoiceArr([...choiceArr]); // 이전 상태 업데이트
+
+      // 요청 보내는 부분
+      socket?.send(
+        JSON.stringify({
+          type: 'ing',
+          pageCnt: 1,
+          choice: '1',
+          koContent: choiceArr[0],
+          enContent: choiceArr[1],
+        })
+      );
+    }
+  }, [prevChoiceArr]);
+
   //스트림 데이터 받아오는거 출력
   if (message != '') {
     console.log(message);
   }
 
-  // //나중에 선택한 스토리 보낼 때
-  // socket?.send(
-  //   JSON.stringify({
-  //     type: 'ing',
-  //     pageCnt: 1,
-  //     choice: '1',
-  //     koContent: '나중에 state값 들어갈듯',
-  //     enContent: 'later state값 들어갈듯',
-  //   })
-  // );
+  // console.log(choiceArr);
+
+  //나중에 선택한 스토리 보낼 때
+  socket?.send(
+    JSON.stringify({
+      type: 'ing',
+      pageCnt: 1,
+      choice: '1',
+      koContent: choiceArr[0],
+      enContent: choiceArr[1],
+    })
+  );
 
   return (
     <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">

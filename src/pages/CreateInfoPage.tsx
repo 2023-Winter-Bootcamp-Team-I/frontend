@@ -1,13 +1,18 @@
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
+// import { useState } from 'react';
 
-const CreateInfoPage = () => {
+function CreateInfoPage() {
+  // const [loginId, setLoginId] = useState("");
+  // const [nickname, setNickname] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  // const [isLoading, setLoading] = useState(false);
+
   return (
     // 왼쪽 오른쪽 전체 div
     <div className="flex w-[1300px] h-screen justify-center items-center ml-28">
       {/* 뒤로가는 버튼 */}
-      <button>
-        <img src={BackArrow} className="left-[0%] top-[0%] absolute"></img>
-      </button>
+      <button>{/* <img src={BackArrow} className="left-[0%] top-[0%] absolute"></img> */}</button>
       {/* 왼쪽 전체 div */}
       <div className="flex flex-col justify-center items-center mr-10 gap-5">
         {/* 이름 div  */}
@@ -91,12 +96,12 @@ const CreateInfoPage = () => {
       {/* 동화 생성 버튼 */}
       <div>
         <button className="동화책 생성 버튼 font-jua">
-          <img src={NextButton} className=" absolute left-[91%] top-[40%]"></img>
+          {/* <img src={NextButton} className=" absolute left-[91%] top-[40%]"></img> */}
           <p className="absolute left-[90%] top-[53%] mt-5 font-jua">동화책 생성하러가기</p>
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default CreateInfoPage;
