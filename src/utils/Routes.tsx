@@ -9,6 +9,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import CreateBookPage from '@/pages/CreateBookPage';
 import StoryChoiceModal from '@/pages/StoryChoiceModal';
 import LogInModal from '@/components/LogInModal';
+import ShareModal from '@/components/ShareModal';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: 'loginmodal',
         element: <LogInModal />,
+      },
+      {
+        path: 'sharemodal',
+        element: <ShareModal />,
       },
     ],
   },
