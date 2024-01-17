@@ -4,13 +4,15 @@ import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
-import { useRecoilValue } from 'recoil';
-import { userIDState } from '@/states/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userIDState, userLanguage } from '@/states/atom';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
   const [books, setBooks] = useState<Book[]>([]);
   const userID = useRecoilValue(userIDState);
+  const setUserLang = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
 
   // 책 업데이트 할때 쓸 함수 입니다 이 페이지에선 안 쓸 확률이 크지만 일단 여기에 주석처리해서 둘게요
   // const handleUpdateTitle = async (bookId: number, newTitle: string) => {
@@ -62,9 +64,14 @@ const LibraryPage = () => {
           <div className="flex flex-row justify-between mb-1">
             <img src={homeicon} className="h-[6.5rem] w-[6.5rem] -mt-6 -ml-8" />
             <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8">
-              <button className=" flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4">
+              <button
+                onClick={() => {
+                  selectedLanguage === 'ko' ? setUserLang('en') : setUserLang('ko');
+                }}
+                className=" flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4"
+              >
                 <img src={translation} className="pl-2 -mt-0.5 pt" />
-                <p className=" text-[#1D92FF]">한국어</p>
+                <p className=" text-[#1D92FF]">{selectedLanguage}</p>
               </button>
               <button className=" w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4">
                 로그아웃

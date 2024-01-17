@@ -8,9 +8,17 @@ const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 });
 
+// 유저의 아이디
 export const userIDState = atom({
   key: 'user_id',
   default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
+// user 의 언어 선택 값
+export const userLanguage = atom({
+  key: 'user_language',
+  default: 'ko',
   effects_UNSTABLE: [persistAtom],
 });
 
