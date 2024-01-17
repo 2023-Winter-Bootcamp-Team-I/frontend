@@ -1,5 +1,5 @@
 // WebSocketProvider.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type WsData = {
   type: string;
@@ -24,7 +24,32 @@ const WebSocketContext = createContext<WebSocketContextProps | undefined>(undefi
 export const WebSocketProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
-  return <WebSocketContext.Provider value={{ socket, setSocket }}>{children}</WebSocketContext.Provider>;
+  useEffect(() => {
+    const ws = new WebSocket('ws://localhost:8000/ws/books/');
+
+    ws.onopen = () => {
+      setSocket(ws);
+    };
+
+    return () => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
+    };
+  }, []);
+
+  const send = (data: WsData) => {
+    if (socket) {
+      socket.send(JSON.stringify(data));
+    }
+  };
+
+  const contextValue: WebSocketContextProps = {
+    socket,
+    send,
+  };
+
+  return <WebSocketContext.Provider value={contextValue}>{children}</WebSocketContext.Provider>;
 };
 
 export const useWebSocket = (): WebSocketContextProps => {
