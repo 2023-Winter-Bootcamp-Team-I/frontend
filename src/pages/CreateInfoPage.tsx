@@ -1,4 +1,6 @@
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
+import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
+import NextButton from '@/assets/image/CreateInfo/NextButton.svg';
 
 const CreateInfoPage = () => {
   return (
