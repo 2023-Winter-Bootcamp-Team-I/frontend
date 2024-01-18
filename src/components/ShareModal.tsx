@@ -12,6 +12,8 @@ interface ShareModalProps {
 const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
   const [email, setEmail] = useState<string>('');
 
+  // console.log(bookId);
+
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -23,8 +25,11 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
         // 이메일이 비어있을 경우에 대한 처리
         return;
       }
-
-      await sendEmail({ email, book_id: bookId });
+      // console.log(bookId);
+      await sendEmail({
+        email: email,
+        book_id: bookId,
+      });
       console.log('이메일 전송 요청이 성공했습니다.');
       // 추가적인 성공 처리 (예: 리다이렉트)
     } catch (error) {
@@ -32,8 +37,9 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
       // 실패 시의 처리
     }
   };
+
   return (
-    <div className="z-10 absolute top-[15%] w-screen h-screen">
+    <div className="z-10 absolute left-[-13%] top-[-6%] w-screen h-screen">
       <div>
         <button onClick={closeModal}>
           <img className="left-[70%] top-[10%] z-20 absolute" src={Close} alt="close_button" />
@@ -41,7 +47,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
       </div>
       <div className="flex justify-center text-center sm:items-center sm:p-0">
         <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-1/2">
-          <div className="flex flex-row h-[70vh]">
+          <div className="flex flex-row h-[70vh] ">
             <div className="flex flex-col bg-loginBlue basis-1/3">
               <div className="flex basis-2/3 justify-center">
                 <img className="mx-auto min-h-full mt-8 w-5/6" src={star} alt="star_character" />

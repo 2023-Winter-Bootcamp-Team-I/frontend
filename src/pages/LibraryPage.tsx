@@ -109,6 +109,7 @@ const LibraryPage = () => {
                       />
                     </svg>
                   </div>
+                  {showModal && <ShareModal closeModal={closeModal} bookId={book.book_id} />}
                 </div>
               ))}
             </div>
@@ -120,7 +121,6 @@ const LibraryPage = () => {
           </div>
         </div>
       </div>
-      {showModal && <ShareModal closeModal={closeModal} />}
     </>
   );
 };
