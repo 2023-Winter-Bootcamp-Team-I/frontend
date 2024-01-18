@@ -5,9 +5,10 @@ import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
+import Close from '@/assets/images/Close.svg';
 import { Link } from 'react-router-dom';
 
-function LogInModal() {
+function LogInModal({ closeModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUserID = useSetRecoilState(userIDState);
@@ -22,6 +23,9 @@ function LogInModal() {
 
   return (
     <div className=" z-10 absolute top-[15%] w-screen h-screen">
+      <button onClick={closeModal}>
+        <img className="left-[70%] top-[10%] z-20 absolute" src={Close}></img>
+      </button>
       <div className="flex justify-center text-center sm:items-center sm:p-0">
         {/* Modal code starts from the below line */}
         <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-1/2">

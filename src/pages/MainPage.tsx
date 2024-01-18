@@ -5,6 +5,7 @@ import LogInModal from '../components/LogInModal';
 import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,20 +32,36 @@ const MainPage = () => {
           <div className="text-6xl font-[Dongle] mt-8">우리 아이가 동화책 주인공이라면? </div>
           <div className="text-6xl font-[Dongle] mb-8">AI와 함께 만드는 우리 아이 동화책 </div>
           <div className="flex gap-12 h-20 font-[Jua]">
-            <button
+            <motion.button
               onClick={openModal}
               className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
               로그인
-            </button>
+            </motion.button>
             <Link to="/signup">
-              <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]">
+              <motion.button
+                className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 회원가입
-              </button>
+              </motion.button>
             </Link>
           </div>
         </div>
-        <img src={cutebook} className="w-[38rem] h-[25rem] -mt-4 -mr-12" />
+        <motion.img
+          src={cutebook}
+          className="w-[38rem] h-[25rem] -mt-4 -mr-12"
+          initial={{ scale: 3 }}
+          animate={{ rotate: 360, scale: 1 }}
+          transition={{
+            type: 'spring',
+            stiffness: 50,
+            damping: 25,
+          }}
+        />
       </div>
       {showModal && <LogInModal closeModal={closeModal} />}
     </div>
