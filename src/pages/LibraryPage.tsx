@@ -9,6 +9,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal'; // ShareModal import 추가
 import { Link } from 'react-router-dom';
+import { LogoutState } from '@/states/atom';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -17,6 +18,12 @@ const LibraryPage = () => {
   const userID = useRecoilValue(userIDState);
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
+
+  const setUserID = useSetRecoilState(LogoutState);
+
+  const handleLogout = () => {
+    setUserID(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +82,10 @@ const LibraryPage = () => {
                 <p className="text-[#1D92FF]">{selectedLanguage}</p>
               </button>
               <Link to="/.">
-                <button className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:scale-110">
+                <button
+                  className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:scale-110"
+                  onClick={handleLogout}
+                >
                   로그아웃
                 </button>
               </Link>

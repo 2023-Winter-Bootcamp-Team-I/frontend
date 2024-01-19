@@ -15,6 +15,13 @@ export const userIDState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+// 로그아웃
+export const LogoutState = atom({
+  key: 'user_id',
+  default: 'null',
+  effects_UNSTABLE: [persistAtom],
+});
+
 // user 의 언어 선택 값
 export const userLanguage = atom({
   key: 'user_language',
