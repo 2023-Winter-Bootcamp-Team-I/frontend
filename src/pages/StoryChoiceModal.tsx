@@ -1,9 +1,9 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
-import { showModal, userLanguage } from '@/states/atom';
+import { bookID, showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -22,6 +22,8 @@ const StoryChoiceModal = () => {
   const [boxNum, setBoxNum] = useState<number>(0);
   const [pageNum, setPageNum] = useState<number>(0);
   const [socketSent, setSocketSend] = useState<boolean>(false);
+  const setbookId = useSetRecoilState<number>(bookID);
+
   const navigate = useNavigate();
   // const isMounted = useRef(true);
 
@@ -62,6 +64,8 @@ const StoryChoiceModal = () => {
       setSocketSend(false);
 
       if (pageNum === 5) {
+        //bookid받도록
+        bookId;
         //unmounting이 되고 socket()실행이 돼서 pagenum -1
         // console.log('if문 내부' + pageNum);
         //소켓종료
@@ -82,8 +86,10 @@ const StoryChoiceModal = () => {
       setShowModal(true);
     }, 500);
 
-    if (socket) {
+    //socket 이 있고, pagenum<5이면
+    if (socket && pageNum < 6) {
       // console.log('socket connecting');
+      // console.log(pageNum);
 
       socket.onmessage = (event) => {
         // Buffer를 문자열로 변환
@@ -113,7 +119,7 @@ const StoryChoiceModal = () => {
 
       // console.log(message);
     }
-  }, [isshowModal, socket, storyChoice]);
+  }, [isshowModal, socket, storyChoice, pageNum]);
 
   //사용자가 스토리 선택하면 해당 스토이 배열 보내주기
   useEffect(() => {
