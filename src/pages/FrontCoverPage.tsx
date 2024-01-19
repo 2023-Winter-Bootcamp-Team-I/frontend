@@ -1,4 +1,3 @@
-import React from 'react';
 import robotImg from '@/assets/images/robot.svg';
 import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
