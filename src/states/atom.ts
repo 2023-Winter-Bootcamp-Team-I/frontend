@@ -15,7 +15,7 @@ export const userIDState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-//user 의 언어 선택 값
+// user 의 언어 선택 값
 export const userLanguage = atom({
   key: 'user_language',
   default: 'ko',
