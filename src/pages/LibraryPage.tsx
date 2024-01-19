@@ -2,33 +2,32 @@ import homeicon from '@/assets/images/Library/Home Page.svg';
 import translation from '@/assets/images/Library/Translation.svg';
 import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
+import share from '@/assets/images/Library/Share.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
-import { useRecoilValue } from 'recoil';
-import { userIDState } from '@/states/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userIDState, userLanguage } from '@/states/atom';
+import ShareModal from '../components/ShareModal'; // ShareModal import 추가
 
 const LibraryPage = () => {
-  const [hovered, setHovered] = useState(false);
-  const [books, setBooks] = useState<Book[]>([]); // 불러온 책들을 스테이트에 저장합니다
+  const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
+  const [books, setBooks] = useState<Book[]>([]);
+  const [showModal, setShowModal] = useState(false); // 모달 상태 추가
   const userID = useRecoilValue(userIDState);
+  const setUserLang = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
 
-  // 책 업데이트 할때 쓸 함수 입니다 이 페이지에선 안 쓸 확률이 크지만 일단 여기에 주석처리해서 둘게요
-  // const handleUpdateTitle = async (bookId: number, newTitle: string) => {
-  //   try {
-  //     const updatedBook = await updateTitle(bookId, newTitle);
-  //     setBooks((prevBooks) => prevBooks.map((book) => (book.book_id === updatedBook.book_id ? updatedBook : book)));
-  //     console.log('Title updated successfully:', updatedBook);
-  //   } catch (error) {
-  //     console.error('Error updating title:', error.message);
-  //   }
-  // };
-
-  // 처음 페이지가 로딩 될 때 getBooks 함수를 불러 책들을 로딩하고 setBooks 스테이트에 저장합니다
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedBooks = await getBooks(userID);
         setBooks(fetchedBooks);
+
+        const initialHoveredState: { [key: number]: boolean } = {};
+        fetchedBooks.forEach((book) => {
+          initialHoveredState[book.book_id] = false;
+        });
+        setHovered(initialHoveredState);
       } catch (error) {
         console.error('Error fetching books:', error.message);
       }
@@ -36,21 +35,41 @@ const LibraryPage = () => {
 
     fetchData();
   }, []);
+
+  const handleMouseEnter = (bookId: number) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [bookId]: true }));
+  };
+
+  const handleMouseLeave = (bookId: number) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [bookId]: false }));
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <div className="flex flex-col w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
-        {/* updateTitle 테스트용  */}
-        {/* <button onClick={() => handleUpdateTitle(1, 'New Title')}>update</button> */}
         <div className=" shadow-[inset_0px_4px_15px_0px_rgba(0,0,0,0.25)] w-screen h-60 bg-mainBlue absolute top-[10.5rem] z-20" />
         <div className="w-[1200px] mx-auto mt-8">
           <div className="flex flex-row justify-between mb-1">
             <img src={homeicon} className="h-[6.5rem] w-[6.5rem] -mt-6 -ml-8" />
             <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8">
-              <button className=" flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4">
+              <button
+                onClick={() => {
+                  selectedLanguage === 'ko' ? setUserLang('en') : setUserLang('ko');
+                }}
+                className="flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4"
+              >
                 <img src={translation} className="pl-2 -mt-0.5 pt" />
-                <p className=" text-[#1D92FF]">한국어</p>
+                <p className="text-[#1D92FF]">{selectedLanguage}</p>
               </button>
-              <button className=" w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4">
+              <button className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4">
                 로그아웃
               </button>
             </div>
@@ -60,28 +79,27 @@ const LibraryPage = () => {
               나의 도서관
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
-              {/* books를 iterate 하며 박스?를 생성합니다 */}
               {books.map((book) => (
                 <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
                   <div className="w-64 h-64">
                     <img src={thumbnail} />
-                    {/* <img src={book.image_url} /> */}
                   </div>
-                  <div className=" flex flex-row items-center">
+                  <div className="flex flex-row items-center">
                     <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
+                    <div>
+                      <button onClick={openModal}>
+                        <img src={share} className="w-6 h-6 ml-10 mt-0" alt="Share Icon" />
+                      </button>
+                    </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
-                      stroke={hovered ? '#ee0202' : '#797979'}
-                      className="w-6 h-6 ml-[2.5rem] cursor-pointer "
-                      onMouseEnter={() => {
-                        setHovered(true);
-                      }}
-                      onMouseLeave={() => {
-                        setHovered(false);
-                      }}
+                      stroke={hovered[book.book_id] ? '#ee0202' : '#797979'}
+                      className="w-6 h-6 ml-[1rem] cursor-pointer "
+                      onMouseEnter={() => handleMouseEnter(book.book_id)}
+                      onMouseLeave={() => handleMouseLeave(book.book_id)}
                       onClick={() => deleteBook(book.book_id)}
                     >
                       <path
@@ -91,13 +109,14 @@ const LibraryPage = () => {
                       />
                     </svg>
                   </div>
+                  {showModal && <ShareModal closeModal={closeModal} bookId={book.book_id} />}
                 </div>
               ))}
             </div>
           </div>
-          <div className=" fixed bottom-10 right-10 flex items-end justify-end w-[7rem] h-[7rem] rounded-full bg-gradient-to-br from-mainBlue to-[#00bcd4] active:bg-white hover:scale-125 transition duration-300">
+          <div className="fixed bottom-10 right-10 flex items-end justify-end w-[7rem] h-[7rem] rounded-full bg-gradient-to-br from-mainBlue to-[#00bcd4] active:bg-white hover:scale-125 transition duration-300">
             <div className="mb-3 mr-1">
-              <img src={addbook} />
+              <img src={addbook} alt="Add Book Icon" />
             </div>
           </div>
         </div>

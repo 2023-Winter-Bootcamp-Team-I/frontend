@@ -1,5 +1,5 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
-import { showModal, userLan } from '@/states/atom';
+import { showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -16,7 +16,7 @@ const StoryChoiceModal = () => {
   const [storyChoice, setStoryChoice] = useState<Story[]>([]);
   const [isshowModal, setShowModal] = useRecoilState<boolean>(showModal);
   // const [prevChoiceArr, setPrevChoiceArr] = useState<Story[]>([]);
-  const [userLanState] = useRecoilState(userLan);
+  const [userLanState] = useRecoilState(userLanguage);
   const [index, setIndex] = useState<number>(0); //출력할 배열의 인덱스
   const [choice, setChoice] = useState<number>(0); //선택한 스토리 배열 인덱스
   const [boxNum, setBoxNum] = useState<number>(0);

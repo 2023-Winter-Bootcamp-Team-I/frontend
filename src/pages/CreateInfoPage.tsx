@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { userLan } from '@/states/atom';
+import { userLanguage } from '@/states/atom';
 
 type WsData = {
   type: string;
@@ -21,7 +21,7 @@ type WsData = {
 };
 
 function CreateInfoPage() {
-  const [userLanState, setUserLanState] = useRecoilState(userLan);
+  const [userLanState, setUserLanState] = useRecoilState(userLanguage);
 
   const [userInfo, setUserInfo] = useState<WsData>({
     type: 'start',
