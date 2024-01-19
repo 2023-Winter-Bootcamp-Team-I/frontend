@@ -3,6 +3,7 @@ import letterImg from '@/assets/images/letter.svg';
 import star from '@/assets/images/star.svg';
 import Close from '@/assets/images/Close.svg';
 import { sendEmail } from '@/api/email';
+import { Link } from 'react-router-dom';
 
 interface ShareModalProps {
   closeModal: () => void;
@@ -78,12 +79,14 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                 </div>
                 <div className="flex mb-[7vh] justify-center"></div>
                 <div className="flex flex-row gap-2 ml-2 justify-center">
-                  <button
-                    onClick={handleShareButtonClick}
-                    className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
-                  >
-                    공유하기
-                  </button>
+                  <Link to="/library">
+                    <button
+                      onClick={handleShareButtonClick}
+                      className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
+                    >
+                      공유하기
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

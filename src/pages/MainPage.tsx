@@ -33,12 +33,12 @@ const MainPage = () => {
           <div className="flex gap-12 h-20 font-[Jua]">
             <button
               onClick={openModal}
-              className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
+              className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF] hover:scale-110"
             >
               로그인
             </button>
             <Link to="/signup">
-              <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]">
+              <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110">
                 회원가입
               </button>
             </Link>

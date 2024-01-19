@@ -1,4 +1,7 @@
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
+import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
+import NextButton from '@/assets/image/CreateInfo/NextButton.svg';
+import { Link } from 'react-router-dom';
 
 const CreateInfoPage = () => {
   return (
@@ -90,10 +93,12 @@ const CreateInfoPage = () => {
       </div>
       {/* 동화 생성 버튼 */}
       <div>
-        <button className="동화책 생성 버튼 font-jua">
-          <img src={NextButton} className=" absolute left-[91%] top-[40%]"></img>
-          <p className="absolute left-[90%] top-[53%] mt-5 font-jua">동화책 생성하러가기</p>
-        </button>
+        <Link to="/createbookpage">
+          <button className="동화책 생성 버튼 font-jua">
+            <img src={NextButton} className=" absolute left-[91%] top-[40%]"></img>
+            <p className="absolute left-[90%] top-[53%] mt-5 font-jua">동화책 생성하러가기</p>
+          </button>
+        </Link>
       </div>
     </div>
   );

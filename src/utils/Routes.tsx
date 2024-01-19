@@ -12,7 +12,6 @@ import LogInModal from '@/components/LogInModal';
 import CreateTitleModal from '@/components/CreateTitleModal';
 import ShareModal from '@/components/ShareModal';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
