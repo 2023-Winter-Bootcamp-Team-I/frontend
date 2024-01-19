@@ -64,14 +64,12 @@ const StoryChoiceModal = () => {
       setSocketSend(false);
 
       if (pageNum === 5) {
-        //bookid받도록
-        bookId;
         //unmounting이 되고 socket()실행이 돼서 pagenum -1
         // console.log('if문 내부' + pageNum);
         //소켓종료
         socket?.close();
         //제목 생성 페이지로 이동
-        navigate('/CreateTitleModal');
+        navigate('/title');
         // socket.onmessage = null; //더 이상 메시지를 수신하고 싶지 않을 때
       }
     };
@@ -87,24 +85,30 @@ const StoryChoiceModal = () => {
     }, 500);
 
     //socket 이 있고, pagenum<5이면
-    if (socket && pageNum < 6) {
+    if (socket && pageNum < 5) {
       // console.log('socket connecting');
-      // console.log(pageNum);
+      console.log(pageNum);
 
       socket.onmessage = (event) => {
+        // console.log('socket 받는중');
         // Buffer를 문자열로 변환
         const data = JSON.parse(event.data.toString());
         const msg: string = data.message;
+
+        console.log(msg);
 
         //한글자씩 받아서 이어붙이기
         setMessage((m) => m + msg);
 
         // console.log(message);
+        // console.log(storyChoice);
+
         // 특정 문자로 데이터 슬라이싱해 저장
         setStoryChoice((prevArr) => {
+          // console.log('배열 채우는 중');
           const lastItem = prevArr[prevArr.length - 1]; //배열의 마지막 요소
 
-          if (msg === ':\n' || msg === '.\n\n') {
+          if (msg === ':\n' || msg === '한') {
             // 다른언어 또는 다른 스토리 시작
             return [...prevArr, { language: msg, content: '' }];
           } else if (lastItem) {
@@ -118,6 +122,11 @@ const StoryChoiceModal = () => {
       };
 
       // console.log(message);
+    } else if (socket && pageNum === 5) {
+      socket.onmessage = (event) => {
+        const book = JSON.parse(event.data);
+        setbookId(book.bookId);
+      };
     }
   }, [isshowModal, socket, storyChoice, pageNum]);
 
