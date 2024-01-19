@@ -7,7 +7,8 @@ import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
-import ShareModal from '../components/ShareModal'; // ShareModal import 추가
+import ShareModal from '../components/ShareModal';
+import { Link } from 'react-router-dom';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -16,6 +17,12 @@ const LibraryPage = () => {
   const userID = useRecoilValue(userIDState);
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
+
+  const setUserID = useSetRecoilState(userIDState);
+
+  const handleLogout = () => {
+    setUserID(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,20 +65,29 @@ const LibraryPage = () => {
         <div className=" shadow-[inset_0px_4px_15px_0px_rgba(0,0,0,0.25)] w-screen h-60 bg-mainBlue absolute top-[10.5rem] z-20" />
         <div className="w-[1200px] mx-auto mt-8">
           <div className="flex flex-row justify-between mb-1">
-            <img src={homeicon} className="h-[6.5rem] w-[6.5rem] -mt-6 -ml-8" />
-            <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8">
+            <Link to="/">
+              <button>
+                <img src={homeicon} className="h-[6.5rem] w-[6.5rem] -mt-6 -ml-8 hover:scale-150" />
+              </button>
+            </Link>
+            <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8 ">
               <button
                 onClick={() => {
                   selectedLanguage === 'ko' ? setUserLang('en') : setUserLang('ko');
                 }}
-                className="flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4"
+                className="flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4 hover:scale-110"
               >
                 <img src={translation} className="pl-2 -mt-0.5 pt" />
                 <p className="text-[#1D92FF]">{selectedLanguage}</p>
               </button>
-              <button className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4">
-                로그아웃
-              </button>
+              <Link to="/.">
+                <button
+                  className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:scale-110"
+                  onClick={handleLogout}
+                >
+                  로그아웃
+                </button>
+              </Link>
             </div>
           </div>
           <div className="relative z-30">
@@ -116,7 +132,9 @@ const LibraryPage = () => {
           </div>
           <div className="fixed bottom-10 right-10 flex items-end justify-end w-[7rem] h-[7rem] rounded-full bg-gradient-to-br from-mainBlue to-[#00bcd4] active:bg-white hover:scale-125 transition duration-300">
             <div className="mb-3 mr-1">
-              <img src={addbook} alt="Add Book Icon" />
+              <Link to="/createinfopage">
+                <img src={addbook} alt="Add Book Icon" />
+              </Link>
             </div>
           </div>
         </div>
