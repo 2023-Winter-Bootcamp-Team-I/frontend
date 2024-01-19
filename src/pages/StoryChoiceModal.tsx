@@ -1,8 +1,9 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
 import { showModal, userLan } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
-import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -20,11 +21,13 @@ const StoryChoiceModal = () => {
   const [choice, setChoice] = useState<number>(0); //선택한 스토리 배열 인덱스
   const [boxNum, setBoxNum] = useState<number>(0);
   const [pageNum, setPageNum] = useState<number>(0);
-
-  const isMounted = useRef(true);
+  const [socketSent, setSocketSend] = useState<boolean>(false);
+  const navigate = useNavigate();
+  // const isMounted = useRef(true);
 
   const choiceStory = (boxNumber: number) => {
     setPageNum((prev) => prev + 1);
+    // console.log(pageNum);
 
     if (boxNumber === 1) {
       setChoice(0);
@@ -36,18 +39,8 @@ const StoryChoiceModal = () => {
   };
 
   useEffect(() => {
-    // 언마운트될 때 ref를 false로 설정
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    // 컴포넌트가 여전히 마운트되어 있는지 확인하기 위해 ref 사용
-    if (!isMounted.current) return;
-
     if (boxNum !== 0) {
-      console.log('재요청' + pageNum);
+      setSocketSend(true);
 
       socket?.send(
         JSON.stringify({
@@ -58,23 +51,26 @@ const StoryChoiceModal = () => {
           enContent: storyChoice[choice + 1],
         })
       );
-
-      return () => {
-        console.log('unmounting..');
-        //응답받고 요청보낸 후 모든 state값 초기화
-        setBoxNum(0);
-        setStoryChoice([]);
-        setMessage('');
-        setShowModal(false);
-
-        if (pageNum === 6) {
-          console.log('last send');
-          socket?.close();
-          // socket.onmessage = null; //더 이상 메시지를 수신하고 싶지 않을 때
-        }
-      };
     }
-  }, [isshowModal, pageNum]);
+
+    return () => {
+      console.log('unmounting..');
+      setBoxNum(0);
+      setStoryChoice([]);
+      setMessage('');
+      setShowModal(false);
+      setSocketSend(false);
+
+      if (pageNum === 5) {
+        //unmounting이 되고 socket()실행이 돼서 pagenum -1
+        // console.log('if문 내부' + pageNum);
+        socket?.close();
+        //제목 생성 페이지로 이동
+        navigate('/backcover');
+        // socket.onmessage = null; //더 이상 메시지를 수신하고 싶지 않을 때
+      }
+    };
+  }, [pageNum]);
 
   if (userLanState == 'en') {
     setIndex(1);
