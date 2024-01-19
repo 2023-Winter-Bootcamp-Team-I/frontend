@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
-import ShareModal from '../components/ShareModal'; // ShareModal import 추가
+import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
 
 const LibraryPage = () => {
