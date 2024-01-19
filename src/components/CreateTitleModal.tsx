@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { updateTitle, Title } from '@/api/title';
 import pencil from '@/assets/images/pencil.svg';
+import { useRecoilValue } from 'recoil';
+import { bookID } from '@/states/atom';
 
 interface CreateTitleModalProps {
   title: string;
@@ -12,12 +14,15 @@ interface CreateTitleModalProps {
 const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title, onClose }) => {
   // 상태 초기화
   const [bookTitle, setBookTitle] = useState(title || '');
+  const bookId = useRecoilValue<number>(bookID);
 
   const handleCreateTitle = async () => {
     try {
       if (bookTitle.trim() !== '') {
-        const updatedBook: Title = await updateTitle(title, bookTitle);
-        console.log('책 제목이 업데이트되었습니다:', updatedBook);
+        const updatedBook: Title = await updateTitle(bookId, bookTitle);
+
+        console.log(updatedBook);
+
         onClose(); // 모달 닫기
       } else {
         console.warn('책 제목은 비워둘 수 없습니다.');

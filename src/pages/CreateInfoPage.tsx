@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { userLanguage } from '@/states/atom';
+import { userIDState, userLanguage } from '@/states/atom';
 
 type WsData = {
+  userId?: number;
   type: string;
   pageCnt: number;
   userName?: string;
@@ -22,8 +23,10 @@ type WsData = {
 
 function CreateInfoPage() {
   const [userLanState, setUserLanState] = useRecoilState(userLanguage);
+  const [userId] = useRecoilState<number>(userIDState);
 
   const [userInfo, setUserInfo] = useState<WsData>({
+    userId: userId,
     type: 'start',
     pageCnt: 0,
     userName: '',

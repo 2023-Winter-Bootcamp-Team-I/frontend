@@ -64,9 +64,10 @@ const StoryChoiceModal = () => {
       if (pageNum === 5) {
         //unmounting이 되고 socket()실행이 돼서 pagenum -1
         // console.log('if문 내부' + pageNum);
+        //소켓종료
         socket?.close();
         //제목 생성 페이지로 이동
-        navigate('/backcover');
+        navigate('/CreateTitleModal');
         // socket.onmessage = null; //더 이상 메시지를 수신하고 싶지 않을 때
       }
     };
