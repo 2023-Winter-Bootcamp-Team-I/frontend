@@ -14,6 +14,18 @@ export const userIDState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const userLan = atom({
+  key: 'user_lan',
+  default: 'ko',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const showModal = atom({
+  key: 'showModal',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
 // 혹시 몰라 카피해와서 주석처리해두는 코드.. import selector 만해주자
 // export const isLoggedInSelector = selector({
 //   key: 'isLoggedInSelector',

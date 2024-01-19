@@ -1,6 +1,8 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
+import { showModal, userLan } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -11,11 +13,81 @@ const StoryChoiceModal = () => {
   const { socket } = useWebSocket();
   const [message, setMessage] = useState<string>('');
   const [storyChoice, setStoryChoice] = useState<Story[]>([]);
-  const [prevChoiceArr, setPrevChoiceArr] = useState<Story[]>([]);
+  const [isshowModal, setShowModal] = useRecoilState<boolean>(showModal);
+  // const [prevChoiceArr, setPrevChoiceArr] = useState<Story[]>([]);
+  const [userLanState] = useRecoilState(userLan);
+  const [index, setIndex] = useState<number>(0); //출력할 배열의 인덱스
+  const [choice, setChoice] = useState<number>(0); //선택한 스토리 배열 인덱스
+  const [boxNum, setBoxNum] = useState<number>(0);
+  const [pageNum, setPageNum] = useState<number>(0);
+
+  const isMounted = useRef(true);
+
+  const choiceStory = (boxNumber: number) => {
+    setPageNum((prev) => prev + 1);
+
+    if (boxNumber === 1) {
+      setChoice(0);
+      setBoxNum(boxNumber);
+    } else if (boxNumber === 2) {
+      setChoice(2);
+      setBoxNum(boxNumber);
+    }
+  };
 
   useEffect(() => {
+    // 언마운트될 때 ref를 false로 설정
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    // 컴포넌트가 여전히 마운트되어 있는지 확인하기 위해 ref 사용
+    if (!isMounted.current) return;
+
+    if (boxNum !== 0) {
+      console.log('재요청' + pageNum);
+
+      socket?.send(
+        JSON.stringify({
+          type: pageNum === 6 ? 'end' : 'ing',
+          pageCnt: pageNum,
+          choice: boxNum,
+          koContent: storyChoice[choice],
+          enContent: storyChoice[choice + 1],
+        })
+      );
+
+      return () => {
+        console.log('unmounting..');
+        //응답받고 요청보낸 후 모든 state값 초기화
+        setBoxNum(0);
+        setStoryChoice([]);
+        setMessage('');
+        setShowModal(false);
+
+        if (pageNum === 6) {
+          console.log('last send');
+          socket?.close();
+          // socket.onmessage = null; //더 이상 메시지를 수신하고 싶지 않을 때
+        }
+      };
+    }
+  }, [isshowModal, pageNum]);
+
+  if (userLanState == 'en') {
+    setIndex(1);
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowModal(true);
+    }, 500);
+
     if (socket) {
       // console.log('socket connecting');
+
       socket.onmessage = (event) => {
         // Buffer를 문자열로 변환
         const data = JSON.parse(event.data.toString());
@@ -24,11 +96,12 @@ const StoryChoiceModal = () => {
         //한글자씩 받아서 이어붙이기
         setMessage((m) => m + msg);
 
-        //특정 문자로 데이터 슬라이싱해 저장
+        // console.log(message);
+        // 특정 문자로 데이터 슬라이싱해 저장
         setStoryChoice((prevArr) => {
           const lastItem = prevArr[prevArr.length - 1]; //배열의 마지막 요소
 
-          if (msg === '한' || msg === '영') {
+          if (msg === ':\n' || msg === '.\n\n') {
             // 다른언어 또는 다른 스토리 시작
             return [...prevArr, { language: msg, content: '' }];
           } else if (lastItem) {
@@ -40,34 +113,15 @@ const StoryChoiceModal = () => {
           return prevArr;
         });
       };
+
+      // console.log(message);
     }
+  }, [isshowModal, socket, storyChoice]);
 
-    // storyChoice 상태가 업데이트되면서 변경이 있을 때만 콘솔에 출력하고 요청을 보냄
-    if (JSON.stringify(prevChoiceArr) !== JSON.stringify(storyChoice)) {
-      console.log(storyChoice);
-      setPrevChoiceArr([...storyChoice]); // 이전 상태 업데이트
-
-      // 요청 보내는 부분
-      socket?.send(
-        JSON.stringify({
-          type: 'ing',
-          pageCnt: 1,
-          choice: '1',
-          koContent: storyChoice[0],
-          enContent: storyChoice[1],
-        })
-      );
-    }
-
-    return () => {
-      if (socket) {
-        socket.onmessage = null;
-        setMessage('');
-        setStoryChoice([]);
-        setPrevChoiceArr([]);
-      }
-    };
-  }, [socket, storyChoice, prevChoiceArr]);
+  //사용자가 스토리 선택하면 해당 스토이 배열 보내주기
+  useEffect(() => {
+    console.log(storyChoice);
+  }, [storyChoice]);
 
   return (
     // 배경 뿌옇게
@@ -83,9 +137,32 @@ const StoryChoiceModal = () => {
           {/* 큰 박스 */}
           <div className=" w-[95%] h-[70%] bg-[#E6E6E6] rounded-2xl  flex flex-row justify-center z-20">
             {/* 왼쪽 박스 */}
-            <div className="w-2/4 h-[80%]  mt-[4.5rem] ml-10 mr-10  bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"></div>
-            {/* 오른쪽 박스 */}
-            <div className="w-2/4 h-[80%] mt-[4.5rem] ml-10 mr-10 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl  z-30"></div>
+            {isshowModal ? (
+              <>
+                <div
+                  onClick={() => {
+                    choiceStory(1);
+                  }}
+                  className="cursor-pointer w-2/4 h-[80%]  mt-[4.5rem] ml-10 mr-10  bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"
+                >
+                  <span className="font-dongle text-[#222222] text-3xl">
+                    {storyChoice[index] ? storyChoice[index]['content'] : ''}
+                  </span>
+                </div>
+                <div
+                  onClick={() => {
+                    choiceStory(2);
+                  }}
+                  className="cursor-pointer w-2/4 h-[80%] mt-[4.5rem] ml-10 mr-10 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl  z-30"
+                >
+                  <span className="font-dongle text-[#222222] text-3xl">
+                    {storyChoice[index + 2] ? storyChoice[index + 2]['content'] : ''}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>

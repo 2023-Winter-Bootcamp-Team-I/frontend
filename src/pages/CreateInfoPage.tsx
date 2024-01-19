@@ -4,6 +4,8 @@ import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
 import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { userLan } from '@/states/atom';
 
 type WsData = {
   type: string;
@@ -19,6 +21,8 @@ type WsData = {
 };
 
 function CreateInfoPage() {
+  const [userLanState, setUserLanState] = useRecoilState(userLan);
+
   const [userInfo, setUserInfo] = useState<WsData>({
     type: 'start',
     pageCnt: 0,
@@ -34,6 +38,12 @@ function CreateInfoPage() {
       ...prevUserInfo,
       [field]: value,
     }));
+
+    if (field == 'language') {
+      setUserLanState(value);
+    }
+
+    // console.log(userLanState);
   };
 
   //웹소켓 연결
@@ -49,7 +59,7 @@ function CreateInfoPage() {
     navigate('/storychoicemodal');
     setTimeout(() => {
       sendDataToServer();
-    }, 3000);
+    }, 2000);
 
     console.log('User Info:', userInfo);
   };
@@ -118,13 +128,13 @@ function CreateInfoPage() {
           <div className="flex gap-5 w-[95%]  ">
             <button
               className=" w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
-              onClick={() => handleChange('language', '한글')}
+              onClick={() => handleChange('language', 'ko')}
             >
               한글(Ko)
             </button>
             <button
               className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
-              onClick={() => handleChange('language', '영어')}
+              onClick={() => handleChange('language', 'en')}
             >
               영어(En)
             </button>
