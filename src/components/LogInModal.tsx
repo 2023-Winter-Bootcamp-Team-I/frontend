@@ -89,16 +89,14 @@ function LogInModal({ closeModal }) {
                     />
                   </div>
                   <div className="flex flex-row gap-2 ml-2 justify-center">
-                    <Link to="/library">
-                      <motion.button
-                        className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
-                        onClick={handleLogin}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        로그인
-                      </motion.button>
-                    </Link>
+                    <motion.button
+                      className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
+                      onClick={handleLogin}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      로그인
+                    </motion.button>
                     <Link to="/signup">
                       <motion.button
                         className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
