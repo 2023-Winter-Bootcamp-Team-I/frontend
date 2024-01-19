@@ -8,6 +8,13 @@ export interface Book {
   image_url: string;
 }
 
+export interface Page {
+  page_num: number;
+  ko_content: string;
+  en_content: string;
+  image_url: string;
+}
+
 // /books 에 대한 GET 요청입니다
 // 서재 페이지에서 책들을 처음으로 불러 올 때 사용 됩니다
 // user_id 를 input으로 받으며
@@ -36,7 +43,9 @@ export const updateTitle = async (bookId: number, newTitle: string): Promise<Boo
   }
 };
 
-// /books/{book_id}
+// /books/{book_id} 에 대한 Delete 요청
+// 책을 삭제 할 때 사용됩니다
+// bookId를 input 으로 받습니다
 export const deleteBook = async (bookId: number): Promise<void> => {
   try {
     await api.delete(`/books/${bookId}`);
@@ -45,3 +54,29 @@ export const deleteBook = async (bookId: number): Promise<void> => {
     throw error;
   }
 };
+
+export const readBook = async (bookId: number): Promise<Page[]> => {
+  try {
+    const response = await api.get(`/books/${bookId}`);
+    return response.data.result.content as Page[];
+  } catch (error) {
+    console.error('Error fetching book content:', error.message);
+    throw error;
+  }
+};
+
+// const exampleData =
+// [
+//     {
+//       page_num: 1,
+//       ko_content: "대충 되게 긴 이야기",
+//       en_content: "대충 되게 긴 이야기",
+//       image_url: "대충 되게 긴 링크",
+//     },
+//     {
+//       page_num: 2,
+//       ko_content: "대충 되게 긴 이야기",
+//       en_content: "대충 되게 긴 이야기",
+//       image_url: "대충 되게 긴 링크",
+//     }
+// ]
