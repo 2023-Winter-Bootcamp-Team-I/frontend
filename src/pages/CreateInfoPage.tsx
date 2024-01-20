@@ -59,10 +59,10 @@ function CreateInfoPage() {
   const navigate = useNavigate();
 
   const handleNextButtonClick = () => {
-    navigate('/storychoicemodal');
+    navigate('/frontcover');
     setTimeout(() => {
       sendDataToServer();
-    }, 2000);
+    }, 3000);
 
     console.log('User Info:', userInfo);
   };

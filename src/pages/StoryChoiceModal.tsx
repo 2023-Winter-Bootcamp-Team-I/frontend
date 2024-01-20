@@ -46,7 +46,7 @@ const StoryChoiceModal = () => {
 
       socket?.send(
         JSON.stringify({
-          type: pageNum === 6 ? 'end' : 'ing',
+          type: pageNum === 2 ? 'end' : 'ing',
           pageCnt: pageNum,
           choice: boxNum,
           koContent: storyChoice[choice],
@@ -85,7 +85,7 @@ const StoryChoiceModal = () => {
     }, 500);
 
     //socket 이 있고, pagenum<5이면
-    if (socket && pageNum < 5) {
+    if (socket && pageNum < 1) {
       // console.log('socket connecting');
       console.log(pageNum);
 
@@ -122,7 +122,7 @@ const StoryChoiceModal = () => {
       };
 
       // console.log(message);
-    } else if (socket && pageNum === 5) {
+    } else if (socket && pageNum === 1) {
       socket.onmessage = (event) => {
         const book = JSON.parse(event.data);
         setbookId(book.bookId);
