@@ -6,23 +6,23 @@ import App from './App';
 import One from './components/One';
 import Test from './pages/Test';
 import reportWebVitals from './reportWebVitals';
+import './i18n';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "one",
+        path: 'one',
         element: <One />,
       },
     ],
   },
   {
-    path:"test",
+    path: 'test',
     element: <Test />,
-  }
-
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

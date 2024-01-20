@@ -9,6 +9,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -19,6 +20,7 @@ const LibraryPage = () => {
   const selectedLanguage = useRecoilValue(userLanguage);
 
   const setUserID = useSetRecoilState(userIDState);
+  const { t, i18n } = useTranslation();
 
   const handleLogout = () => {
     setUserID(null);
@@ -92,7 +94,7 @@ const LibraryPage = () => {
           </div>
           <div className="relative z-30">
             <div className="font-dongle text-[120px] text-[#F1F1F1] ml-8 drop-shadow-[2px_3px_0px_rgba(0,0,0,0.35)]">
-              나의 도서관
+              {t('Welcome to React')}
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
               {books.map((book) => (
