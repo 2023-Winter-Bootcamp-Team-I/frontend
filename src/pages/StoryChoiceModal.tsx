@@ -46,7 +46,7 @@ const StoryChoiceModal = () => {
 
       socket?.send(
         JSON.stringify({
-          type: pageNum === 2 ? 'end' : 'ing',
+          type: pageNum === 6 ? 'end' : 'ing',
           pageCnt: pageNum,
           choice: boxNum,
           koContent: storyChoice[choice],
@@ -85,9 +85,9 @@ const StoryChoiceModal = () => {
     }, 500);
 
     //socket 이 있고, pagenum<5이면
-    if (socket && pageNum < 1) {
+    if (socket && pageNum < 6) {
       // console.log('socket connecting');
-      console.log(pageNum);
+      // console.log(pageNum);
 
       socket.onmessage = (event) => {
         // console.log('socket 받는중');
@@ -95,20 +95,20 @@ const StoryChoiceModal = () => {
         const data = JSON.parse(event.data.toString());
         const msg: string = data.message;
 
-        console.log(msg);
+        // console.log(msg);
 
         //한글자씩 받아서 이어붙이기
         setMessage((m) => m + msg);
 
-        // console.log(message);
-        // console.log(storyChoice);
+        console.log(message);
+        console.log(storyChoice);
 
         // 특정 문자로 데이터 슬라이싱해 저장
         setStoryChoice((prevArr) => {
           // console.log('배열 채우는 중');
           const lastItem = prevArr[prevArr.length - 1]; //배열의 마지막 요소
 
-          if (msg === ':\n' || msg === '한') {
+          if (msg === '국' || msg === '영' || msg === '.') {
             // 다른언어 또는 다른 스토리 시작
             return [...prevArr, { language: msg, content: '' }];
           } else if (lastItem) {
@@ -122,7 +122,7 @@ const StoryChoiceModal = () => {
       };
 
       // console.log(message);
-    } else if (socket && pageNum === 1) {
+    } else if (socket && pageNum === 6) {
       socket.onmessage = (event) => {
         const book = JSON.parse(event.data);
         setbookId(book.bookId);

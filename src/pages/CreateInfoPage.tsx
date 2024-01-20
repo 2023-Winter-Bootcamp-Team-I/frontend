@@ -59,7 +59,7 @@ function CreateInfoPage() {
   const navigate = useNavigate();
 
   const handleNextButtonClick = () => {
-    navigate('/frontcover');
+    navigate('/storychoicemodal');
     setTimeout(() => {
       sendDataToServer();
     }, 3000);
