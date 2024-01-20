@@ -51,7 +51,7 @@ const MainPage = () => {
             {userID ? (
               <Link to="/createinfopage">
                 <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110">
-                  책생성하기
+                  책 생성하기
                 </button>
               </Link>
             ) : (

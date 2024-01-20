@@ -15,6 +15,7 @@ function LogInModal({ closeModal }) {
   const setUserID = useSetRecoilState(userIDState);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -36,94 +37,98 @@ function LogInModal({ closeModal }) {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    setIsModalOpen(true);
     return () => {
       document.body.style.overflow = 'unset';
+      setIsModalOpen(false);
     };
   }, []);
 
   return (
     <AnimatePresence>
-      <motion.div
-        className="z-10 absolute top-[15%] w-screen h-screen"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.5 }}
-      >
-        <button onClick={closeModal}>
-          <img className="left-[70%] top-[10%] z-20 absolute hover:scale-125" src={Close} alt="close_button" />
-        </button>
-        <div className="flex justify-center text-center sm:items-center sm:p-0">
-          <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-1/2">
-            <div className="flex flex-row h-[70vh]">
-              <div className="flex flex-col bg-loginBlue basis-1/3">
-                <div className="flex basis-2/3 justify-center">
-                  <img className="mx-auto min-h-full w-2/3" src={heartImg} alt="heart_character" />
-                </div>
-                <div className="flex basis-1/3 font-dongle text-white text-9xl justify-center align-bottom">
-                  북그북그
-                </div>
-              </div>
-              <div className="flex flex-col bg-mainColor basis-2/3 h-full">
-                <div className="flex text-white font-jua text-5xl justify-center mt-20 mb-[7vh]">로그인</div>
-                <div className="flex flex-col justify-center">
-                  <div className="flex justify-center">
-                    <img
-                      className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
-                      src={letterImg}
-                      alt="letter_image"
-                    />
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="이메일을 입력해주세요"
-                      required
-                      className="block w-[80%] h-[4.2rem] text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+      {isModalOpen && (
+        <motion.div
+          className="z-10 absolute  w-screen h-screen bg-white  bg-opacity-20 "
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5 }}
+        >
+          <button onClick={closeModal}>
+            <img className="left-[66%] top-[18%] z-20 absolute" src={Close} alt="close_button" />
+          </button>
+          <div className="flex justify-center text-center sm:items-center sm:p-0">
+            <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-28 w-2/5">
+              <div className="flex flex-row h-[65vh]">
+                <div className="flex flex-col bg-loginBlue basis-1/3">
+                  <div className="flex basis-2/3 justify-center">
+                    <img className="mx-auto min-h-full w-2/3" src={heartImg} alt="heart_character" />
                   </div>
-                  <div className="flex mt-8 mb-[7vh] justify-center">
-                    <img
-                      className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
-                      src={lockImg}
-                      alt="lock_image"
-                    />
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="비밀번호를 입력해주세요"
-                      required
-                      className="block w-[80%] h-[4.2rem] text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                  <div className="flex basis-1/3 font-dongle text-white text-8xl justify-center align-bottom">
+                    북그북그
                   </div>
-                  <div className="flex flex-row gap-2 ml-2 justify-center">
-                    <motion.button
-                      className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
-                      onClick={handleLogin}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      로그인
-                    </motion.button>
-                    <Link to="/signup">
+                </div>
+                <div className="flex flex-col bg-mainColor basis-2/3 h-full">
+                  <div className="flex text-white font-jua text-5xl justify-center mt-20 mb-[7vh]">로그인</div>
+                  <div className="flex flex-col justify-center">
+                    <div className="flex justify-center">
+                      <img
+                        className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
+                        src={letterImg}
+                        alt="letter_image"
+                      />
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="이메일을 입력해주세요"
+                        required
+                        className="block w-[80%] h-[4.2rem] text-lg rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex mt-8 mb-[7vh] justify-center">
+                      <img
+                        className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
+                        src={lockImg}
+                        alt="lock_image"
+                      />
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="비밀번호를 입력해주세요"
+                        required
+                        className="block w-[80%] h-[4.2rem] text-lg rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex flex-row gap-2 ml-2 justify-center">
                       <motion.button
-                        className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
+                        className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
+                        onClick={handleLogin}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        회원 가입
+                        로그인
                       </motion.button>
-                    </Link>
+                      <Link to="/signup">
+                        <motion.button
+                          className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          회원 가입
+                        </motion.button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }
