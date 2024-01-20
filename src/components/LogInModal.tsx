@@ -6,8 +6,8 @@ import { loginUser } from '@/api/login';
 import { useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
 import Close from '@/assets/images/Close.svg';
-import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LogInModal({ closeModal }) {
   const [email, setEmail] = useState('');
