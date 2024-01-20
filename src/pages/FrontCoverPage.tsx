@@ -9,28 +9,51 @@ import HTMLFlipBook from 'react-pageflip';
 
 function FrontCoverPage() {
   const viewportWidth = window.innerWidth;
-  const viewportHeight = window.outerHeight;
+  const viewportHeight = window.innerHeight;
   return (
     <div className="flex flex-col">
       <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
         <div className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 ml-10 z-20">
           <img className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
         </div>
-        <div className="flex flex-row h-screen mx-auto my-0">
+        <div className="flex flex-row h-screen mx-auto my-0 w-full">
           <HTMLFlipBook
+            // width={viewportWidth}
+            // height={viewportHeight}
+            // size="stretch"
+            // // minWidth={viewportWidth}
+            // // maxWidth={viewportWidth}
+            // // minHeight={viewportHeight}
+            // // maxHeight={viewportHeight}
+            // drawShadow={false}
+            // flippingTime={1000}
+            // className="book-theme"
+            // startPage={1}
+            // usePortrait={true}
+            // startZIndex={10}
+            // autoSize={true}
+            // maxShadowOpacity={0.5}
+            // showCover={false}
+            // mobileScrollSupport={true}
+            // clickEventForward={true}
+            // useMouseEvents={true}
+            // swipeDistance={3}
+            // showPageCorners={true}
+            // disableFlipByClick={false}
+            // style={{}}
             width={viewportWidth}
-            height={viewportHeight}
+            height={680}
             size="stretch"
-            // minWidth={viewportWidth}
-            // maxWidth={viewportWidth}
-            // minHeight={viewportHeight}
-            // maxHeight={viewportHeight}
-            drawShadow={false}
+            minWidth={400}
+            maxWidth={viewportWidth}
+            minHeight={600}
+            maxHeight={680}
+            drawShadow={true}
             flippingTime={1000}
             className="book-theme"
             startPage={1}
             usePortrait={true}
-            startZIndex={10}
+            startZIndex={30}
             autoSize={true}
             maxShadowOpacity={0.5}
             showCover={false}
@@ -42,8 +65,9 @@ function FrontCoverPage() {
             disableFlipByClick={false}
             style={{}}
           >
-            <div className="flex flex-col basis-1/2 h-screen justify-center">
-              <div className="flex basis-1/2 justify-center">
+            {/* <div className="flex flex-col h-screen justify-center align-center"> */}
+            <div className="flex flex-col w-full h-full">
+              <div className="flex justify-center">
                 <img className="flex mx-auto min-h-full z-20 w-60 mt-36" src={robotImg} alt="robot_character" />
               </div>
               <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20 gap-y-10">
@@ -52,7 +76,7 @@ function FrontCoverPage() {
                 </div>
               </div>
             </div>
-            <div className="flex basis-1/2 h-screen justify-center content-center">
+            <div className="flex w-full h-full">
               <FrontCover></FrontCover>
             </div>
             {[1, 2, 3, 4, 5, 6].map((index) => (
@@ -77,7 +101,7 @@ export default FrontCoverPage;
 
 const FrontCover = React.forwardRef(() => {
   return (
-    <div className="flex bg-bookCoverBack h-screen w-[96%] mt-8 -ml-24 rounded-3xl">
+    <div className="flex bg-bookCoverBack h-screen w-full mt-8 rounded-3xl">
       <div className="flex flex-col bg-bookCoverFront h-full w-full mt-6 z-20 -ml-6 mr-6 rounded-3xl justify-center items-center">
         <div className="flex bg-bookCoverTextBox h-[25%] w-4/5 rounded-3xl border-2 border-shadowGray border-solid font-dongle text-[7rem] mb-44 items-center justify-center">
           <div className="p-10 break-keep text-titleColor align-bottom">백설 공주</div>
