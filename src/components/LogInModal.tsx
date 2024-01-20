@@ -2,24 +2,36 @@ import React, { useState, useEffect } from 'react';
 import heartImg from '@/assets/images/heart.svg';
 import letterImg from '@/assets/images/letter.svg';
 import lockImg from '@/assets/images/lock.svg';
-import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
+import { loginUser } from '@/api/login';
 import { useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
 import Close from '@/assets/images/Close.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function LogInModal({ closeModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUserID = useSetRecoilState(userIDState);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // loginUser 함수 호출
-    const response = await loginUser({ email, password });
-    const userID = response.data['result']['user_id'];
+    try {
+      const response = await loginUser({ email, password });
+      const userID = response.data['result']['user_id'];
 
-    setUserID(userID);
+      if (userID) {
+        setUserID(userID);
+        setError('');
+        closeModal();
+        navigate('/library');
+      } else {
+        setError('유효하지 않은 아이디입니다.');
+      }
+    } catch (error) {
+      setError('로그인에 실패하였습니다.');
+    }
   };
 
   useEffect(() => {
@@ -32,17 +44,16 @@ function LogInModal({ closeModal }) {
   return (
     <AnimatePresence>
       <motion.div
-        className=" z-10 absolute top-[15%] w-screen h-screen"
+        className="z-10 absolute top-[15%] w-screen h-screen"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5 }}
       >
         <button onClick={closeModal}>
-          <img className="left-[70%] top-[10%] z-20 absolute hover:scale-125" src={Close}></img>
+          <img className="left-[70%] top-[10%] z-20 absolute hover:scale-125" src={Close} alt="close_button" />
         </button>
         <div className="flex justify-center text-center sm:items-center sm:p-0">
-          {/* Modal code starts from the below line */}
           <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-1/2">
             <div className="flex flex-row h-[70vh]">
               <div className="flex flex-col bg-loginBlue basis-1/3">

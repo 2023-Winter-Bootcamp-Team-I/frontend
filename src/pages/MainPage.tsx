@@ -14,6 +14,7 @@ const MainPage = () => {
   };
 
   const closeModal = () => {
+    // setShowModal((prev) => !prev);
     setShowModal(false);
   };
 
