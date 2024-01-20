@@ -22,7 +22,8 @@ const StoryChoiceModal = () => {
   const [boxNum, setBoxNum] = useState<number>(0);
   const [pageNum, setPageNum] = useState<number>(0);
   const [socketSent, setSocketSend] = useState<boolean>(false);
-  const setbookId = useSetRecoilState<number>(bookID);
+  // const setbookId = useSetRecoilState<number>(bookID);
+  const [bookId, setbookId] = useRecoilState(bookID);
 
   const navigate = useNavigate();
   // const isMounted = useRef(true);
@@ -125,6 +126,7 @@ const StoryChoiceModal = () => {
     } else if (socket && pageNum === 6) {
       socket.onmessage = (event) => {
         const book = JSON.parse(event.data);
+
         setbookId(book.bookId);
       };
     }

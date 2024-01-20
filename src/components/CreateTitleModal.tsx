@@ -5,25 +5,28 @@ import { updateTitle, Title } from '@/api/title';
 import pencil from '@/assets/images/pencil.svg';
 import { useRecoilValue } from 'recoil';
 import { bookID } from '@/states/atom';
+import { useNavigate } from 'react-router-dom';
 
 interface CreateTitleModalProps {
   title: string;
-  onClose: () => void;
 }
 
-const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title, onClose }) => {
+const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title }) => {
   // 상태 초기화
   const [bookTitle, setBookTitle] = useState(title || '');
   const bookId = useRecoilValue<number>(bookID);
+  const navigate = useNavigate();
+  // console.log(bookId);
 
   const handleCreateTitle = async () => {
     try {
       if (bookTitle.trim() !== '') {
+        // console.log(bookId);
         const updatedBook: Title = await updateTitle(bookId, bookTitle);
 
         console.log(updatedBook);
 
-        onClose(); // 모달 닫기
+        navigate('/library'); // 모달 닫기
       } else {
         console.warn('책 제목은 비워둘 수 없습니다.');
       }
