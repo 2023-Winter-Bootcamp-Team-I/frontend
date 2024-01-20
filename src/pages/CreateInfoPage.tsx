@@ -4,7 +4,7 @@ import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
 import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 
 type WsData = {
@@ -22,8 +22,9 @@ type WsData = {
 };
 
 function CreateInfoPage() {
-  const [userLanState, setUserLanState] = useRecoilState(userLanguage);
+  const setUserLanState = useSetRecoilState(userLanguage);
   const [userId] = useRecoilState<number>(userIDState);
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState<WsData>({
     userId: userId,
@@ -56,13 +57,11 @@ function CreateInfoPage() {
     send(userInfo);
   };
 
-  const navigate = useNavigate();
-
   const handleNextButtonClick = () => {
     navigate('/storychoicemodal');
     setTimeout(() => {
       sendDataToServer();
-    }, 3000);
+    }, 1500);
 
     console.log('User Info:', userInfo);
   };

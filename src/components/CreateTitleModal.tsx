@@ -26,7 +26,7 @@ const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title }) => {
 
         console.log(updatedBook);
 
-        navigate('/library'); // 모달 닫기
+        navigate('/library');
       } else {
         console.warn('책 제목은 비워둘 수 없습니다.');
       }
