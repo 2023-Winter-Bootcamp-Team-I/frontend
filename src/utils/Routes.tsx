@@ -12,7 +12,8 @@ import LogInModal from '@/components/LogInModal';
 import CreateTitleModal from '@/components/CreateTitleModal';
 import ShareModal from '@/components/ShareModal';
 import ReadBookPage from '@/pages/ReadBookPage';
-
+import CreationStartPage from '@/pages/CreationStartPage';
+import CreationFinishPage from '@/pages/CreationFinishPage';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
       {
         path: 'backcover',
         element: <BackCoverPage />,
+      },
+      {
+        path: 'creationstart',
+        element: <CreationStartPage />,
+      },
+      {
+        path: 'creationfinish',
+        element: <CreationFinishPage />,
       },
       {
         path: 'library',
