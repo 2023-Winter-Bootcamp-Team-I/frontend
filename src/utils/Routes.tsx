@@ -12,7 +12,7 @@ import LogInModal from '@/components/LogInModal';
 import CreateTitleModal from '@/components/CreateTitleModal';
 import ShareModal from '@/components/ShareModal';
 import ReadBookPage from '@/pages/ReadBookPage';
-
+import LoadingPage from '@/pages/LoadingPage';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'sharemodal',
         element: <ShareModal />,
+      },
+      {
+        path: 'loading',
+        element: <LoadingPage />,
       },
     ],
   },
