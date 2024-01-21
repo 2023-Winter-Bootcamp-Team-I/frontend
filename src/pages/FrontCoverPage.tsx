@@ -7,13 +7,13 @@ import barcodeImg from '@/assets/images/barcode.svg';
 import { useState, useRef, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { readBook } from '@/api/books';
-import { Page } from '@/api/books';
+import { BookPage } from '@/api/books';
 
 function FrontCoverPage() {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   const book = useRef(null);
-  const [bookData, setBookData] = useState<{ pages: Page[]; bookTitle: string }>();
+  const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
 
   const testData = [
     {
