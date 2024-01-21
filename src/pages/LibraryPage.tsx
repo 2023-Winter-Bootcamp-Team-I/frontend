@@ -4,13 +4,11 @@ import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
-import { sendEmail } from '@/api/email';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
 import { LuShare } from 'react-icons/lu';
-import { send } from 'vite';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -19,6 +17,7 @@ const LibraryPage = () => {
   const userID = useRecoilValue(userIDState);
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
+  const [currentBookId, setCurrentBookId] = useState<number>(0);
 
   const setUserID = useSetRecoilState(userIDState);
 
@@ -53,7 +52,8 @@ const LibraryPage = () => {
     setHovered((prevHovered) => ({ ...prevHovered, [bookId]: false }));
   };
 
-  const openModal = () => {
+  const openModal = (bookId: number) => {
+    setCurrentBookId(bookId);
     setShowModal(true);
   };
 
@@ -97,7 +97,7 @@ const LibraryPage = () => {
           </div>
           <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
             {books.map((book) => (
-              <div key={book.book_id} className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
+              <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
                 <div className="w-64 h-64">
                   <img src={thumbnail} />
                 </div>
@@ -108,7 +108,7 @@ const LibraryPage = () => {
                       <LuShare
                         className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#000000]"
                         alt="Share Icon"
-                        onClick={() => openModal(bookId)}
+                        onClick={() => openModal(book.book_id)}
                       />
                     </button>
                   </div>
@@ -130,7 +130,7 @@ const LibraryPage = () => {
                     />
                   </svg>
                 </div>
-                {showModal && <ShareModal closeModal={closeModal} bookId={book.book_id} />}
+                {showModal && <ShareModal closeModal={closeModal} bookId={currentBookId} />}
               </div>
             ))}
           </div>

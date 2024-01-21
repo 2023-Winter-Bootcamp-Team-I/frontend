@@ -14,8 +14,6 @@ interface ShareModalProps {
 const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
   const [email, setEmail] = useState<string>('');
 
-  // console.log(bookId);
-
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
