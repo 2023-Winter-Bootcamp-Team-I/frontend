@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import pencilImg from '@/assets/images/pencil.svg';
 import { Link } from 'react-router-dom';
 import { signUpUser } from '@/api/users';
+import { motion } from 'framer-motion';
 
 interface SignUpData {
   password: string;
@@ -100,22 +101,26 @@ function SignUp() {
 
               <div className="flex flex-row">
                 <Link to="/" className="flex basis-1/2 justify-center">
-                  <button
+                  <motion.button
                     className="flex justify-center items-center font-jua rounded-full bg-white px-14 py-2.5 text-lg font-bold leading-6 text-signupButtonBlue border-b-2 border-r-2 border-shadowGray mr-2"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => {
                       // 가입 취소 버튼 클릭 시 동작 추가
                     }}
                   >
                     가입 취소
-                  </button>
+                  </motion.button>
                 </Link>
                 <Link to="/" className="flex basis-1/2 justify-center">
-                  <button
+                  <motion.button
                     className="flex justify-center font-jua rounded-full bg-signupButtonBlue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={handleSignUp}
                   >
                     가입 완료
-                  </button>
+                  </motion.button>
                 </Link>
               </div>
             </div>

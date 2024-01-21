@@ -11,7 +11,7 @@ const { persistAtom } = recoilPersist({
 // 유저의 아이디
 export const userIDState = atom({
   key: 'user_id',
-  default: '',
+  default: 0,
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -19,6 +19,18 @@ export const userIDState = atom({
 export const userLanguage = atom({
   key: 'user_language',
   default: 'ko',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const bookID = atom({
+  key: 'bookId',
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const showModal = atom({
+  key: 'showModal',
+  default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
