@@ -10,9 +10,10 @@ function CreationStartPage() {
   const book = useRef(null);
   const navigate = useNavigate();
   const navigateToCreateBookPage = () => {
-    navigate('../createbookpage');
+    setTimeout(() => {
+      navigate('../createbookpage');
+    }, 1000);
   };
-
   return (
     <div className="flex flex-col">
       <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
