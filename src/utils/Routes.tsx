@@ -11,6 +11,8 @@ import StoryChoiceModal from '@/pages/StoryChoiceModal';
 import LogInModal from '@/components/LogInModal';
 import CreateTitleModal from '@/components/CreateTitleModal';
 import ShareModal from '@/components/ShareModal';
+import ReadBookPage from '@/pages/ReadBookPage';
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'createbookpage',
         element: <CreateBookPage />,
+      },
+      {
+        path: 'readbookpage',
+        element: <ReadBookPage />,
       },
       {
         path: 'storychoicemodal',
