@@ -1,14 +1,19 @@
-import robotImg from '@/assets/images/robot.svg';
-import nextButtonImg from '@/assets/images/nextButton.svg';
 import barcodeImg from '@/assets/images/barcode.svg';
 import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
 import { useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import React from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreationFinishPage() {
   const book = useRef(null);
+  const navigate = useNavigate();
+  const navigateToCreateBookPage = () => {
+    setTimeout(() => {
+      navigate('../title');
+    }, 1000);
+  };
 
   useEffect(() => {
     // Set an interval to flip the page every 5 seconds
@@ -54,6 +59,7 @@ function CreationFinishPage() {
             disableFlipByClick={false}
             style={{}}
             ref={book}
+            onFlip={navigateToCreateBookPage}
           >
             {[1, 2].map((index) => (
               <div>
@@ -72,27 +78,9 @@ function CreationFinishPage() {
 
 export default CreationFinishPage;
 
-const FrontCover = React.forwardRef(() => {
+const Page = React.forwardRef(() => {
   return (
-    <div className="flex h-full pb-6">
-      <div className="flex bg-bookCoverBack h-full w-full rounded-3xl">
-        <div className="flex flex-col bg-bookCoverFront h-full w-full mt-6 z-20 -ml-6 mr-6 rounded-3xl justify-center items-center">
-          <div className="flex bg-bookCoverTextBox h-[25%] w-4/5 rounded-3xl border-2 border-shadowGray border-solid font-dongle text-[7rem] mb-44 items-center justify-center">
-            <div className="p-10 break-keep text-titleColor align-bottom">백설 공주</div>
-          </div>
-          <div className="bg-bookCoverLine h-1/5 w-full mt-10 mb-44"></div>
-        </div>
-      </div>
-    </div>
-  );
-});
-
-const Page = React.forwardRef((props, ref) => {
-  return (
-    <div
-      className="flex justify-center items-center flex-col px-[2.5rem] py-8 bg-[#93C4FF] border-[#7bb6ff] border-y-4 border-l-4 border-solid rounded-2xl"
-      ref={ref}
-    >
+    <div className="flex justify-center items-center flex-col px-[2.5rem] py-8 bg-[#93C4FF] border-[#7bb6ff] border-y-4 border-l-4 border-solid rounded-2xl">
       <div className="flex flex-col items-center justify-around box-border px-2 w-full h-[776px] bg-white bg-opacity-45  rounded-2xl z-30">
         <img src={QuestionMark} className=" mt-12 h-1/4 z-30"></img>
         <div className="box-border mt-4 h-[55%] w-[95%] bg-[#fdfdfd] bg-opacity-70 rounded-2xl z-30 pb-10 mb-10">

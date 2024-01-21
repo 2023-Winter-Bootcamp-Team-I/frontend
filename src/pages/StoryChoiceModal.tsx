@@ -122,7 +122,7 @@ const StoryChoiceModal = () => {
         setbookId(book.bookId);
       };
 
-      navigate('/title');
+      navigate('/creationfinish');
     }
   }, [isshowModal, socket, storyChoice, pageNum]);
 
