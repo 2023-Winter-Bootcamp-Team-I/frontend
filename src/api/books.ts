@@ -8,7 +8,7 @@ export interface Book {
   image_url: string;
 }
 
-export interface Page {
+export interface BookPage {
   page_num: number;
   ko_content: string;
   en_content: string;
@@ -58,7 +58,7 @@ export const deleteBook = async (bookId: number): Promise<void> => {
 export const readBook = async (bookId: number): Promise<ReadBookResult> => {
   try {
     const response = await api.get(`/books/${bookId}`);
-    const pages = response.data.result.content as Page[];
+    const pages = response.data.result.content as BookPage[];
 
     const bookTitle = response.data.result.title;
 
@@ -68,19 +68,3 @@ export const readBook = async (bookId: number): Promise<ReadBookResult> => {
     throw error;
   }
 };
-
-// const exampleData =
-// [
-//     {
-//       page_num: 1,
-//       ko_content: "대충 되게 긴 이야기",
-//       en_content: "대충 되게 긴 이야기",
-//       image_url: "대충 되게 긴 링크",
-//     },
-//     {
-//       page_num: 2,
-//       ko_content: "대충 되게 긴 이야기",
-//       en_content: "대충 되게 긴 이야기",
-//       image_url: "대충 되게 긴 링크",
-//     }
-// ]
