@@ -54,13 +54,13 @@ function LogInModal({ closeModal }) {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.5 }}
         >
-          <button onClick={closeModal}>
-            <img className="left-[66%] top-[18%] z-20 absolute" src={Close} alt="close_button" />
-          </button>
           <div className="flex justify-center text-center sm:items-center sm:p-0">
             <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-28 w-2/5">
               <div className="flex flex-row h-[65vh]">
                 <div className="flex flex-col bg-loginBlue basis-1/3">
+                  <button onClick={closeModal}>
+                    <img className="left-[90%] top-[4%] z-20 absolute" src={Close} alt="close_button" />
+                  </button>
                   <div className="flex basis-2/3 justify-center">
                     <img className="mx-auto min-h-full w-2/3" src={heartImg} alt="heart_character" />
                   </div>
@@ -69,11 +69,11 @@ function LogInModal({ closeModal }) {
                   </div>
                 </div>
                 <div className="flex flex-col bg-mainColor basis-2/3 h-full">
-                  <div className="flex text-white font-jua text-5xl justify-center mt-20 mb-[7vh]">로그인</div>
+                  <div className="flex text-white font-jua text-4xl justify-center mt-20 mb-[7vh]">로그인</div>
                   <div className="flex flex-col justify-center">
                     <div className="flex justify-center">
                       <img
-                        className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
+                        className="flex mx-auto min-h-full w-8 opacity-50 -mr-16 ml-10"
                         src={letterImg}
                         alt="letter_image"
                       />
@@ -83,13 +83,13 @@ function LogInModal({ closeModal }) {
                         type="email"
                         placeholder="이메일을 입력해주세요"
                         required
-                        className="block w-[80%] h-[4.2rem] text-lg rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="flex mt-8 mb-[7vh] justify-center">
                       <img
-                        className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
+                        className="flex mx-auto min-h-full w-8 opacity-50 -mr-16 ml-10"
                         src={lockImg}
                         alt="lock_image"
                       />
@@ -99,13 +99,13 @@ function LogInModal({ closeModal }) {
                         type="password"
                         placeholder="비밀번호를 입력해주세요"
                         required
-                        className="block w-[80%] h-[4.2rem] text-lg rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <div className="flex flex-row gap-2 ml-2 justify-center">
                       <motion.button
-                        className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-white py-4 text-3xl leading-7 text-loginBlue mr-2"
+                        className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-white py-3.5 text-3xl leading-7 text-loginBlue mr-2"
                         onClick={handleLogin}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -114,7 +114,7 @@ function LogInModal({ closeModal }) {
                       </motion.button>
                       <Link to="/signup">
                         <motion.button
-                          className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2"
+                          className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-loginBlue py-3.5 text-3xl leading-7 text-white ml-2"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                         >

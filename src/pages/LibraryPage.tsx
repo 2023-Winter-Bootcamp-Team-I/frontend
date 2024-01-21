@@ -4,11 +4,13 @@ import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
+import { sendEmail } from '@/api/email';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
 import { LuShare } from 'react-icons/lu';
+import { send } from 'vite';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -95,17 +97,18 @@ const LibraryPage = () => {
           </div>
           <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
             {books.map((book) => (
-              <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
+              <div key={book.book_id} className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
                 <div className="w-64 h-64">
                   <img src={thumbnail} />
                 </div>
                 <div className="flex flex-row items-center">
                   <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
                   <div>
-                    <button onClick={openModal}>
+                    <button>
                       <LuShare
                         className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#000000]"
                         alt="Share Icon"
+                        onClick={() => openModal(bookId)}
                       />
                     </button>
                   </div>

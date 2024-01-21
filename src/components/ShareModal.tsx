@@ -54,20 +54,20 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
     <AnimatePresence>
       {isModalOpen && (
         <motion.div
-          className="z-30  absolute left-[-30%] top-[-10%] w-screen h-screen  bg-white  bg-opacity-10 "
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
+          className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex justify-center text-center sm:items-center sm:p-0">
+          <div className="flex justify-center text-center sm:items-center sm:p-0 w-full">
             <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-2/5">
               <div className="flex flex-row h-[65vh] ">
                 <div className="flex flex-col bg-loginBlue basis-1/3">
                   <div className="flex basis-2/3 justify-center">
                     <img className="mx-auto min-h-full mt-8 w-5/6" src={star} alt="star_character" />
                   </div>
-                  <div className="flex basis-1/3 font-dongle text-white text-9xl justify-center align-bottom">
+                  <div className="flex basis-1/3 font-dongle text-white text-8xl justify-center align-bottom">
                     북그북그
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                   <div className="flex flex-col justify-center ">
                     <div className="flex justify-center">
                       <img
-                        className="flex mx-auto min-h-full w-12 opacity-50 -mr-20 ml-10"
+                        className="flex mx-auto min-h-full w-8 opacity-50 -mr-16 ml-10"
                         src={letterImg}
                         alt="letter_image"
                       />
@@ -93,7 +93,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className="block w-[80%] h-[4.2rem] text-xl rounded-full px-24 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
                       />
                     </div>
                     <div className="flex mb-[7vh] justify-center"></div>
@@ -104,7 +104,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                             handleShareButtonClick();
                             closeModal();
                           }}
-                          className="w-[11.5rem] text-[1.8rem] font-jua rounded-2xl bg-loginBlue py-4 text-3xl leading-7 text-white ml-2 hover:scale-110"
+                          className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-loginBlue py-3.5 text-3xl leading-7 text-white ml-2 hover:scale-110"
                         >
                           공유하기
                         </button>
