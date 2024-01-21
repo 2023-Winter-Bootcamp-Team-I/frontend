@@ -55,10 +55,14 @@ export const deleteBook = async (bookId: number): Promise<void> => {
   }
 };
 
-export const readBook = async (bookId: number): Promise<Page[]> => {
+export const readBook = async (bookId: number): Promise<ReadBookResult> => {
   try {
     const response = await api.get(`/books/${bookId}`);
-    return response.data.result.content as Page[];
+    const pages = response.data.result.content as Page[];
+
+    const bookTitle = response.data.result.title;
+
+    return { pages, bookTitle };
   } catch (error) {
     console.error('Error fetching book content:', error.message);
     throw error;

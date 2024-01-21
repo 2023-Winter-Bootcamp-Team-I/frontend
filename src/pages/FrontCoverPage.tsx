@@ -4,13 +4,80 @@ import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
 import barcodeImg from '@/assets/images/barcode.svg';
-import { useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
+import { readBook } from '@/api/books';
+import { Page } from '@/api/books';
 
 function FrontCoverPage() {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   const book = useRef(null);
+  const [bookData, setBookData] = useState<{ pages: Page[]; bookTitle: string }>();
+
+  const testData = [
+    {
+      page_num: 1,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 1',
+      en_content: 'english content blah blah blah 1',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 2,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 2',
+      en_content: 'english content blah blah blah 2',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 3,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 3',
+      en_content: 'english content blah blah blah 3',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 4,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 4',
+      en_content: 'english content blah blah blah 4',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 5,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 5',
+      en_content: 'english content blah blah blah 5',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 6,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 6',
+      en_content: 'english content blah blah blah 6',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+  ];
+
+  useEffect(() => {
+    const fetchBookData = async () => {
+      try {
+        const result = await readBook(1); // bookID 가져와야함
+        setBookData(result);
+      } catch (error) {
+        console.error('Error fetching book data:', error.message);
+      }
+    };
+
+    fetchBookData();
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -23,29 +90,6 @@ function FrontCoverPage() {
         </button>
         <div className="flex flex-row h-screen mx-auto my-0 w-full px-10">
           <HTMLFlipBook
-            // width={viewportWidth}
-            // height={viewportHeight}
-            // size="stretch"
-            // // minWidth={viewportWidth}
-            // // maxWidth={viewportWidth}
-            // // minHeight={viewportHeight}
-            // // maxHeight={viewportHeight}
-            // drawShadow={false}
-            // flippingTime={1000}
-            // className="book-theme"
-            // startPage={1}
-            // usePortrait={true}
-            // startZIndex={10}
-            // autoSize={true}
-            // maxShadowOpacity={0.5}
-            // showCover={false}
-            // mobileScrollSupport={true}
-            // clickEventForward={true}
-            // useMouseEvents={true}
-            // swipeDistance={3}
-            // showPageCorners={true}
-            // disableFlipByClick={false}
-            // style={{}}
             width={1200}
             height={1180}
             size="stretch"
@@ -71,40 +115,30 @@ function FrontCoverPage() {
             style={{}}
             ref={book}
           >
-            {/* <div className="flex flex-col h-screen justify-center align-center"> */}
             <div className="flex flex-col w-full h-full">
               <div className="flex justify-center">
-                <img className="flex mx-auto min-h-full z-20 w-60" src={robotImg} alt="robot_character" />
+                <img className="flex mx-auto min-h-full z-20 w-60 mt-36" src={robotImg} alt="robot_character" />
               </div>
-              <div className="flex flex-col basis-1/2 items-center align-middle ml-20 gap-y-10">
+              <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20 gap-y-10">
                 <div className="flex justify-center font-dongle text-6xl w-2/3 leading-snug break-keep">
                   라푼젤의 주인공이 되어 이야기를 완성시켜봐!
                 </div>
               </div>
             </div>
+
             <div className="flex w-full h-[800px] pl-10">
               <FrontCover></FrontCover>
             </div>
-            {[1, 2].map((index) => (
+
+            {testData.map((pageData) => (
               <div>
-                <Page pageNumber={index}></Page>
+                <Page props={pageData}></Page>
               </div>
             ))}
+
             <div className="flex w-full h-[800px] pl-10">
-              {/* <FrontCover></FrontCover> */}
               <BackCover></BackCover>
             </div>
-            <div></div>
-            {/* <div className="flex flex-col w-full h-full">
-              <div className="flex justify-center">
-                <img className="flex mx-auto min-h-full z-20 w-60" src={robotImg} alt="robot_character" />
-              </div>
-              <div className="flex flex-col basis-1/2 items-center align-middle ml-20 gap-y-10">
-                <div className="flex justify-center font-dongle text-6xl w-2/3 leading-snug break-keep">
-                  라푼젤의 주인공이 되어 이야기를 완성시켜봐!
-                </div>
-              </div>
-            </div> */}
           </HTMLFlipBook>
         </div>
         <button
@@ -149,7 +183,7 @@ const BackCover = React.forwardRef(() => {
 });
 
 const Page = React.forwardRef((props, ref) => {
-  const { pageNumber } = props;
+  console.log(props.props);
   return (
     <div
       className="flex justify-center items-center flex-col px-[2.5rem] py-8 bg-[#93C4FF] border-[#7bb6ff] border-y-4 border-l-4 border-solid rounded-2xl"
@@ -157,49 +191,11 @@ const Page = React.forwardRef((props, ref) => {
     >
       <div className="flex flex-col items-center justify-around box-border px-2 w-full h-[776px] bg-white bg-opacity-45  rounded-2xl z-30">
         <img src={QuestionMark} className=" mt-12 h-1/4 z-30"></img>
+        {/* <img src={props.props.img_url} className=" mt-12 h-1/4 z-30"></img> */}
         <div className="box-border mt-4 h-[55%] w-[95%] bg-[#fdfdfd] bg-opacity-70 rounded-2xl z-30 pb-10 mb-10">
-          <div className="flex justify-center">{pageNumber} contents blahblahblah</div>
-          <div className="flex justify-center">page contents blahblahblah</div>
-          <div className="flex justify-center">page contents blahblahblah</div>
-          <div className="flex justify-center">page contents blahblahblah</div>
+          <div className="flex justify-center">{props.props.ko_content}</div>
         </div>
       </div>
     </div>
-
-    // <div className="w-screen h-screen bg-white bg-opacity-25 relative z-5">
-    //   <div className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 z-20">
-    //     <img className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
-    //   </div>
-    //   <div className="flex mx-auto my-0 justify-center h-screen w-[1500px]">
-    //     {/* 가장 큰 박스 */}
-    //     <div className=" w-[1450px] px-0 my-3 bg-[#93C4FF] rounded-2xl z-10">
-    //       <div className="flex flex-row w-full h-full">
-    //         {/* 왼쪽 박스 */}
-    //         <div className=" w-1/2 flex justify-center items-center flex-col px-[2.5rem] py-8 border-[#7bb6ff] border-y-4 border-l-4 border-solid rounded-2xl">
-    //           <div className="flex flex-col items-center justify-around box-border px-2 w-full h-full bg-white bg-opacity-45  rounded-2xl z-20">
-    //             <img src={QuestionMark} className=" mt-12 h-1/4 z-30"></img>
-    //             <div className="box-border mt-4 h-[55%] w-[95%] bg-[#fdfdfd] bg-opacity-70 rounded-2xl z-30">asdf</div>
-    //           </div>
-    //         </div>
-    //         {/* 중간 띠 */}
-    //         <div className="w-[4px] mt-4 h-[96.5%] z-30 rounded-l bg-[#7bb6ff]" />
-    //         {/* 오른쪽 박스 */}
-    //         <div className=" w-1/2 flex justify-center items-center flex-col px-[2.5rem] py-8 border-[#7bb6ff] border-y-4 border-r-4 border-solid rounded-2xl">
-    //           <div className="flex flex-col items-center justify-around box-border px-2 w-full h-full bg-white bg-opacity-45  rounded-2xl z-20">
-    //             <img src={QuestionMark} className=" mt-12 h-1/4 z-30"></img>
-    //             <div className="box-border mt-4 h-[55%] w-[95%] bg-[#fdfdfd] bg-opacity-70 rounded-2xl z-30">asdf</div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="absolute top-[45%] right-10 bg-moveButtonColor rounded-full h-24 w-24 z-20 items-end">
-    //     <img className="w-20 z-20 mx-auto my-0" src={nextButtonImg} alt="next_button" />
-    //   </div>
-    // </div>
   );
 });
-
-// const PageCover: React.FC<{ children: React.ReactNode }> = (props) => {
-//   return <div>{props.children}</div>;
-// };
