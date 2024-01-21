@@ -70,16 +70,14 @@ const StoryChoiceModal = () => {
       setShowModal(false);
       setSocketSend(false);
 
-      if (pageNum === 2) {
+      if (bookId != 0 && pageNum === 2) {
         //unmounting이 되고 socket()실행이 돼서 pagenum -1
-        // console.log('if문 내부' + pageNum);
+        console.log('socket closed');
         //소켓종료
         socket?.close();
-        //제목 생성 페이지로 이동
-        navigate('/title');
       }
     };
-  }, [pageNum]);
+  }, [bookId, pageNum]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -117,12 +115,14 @@ const StoryChoiceModal = () => {
         });
       };
 
-      //마지막 페이지의 경우 bookId만 받음
+      // 마지막 페이지의 경우 bookId만 받음
     } else if (socket && pageNum === 3) {
       socket.onmessage = (event) => {
         const book = JSON.parse(event.data);
         setbookId(book.bookId);
       };
+
+      navigate('/title');
     }
   }, [isshowModal, socket, storyChoice, pageNum]);
 
@@ -149,9 +149,9 @@ const StoryChoiceModal = () => {
                   onClick={() => {
                     choiceStory(1);
                   }}
-                  className="cursor-pointer w-2/4 h-[80%]  mt-[4.5rem] ml-10 mr-10  bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"
+                  className="cursor-pointer w-2/4 h-[80%] mt-[4.5rem] ml-10 mr-10 p-8 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)]  rounded-2xl  z-30"
                 >
-                  <span className="font-dongle text-[#222222] text-3xl">
+                  <span className="font-dongle text-[#222222] text-4xl">
                     {storyChoice[index] ? storyChoice[index]['content'] : ''}
                   </span>
                 </div>
@@ -159,9 +159,9 @@ const StoryChoiceModal = () => {
                   onClick={() => {
                     choiceStory(2);
                   }}
-                  className="cursor-pointer w-2/4 h-[80%] mt-[4.5rem] ml-10 mr-10 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl  z-30"
+                  className="cursor-pointer w-2/4 h-[80%] mt-[4.5rem] ml-10 mr-10 p-8 bg-[#D9D9D9] shadow-[5px_3px_4px_0_rgba(0,0,0,0.25)] rounded-2xl  z-30"
                 >
-                  <span className="font-dongle text-[#222222] text-3xl">
+                  <span className="font-dongle text-[#222222] text-4xl">
                     {storyChoice[index + 2] ? storyChoice[index + 2]['content'] : ''}
                   </span>
                 </div>
