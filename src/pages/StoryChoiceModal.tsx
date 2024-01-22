@@ -141,7 +141,7 @@ const StoryChoiceModal = () => {
         {/* 박스 3개 */}
         <div className="flex flex-row justify-center h-[800px] -mt-16 pb-10 z-20">
           {/* 큰 박스 */}
-          <div className=" w-[97%] h-[70%] bg-[#d5e6f7] rounded-xl border-[#cbdbec] border-1 border-solid pt-4 flex flex-row gap-20 justify-center z-20">
+          <div className=" w-[97%] h-[70%] bg-[#E6E6E6] rounded-xl border-[#cbdbec] border-1 border-solid pt-4 flex flex-row gap-20 justify-center z-20">
             {/* 왼쪽 박스 */}
             {isshowModal ? (
               <>
@@ -149,7 +149,7 @@ const StoryChoiceModal = () => {
                   onClick={() => {
                     choiceStory(1);
                   }}
-                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#f7f9fd] shadow-[0px_9px_1px_10px_rgba(140,140,140,0.20)]  rounded-3xl  z-30"
+                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#D9D9D9] shadow-[3px_3px_2px_2px_rgba(0,0,0,0.20)]  rounded-3xl  z-30"
                 >
                   <span className="font-dongle text-[#222222] text-4xl">
                     {storyChoice[index] ? storyChoice[index]['content'] : ''}
@@ -159,7 +159,7 @@ const StoryChoiceModal = () => {
                   onClick={() => {
                     choiceStory(2);
                   }}
-                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#f7f9fd] shadow-[0px_9px_1px_10px_rgba(140,140,140,0.20)] rounded-3xl  z-30"
+                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#D9D9D9] shadow-[3px_3px_2px_2px_rgba(0,0,0,0.20)] rounded-3xl  z-30"
                 >
                   <span className="font-dongle text-[#222222] text-4xl">
                     {storyChoice[index + 2] ? storyChoice[index + 2]['content'] : ''}
