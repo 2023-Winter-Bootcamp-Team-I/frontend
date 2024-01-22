@@ -67,11 +67,11 @@ const router = createBrowserRouter([
         path: 'sharemodal',
         element: <ShareModal />,
       },
-      {
-        path: 'loading',
-        element: <LoadingPage />,
-      },
     ],
+  },
+  {
+    path: 'loading',
+    element: <LoadingPage />,
   },
 
   // {
