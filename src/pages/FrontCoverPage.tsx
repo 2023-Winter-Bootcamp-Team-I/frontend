@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { readBook } from '@/api/books';
 import { BookPage } from '@/api/books';
+import React from 'react';
 
 function FrontCoverPage() {
   const viewportWidth = window.innerWidth;
