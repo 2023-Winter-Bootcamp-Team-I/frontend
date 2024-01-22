@@ -10,6 +10,7 @@ import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 const LibraryPage = () => {
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
@@ -20,7 +21,12 @@ const LibraryPage = () => {
   const selectedLanguage = useRecoilValue(userLanguage);
 
   const setUserID = useSetRecoilState(userIDState);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+
+  const handleLanguageChange = (newLanguage) => {
+    setUserLang(newLanguage);
+    i18n.changeLanguage(newLanguage);
+  };
 
   const handleLogout = () => {
     setUserID(null);
@@ -43,6 +49,11 @@ const LibraryPage = () => {
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    setUserLang(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
   }, []);
 
   const handleMouseEnter = (bookId: number) => {
@@ -74,27 +85,25 @@ const LibraryPage = () => {
             </Link>
             <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8 ">
               <button
-                onClick={() => {
-                  selectedLanguage === 'ko' ? setUserLang('en') : setUserLang('ko');
-                }}
+                onClick={() => handleLanguageChange(selectedLanguage === 'ko' ? 'en' : 'ko')}
                 className="flex gap-2 w-[11rem] h-[3.5rem] bg-white pt-1 pl-1 rounded-3xl border-[#d1d1d1] border-b-8 border-r-4 hover:scale-110"
               >
                 <img src={translation} className="pl-2 -mt-0.5 pt" />
-                <p className="text-[#1D92FF]">{selectedLanguage}</p>
+                <p className="text-[#1D92FF]">{t('languageSelection')}</p>
               </button>
               <Link to="/.">
                 <button
                   className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:scale-110"
                   onClick={handleLogout}
                 >
-                  로그아웃
+                  {t('logout')}
                 </button>
               </Link>
             </div>
           </div>
           <div className="relative z-30">
             <div className="font-dongle text-[120px] text-[#F1F1F1] ml-8 drop-shadow-[2px_3px_0px_rgba(0,0,0,0.35)]">
-              {t('Welcome to React')}
+              <div>{t('library')}</div>
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
               {books.map((book) => (
@@ -144,5 +153,4 @@ const LibraryPage = () => {
     </>
   );
 };
-
 export default LibraryPage;
