@@ -10,9 +10,9 @@ function CreationFinishPage() {
   const book = useRef(null);
   const navigate = useNavigate();
   const navigateToCreateBookPage = () => {
-    // setTimeout(() => {
-    //   navigate('../title');
-    // }, 1000);
+    setTimeout(() => {
+      navigate('../title');
+    }, 1000);
   };
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function CreationFinishPage() {
     const intervalId = setInterval(() => {
       if (book.current) {
         // Check if the book is not flipping, then flip to the next page
-        // if (!book.current.pageFlip().isFlipping) {
-        //   book.current.pageFlip().flipNext();
-        // }
+        if (!book.current.pageFlip().isFlipping) {
+          book.current.pageFlip().flipNext();
+        }
       }
     }, 1000);
 

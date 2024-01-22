@@ -1,7 +1,7 @@
 import robotImg from '@/assets/images/robot.svg';
-import nextButtonImg from '@/assets/images/nextButton.svg';
+// import nextButtonImg from '@/assets/images/nextButton.svg';
 import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,24 @@ function CreationStartPage() {
   const navigateToCreateBookPage = () => {
     setTimeout(() => {
       navigate('../createbookpage');
-    }, 1000);
+    }, 800);
   };
+
+  useEffect(() => {
+    // Set an interval to flip the page every 5 seconds
+    const intervalId = setInterval(() => {
+      if (book.current) {
+        // Check if the book is not flipping, then flip to the next page
+        if (!book.current.pageFlip().isFlipping) {
+          book.current.pageFlip().flipNext();
+        }
+      }
+    }, 1000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []); // Run this effect only once on mount
+
   return (
     <div className="w-screen h-screen">
       <div className="h-full flex flex-col justify-center items-center bg-mainColor bg-opacity-15 z-10">
@@ -67,12 +83,12 @@ function CreationStartPage() {
             ))}
           </HTMLFlipBook>
         </div>
-        <button
+        {/* <button
           className="absolute top-[45%] right-10 bg-moveButtonColor rounded-full h-24 w-24 z-20 items-end"
           onClick={() => book.current.pageFlip().flipNext()}
         >
           <img className="w-20 z-20 mx-auto my-0" src={nextButtonImg} alt="next_button" />
-        </button>
+        </button> */}
       </div>
     </div>
   );
