@@ -1,7 +1,7 @@
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
 import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,7 @@ function CreateInfoPage() {
     type: 'start',
     pageCnt: 0,
     userName: '',
-    fairyTale: '신데렐라',
+    fairyTale: '',
     gender: '',
     age: '',
     language: '',
@@ -48,6 +48,9 @@ function CreateInfoPage() {
 
     if (field == 'language') {
       setUserLanState(value);
+    }
+    if (field === 'fairyTale') {
+      console.log('fairyTale updated:', value);
     }
 
     // console.log(userLanState);
@@ -69,6 +72,10 @@ function CreateInfoPage() {
 
     console.log('User Info:', userInfo);
   };
+
+  useEffect(() => {
+    handleChange('fairyTale', 'Snow White');
+  }, []);
 
   return (
     <div className="flex w-[1300px] h-screen justify-center items-center ml-28">
@@ -100,13 +107,13 @@ function CreateInfoPage() {
           </div>
           <div className="flex flex-row w-[95%] gap-5">
             <button
-              className="w-1/2 h-10  bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
+              className="w-1/2 h-10  bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua  focus:ring "
               onClick={() => handleChange('gender', '남자')}
             >
               남자
             </button>
             <button
-              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
+              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
               onClick={() => handleChange('gender', '여자')}
             >
               여자
@@ -129,19 +136,19 @@ function CreateInfoPage() {
           </div>
         </div>
         <div className="flex flex-col w-full mb-5 ">
-          <div className="w-[95%] h-12  flex items-center  flex-row bg-[#659AFF] rounded-full">
+          <div className="w-[95%] h-12  flex items-center  flex-row bg-[#659AFF] rounded-full ">
             <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-            <p className="font-[Jua] text-3xl mt-1 text-white pr-16">한글/영어 선택해줘!</p>
+            <p className="font-[Jua] text-3xl mt-1 text-white pr-16 ">한글/영어 선택해줘!</p>
           </div>
           <div className="flex gap-5 w-[95%]  ">
             <button
-              className=" w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
+              className=" w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
               onClick={() => handleChange('language', 'ko')}
             >
               한글(Ko)
             </button>
             <button
-              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua"
+              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
               onClick={() => handleChange('language', 'en')}
             >
               영어(En)
@@ -157,7 +164,7 @@ function CreateInfoPage() {
         <div className="flex justify-center items-center w-full">
           <select
             className="w-2/3 mt-3 p-1 font-jua text-3xl"
-            onChange={(e) => handleChange('FairyTale', e.target.value)}
+            onChange={(e) => handleChange('fairyTale', e.target.value)}
           >
             <option value="Snow White">백설 공주</option>
             <option value="Three pig">아기 돼지 삼형제</option>

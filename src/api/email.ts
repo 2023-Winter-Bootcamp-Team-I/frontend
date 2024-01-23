@@ -1,4 +1,5 @@
 import api from './api';
+import Swal from 'sweetalert2';
 
 interface ShareData {
   email: string;
@@ -11,6 +12,12 @@ export const sendEmail = async (shareData: ShareData): Promise<void> => {
       to: shareData.email,
       book_id: shareData.book_id,
     };
+    Swal.fire({
+      title: '이메일 전송 성공!',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 1500,
+    });
     console.log(params);
     // 클라이언트에서 직접 이메일 발송을 시도
     await api.get('/books/share', { params }).then((res) => {

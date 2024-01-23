@@ -1,4 +1,5 @@
 import api from './api';
+import Swal from 'sweetalert2';
 
 interface SignUpData {
   password: string;
@@ -10,12 +11,31 @@ export const signUpUser = async (userData: SignUpData): Promise<void> => {
   try {
     const response = await api.post('/users/signup/', userData);
 
-    // 서버 응답이 성공인 경우
+    // 서버 응답이 성공이 아니면 에러를 던집니다.
+    if (response.status < 200 || response.status >= 300) {
+      throw new Error('가입에 실패했습니다. 다시 시도해주세요.');
+    }
+
     console.log('User created:', response.data);
-    // 추가적인 성공 처리 (예: 리다이렉트)
-  } catch (error) {
-    // 서버 응답이 실패인 경우
-    // console.error('Error creating user:', error.message);
-    // 추가적인 실패 처리 (예: 에러 메시지 표시)
+
+    Swal.fire({
+      title: '회원가입 성공!',
+      text: '가입이 완료되었습니다.',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  } catch (error: any) {
+    console.error('Error creating user:', error.message);
+    Swal.fire({
+      title: '회원가입에 실패했습니다!',
+      text: '정보를 정확히 입력해주세요',
+      icon: 'error',
+      confirmButtonText: '확인',
+      confirmButtonColor: '#3CA5FF',
+      customClass: {
+        popup: 'w-[25%] rounded-xl',
+      },
+    });
   }
 };
