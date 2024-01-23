@@ -4,11 +4,12 @@ import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
 import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { userLanguage } from '@/states/atom';
 import { Link } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { bookID, userIDState, userLanguage } from '@/states/atom';
 
 type WsData = {
+  userId?: number;
   type: string;
   pageCnt: number;
   userName?: string;
@@ -22,9 +23,14 @@ type WsData = {
 };
 
 function CreateInfoPage() {
-  const [userLanState, setUserLanState] = useRecoilState(userLanguage);
+  const setUserLanState = useSetRecoilState(userLanguage);
+  const [userId] = useRecoilState<number>(userIDState);
+  const [bookId, setbookId] = useRecoilState(bookID);
+
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState<WsData>({
+    userId: userId,
     type: 'start',
     pageCnt: 0,
     userName: '',
@@ -54,13 +60,12 @@ function CreateInfoPage() {
     send(userInfo);
   };
 
-  const navigate = useNavigate();
-
   const handleNextButtonClick = () => {
-    navigate('/storychoicemodal');
+    navigate('/creationstart');
     setTimeout(() => {
+      setbookId(0);
       sendDataToServer();
-    }, 2000);
+    }, 1500);
 
     console.log('User Info:', userInfo);
   };

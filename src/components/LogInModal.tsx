@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
 import heartImg from '@/assets/images/heart.svg';
 import letterImg from '@/assets/images/letter.svg';
 import lockImg from '@/assets/images/lock.svg';
-import { loginUser } from '@/api/login';
-import { useSetRecoilState } from 'recoil';
-import { userIDState } from '@/states/atom';
 import Close from '@/assets/images/Close.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { userIDState } from '@/states/atom';
 
-function LogInModal({ closeModal }) {
+
+function LogInModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUserID = useSetRecoilState(userIDState);
