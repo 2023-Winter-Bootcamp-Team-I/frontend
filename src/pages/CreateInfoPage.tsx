@@ -4,6 +4,7 @@ import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
 import { useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bookID, userIDState, userLanguage } from '@/states/atom';
 
@@ -60,7 +61,7 @@ function CreateInfoPage() {
   };
 
   const handleNextButtonClick = () => {
-    navigate('/storychoicemodal');
+    navigate('/creationstart');
     setTimeout(() => {
       setbookId(0);
       sendDataToServer();
@@ -71,9 +72,11 @@ function CreateInfoPage() {
 
   return (
     <div className="flex w-[1300px] h-screen justify-center items-center ml-28">
-      <button>
-        <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute" alt="BackArrow" />
-      </button>
+      <Link to="/library">
+        <button>
+          <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute" alt="BackArrow" />
+        </button>
+      </Link>
       <div className="flex flex-col justify-center items-center mr-10 gap-5">
         <div className="flex flex-col w-full mb-5 ">
           <div className=" w-[95%] h-12 items-center flex flex-row bg-[#659AFF] rounded-full">

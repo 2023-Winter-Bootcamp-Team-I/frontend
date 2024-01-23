@@ -2,13 +2,13 @@ import homeicon from '@/assets/images/Library/Home Page.svg';
 import translation from '@/assets/images/Library/Translation.svg';
 import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
-import share from '@/assets/images/Library/Share.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
 import { Link } from 'react-router-dom';
+import { LuShare } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 
@@ -19,6 +19,7 @@ const LibraryPage = () => {
   const userID = useRecoilValue(userIDState);
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
+  const [currentBookId, setCurrentBookId] = useState<number>(0);
 
   const setUserID = useSetRecoilState(userIDState);
   const { t } = useTranslation();
@@ -44,7 +45,7 @@ const LibraryPage = () => {
         });
         setHovered(initialHoveredState);
       } catch (error) {
-        console.error('Error fetching books:', error.message);
+        console.error('Error fetching books:');
       }
     };
 
@@ -64,7 +65,8 @@ const LibraryPage = () => {
     setHovered((prevHovered) => ({ ...prevHovered, [bookId]: false }));
   };
 
-  const openModal = () => {
+  const openModal = (bookId: number) => {
+    setCurrentBookId(bookId);
     setShowModal(true);
   };
 
@@ -91,7 +93,7 @@ const LibraryPage = () => {
                 <img src={translation} className="pl-2 -mt-0.5 pt" />
                 <p className="text-[#1D92FF]">{t('languageSelection')}</p>
               </button>
-              <Link to="/.">
+              <Link to="/">
                 <button
                   className="w-[11rem] h-[3.5rem] bg-mainBlue pt-1 text-white rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:scale-110"
                   onClick={handleLogout}
@@ -114,8 +116,12 @@ const LibraryPage = () => {
                   <div className="flex flex-row items-center">
                     <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
                     <div>
-                      <button onClick={openModal}>
-                        <img src={share} className="w-6 h-6 ml-10 mt-0" alt="Share Icon" />
+                      <button>
+                        <LuShare
+                          className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#000000]"
+                          alt="Share Icon"
+                          onClick={() => openModal(book.book_id)}
+                        />
                       </button>
                     </div>
                     <svg
@@ -136,7 +142,7 @@ const LibraryPage = () => {
                       />
                     </svg>
                   </div>
-                  {showModal && <ShareModal closeModal={closeModal} bookId={book.book_id} />}
+                  {showModal && <ShareModal closeModal={closeModal} bookId={currentBookId} />}
                 </div>
               ))}
             </div>

@@ -1,5 +1,9 @@
 import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
+import { useState } from 'react';
+import StoryChoiceModal from './StoryChoiceModal';
 const CreateBookPage = () => {
+  const [showStoryChoiceModal, setShowStoryChoiceModal] = useState(true);
+
   return (
     // 배경 색 흐릿하게
     <div className="w-screen h-screen bg-white bg-opacity-25 relative z-5">
@@ -26,6 +30,7 @@ const CreateBookPage = () => {
           </div>
         </div>
       </div>
+      {showStoryChoiceModal && <StoryChoiceModal />}
     </div>
   );
 };
