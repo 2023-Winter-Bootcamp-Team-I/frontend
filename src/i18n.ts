@@ -9,14 +9,14 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         library: 'My Library',
-        languageSelection: '한국어',
+        languageSelection: 'English',
         logout: 'Logout',
       },
     },
     ko: {
       translation: {
         library: '나의 도서관',
-        languageSelection: 'English',
+        languageSelection: '한국어',
         logout: '로그아웃',
       },
     },
