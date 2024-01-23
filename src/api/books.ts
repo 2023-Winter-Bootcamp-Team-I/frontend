@@ -8,6 +8,13 @@ export interface Book {
   image_url: string;
 }
 
+export interface BookPage {
+  page_num: number;
+  ko_content: string;
+  en_content: string;
+  image_url: string;
+}
+
 // /books 에 대한 GET 요청입니다
 // 서재 페이지에서 책들을 처음으로 불러 올 때 사용 됩니다
 // user_id 를 input으로 받으며
@@ -36,12 +43,28 @@ export const updateTitle = async (bookId: number, newTitle: string): Promise<Boo
   }
 };
 
-// /books/{book_id}
+// /books/{book_id} 에 대한 Delete 요청
+// 책을 삭제 할 때 사용됩니다
+// bookId를 input 으로 받습니다
 export const deleteBook = async (bookId: number): Promise<void> => {
   try {
     await api.delete(`/books/${bookId}`);
   } catch (error) {
     console.error('Error deleting book:', error.message);
+    throw error;
+  }
+};
+
+export const readBook = async (bookId: number): Promise<ReadBookResult> => {
+  try {
+    const response = await api.get(`/books/${bookId}`);
+    const pages = response.data.result.content as BookPage[];
+
+    const bookTitle = response.data.result.title;
+
+    return { pages, bookTitle };
+  } catch (error) {
+    console.error('Error fetching book content:', error.message);
     throw error;
   }
 };

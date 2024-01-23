@@ -4,14 +4,18 @@ import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useRecoilValue } from 'recoil';
+import { userIDState } from '@/states/atom';
 
 const textVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
+
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const userID = useRecoilValue(userIDState);
 
   const text = '북그북그';
 
@@ -71,7 +75,14 @@ const MainPage = () => {
             AI와 함께 만드는 우리 아이 동화책
           </motion.div>
           <div className="flex gap-12 h-20 font-[Jua]">
-            <motion.button
+            {userID ? (
+              <Link to="/library">
+                <button className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF] hover:scale-110">
+                  서재로 이동
+                </button>
+              </Link>
+            ) : (
+              <motion.button
               onClick={openModal}
               className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
               whileHover={{ scale: 1.1 }}
@@ -79,7 +90,15 @@ const MainPage = () => {
             >
               로그인
             </motion.button>
-            <Link to="/signup">
+            )}
+            {userID ? (
+              <Link to="/createinfopage">
+                <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110">
+                  책 생성하기
+                </button>
+              </Link>
+            ) : (
+              <Link to="/signup">
               <motion.button
                 className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
                 whileHover={{ scale: 1.1 }}
@@ -88,6 +107,7 @@ const MainPage = () => {
                 회원가입
               </motion.button>
             </Link>
+            )}
           </div>
         </div>
         <motion.img
