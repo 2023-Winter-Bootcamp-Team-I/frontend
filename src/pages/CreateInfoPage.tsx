@@ -60,7 +60,7 @@ function CreateInfoPage() {
   };
 
   const handleNextButtonClick = () => {
-    navigate('/storychoicemodal');
+    navigate('/creationstart');
     setTimeout(() => {
       setbookId(0);
       sendDataToServer();
