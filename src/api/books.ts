@@ -60,7 +60,7 @@ export const deleteBook = async (bookId: number): Promise<void> => {
   }
 };
 
-export const readBook = async (bookId: number): Promise<ReadBookResult> => {
+export const readBook = async (bookId: string): Promise<ReadBookResult> => {
   try {
     const response = await api.get(`/books/${bookId}`);
     const pages = response.data.content as BookPage[];

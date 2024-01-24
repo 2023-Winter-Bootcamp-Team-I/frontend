@@ -12,83 +12,102 @@ import { useParams } from 'react-router-dom';
 
 function FrontCoverPage() {
   const book = useRef(null);
-  // const [bookData, setBookData] = useState<[]>();
   const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
   const { book_id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const testData = [
+    {
+      page_num: 1,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 1',
+      en_content: 'english content blah blah blah 1',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 2,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 2',
+      en_content: 'english content blah blah blah 2',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 3,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 3',
+      en_content: 'english content blah blah blah 3',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 4,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 4',
+      en_content: 'english content blah blah blah 4',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 5,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 5',
+      en_content: 'english content blah blah blah 5',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+    {
+      page_num: 6,
+      ko_content: '대충 되게 긴 이야기 아하마어라어니아 6',
+      en_content: 'english content blah blah blah 6',
+      image_url: '대충 되게 긴 링크',
+      created_at: '2024-00-00',
+      update_at: '2023-00-22',
+    },
+  ];
 
-  // const testData = [
-  //   {
-  //     page_num: 1,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 1',
-  //     en_content: 'english content blah blah blah 1',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  //   {
-  //     page_num: 2,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 2',
-  //     en_content: 'english content blah blah blah 2',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  //   {
-  //     page_num: 3,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 3',
-  //     en_content: 'english content blah blah blah 3',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  //   {
-  //     page_num: 4,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 4',
-  //     en_content: 'english content blah blah blah 4',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  //   {
-  //     page_num: 5,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 5',
-  //     en_content: 'english content blah blah blah 5',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  //   {
-  //     page_num: 6,
-  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 6',
-  //     en_content: 'english content blah blah blah 6',
-  //     image_url: '대충 되게 긴 링크',
-  //     created_at: '2024-00-00',
-  //     update_at: '2023-00-22',
-  //   },
-  // ];
+  // useEffect(() => {
+  //   const fetchBookData = async () => {
+  //     try {
+  //       const result = await readBook(book_id);
+  //       console.log('result in useeffect, ', result);
+  //       console.log('result.pages in useeffect, ', result.pages);
+  //       console.log('result.bookTitle in useeffect, ', result.bookTitle);
+
+  //       setBookData({ pages: result.pages, bookTitle: result.bookTitle });
+
+  //       console.log('bookdata in useeffect, ', bookData);
+  //     } catch (error) {
+  //       console.error('Error fetching book data:', error.message);
+  //     }
+  //   };
+
+  //   fetchBookData();
+  // }, []);
+  const fetchBookData = async () => {
+    try {
+      if (!book_id) {
+        return;
+      }
+      const result = await readBook(book_id);
+
+      setBookData({ pages: result.pages, bookTitle: result.bookTitle });
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching book data:', error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchBookData = async () => {
-      try {
-        const result = await readBook(book_id);
-        console.log('result in useeffect, ', result);
-        console.log('result.pages in useeffect, ', result.pages);
-        console.log('result.bookTitle in useeffect, ', result.bookTitle);
-
-        // const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
-        setBookData({ pages: result.pages, bookTitle: result.bookTitle });
-        // setBookData(result.pages);
-
-        if (bookData) {
-          console.log('bookdata in useeffect, ', bookData);
-        }
-      } catch (error) {
-        console.error('Error fetching book data:', error.message);
-      }
-    };
-
     fetchBookData();
-  }, []);
+  }, [book_id]);
+
+  useEffect(() => {
+    console.log('second useEffect: ', bookData);
+
+    console.log('second useEffect: ', bookData);
+    // console.log(isLoading);
+  }, [bookData]);
 
   return (
     <div className="flex flex-col">
@@ -141,11 +160,18 @@ function FrontCoverPage() {
               <FrontCover></FrontCover>
             </div>
 
-            {/* {bookData?.pages.map((pageData) => (
+            {testData.map((pageData) => (
               <div>
                 <Page props={pageData}></Page>
               </div>
-            ))} */}
+            ))}
+
+            {/* {!isLoading &&
+              bookData?.pages.map((pageData) => (
+                <div>
+                  <Page props={pageData}></Page>
+                </div>
+              ))} */}
 
             <div className="flex w-full h-[800px] pl-10">
               <BackCover></BackCover>
@@ -164,6 +190,7 @@ function FrontCoverPage() {
 }
 
 export default FrontCoverPage;
+
 const FrontCover = React.forwardRef(() => {
   return (
     <div className="flex h-full pb-6">
@@ -193,7 +220,7 @@ const BackCover = React.forwardRef(() => {
 });
 
 const Page = React.forwardRef((props, ref) => {
-  console.log(props.props);
+  console.log(props);
   return (
     <div
       className="flex justify-center items-center flex-col px-[2.5rem] py-8 bg-[#93C4FF] border-[#7bb6ff] border-y-4 border-l-4 border-solid rounded-2xl"
