@@ -12,12 +12,12 @@ export const loginUser = async (loginData: LoginData): Promise<AxiosResponse> =>
     const response = await api.post('/users/signin/', loginData);
     Swal.fire({
       title: '로그인 성공!',
-      text: '환영합니다.',
       icon: 'success',
-      showConfirmButton: false,
       timer: 1500,
     });
+
     return response;
+
     // 추가적인 성공 처리 (예: 리다이렉트)
   } catch (error) {
     console.error('Error fetching books:', error.message);

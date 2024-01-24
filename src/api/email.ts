@@ -15,7 +15,6 @@ export const sendEmail = async (shareData: ShareData): Promise<void> => {
     Swal.fire({
       title: '이메일 전송 성공!',
       icon: 'success',
-      showConfirmButton: false,
       timer: 1500,
     });
     console.log(params);

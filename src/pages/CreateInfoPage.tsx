@@ -40,6 +40,8 @@ function CreateInfoPage() {
     language: '',
   });
 
+  const [selectedGender, setSelectedGender] = useState<string>('');
+
   const handleChange = (field: string, value: string) => {
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
@@ -49,11 +51,23 @@ function CreateInfoPage() {
     if (field == 'language') {
       setUserLanState(value);
     }
-    if (field === 'fairyTale') {
-      console.log('fairyTale updated:', value);
+    if (field === 'gender') {
+      setSelectedGender(value);
     }
 
     // console.log(userLanState);
+  };
+
+  const getButtonStyle = (gender: string) => {
+    return `w-1/2 h-10 bg-white text-[${
+      selectedGender === gender ? '#000000' : '#898989'
+    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#00f]' : ''}`;
+  };
+
+  const getLanguageButtonStyle = (value: string, selectedLanguage: string) => {
+    return `w-1/2 h-10 bg-white text-[${
+      selectedLanguage === value ? '#000000' : '#898989'
+    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#00f]' : ''}`;
   };
 
   //웹소켓 연결
@@ -94,7 +108,7 @@ function CreateInfoPage() {
             <input
               type="text"
               placeholder="이름 입력"
-              className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full "
+              className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full  "
               value={userInfo.userName}
               onChange={(e) => handleChange('userName', e.target.value)}
             />
@@ -106,16 +120,10 @@ function CreateInfoPage() {
             <p className="font-[Jua] text-3xl mt-1 text-white pr-10">너의 성별은 뭐야?</p>
           </div>
           <div className="flex flex-row w-[95%] gap-5">
-            <button
-              className="w-1/2 h-10  bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua  focus:ring "
-              onClick={() => handleChange('gender', '남자')}
-            >
+            <button className={getButtonStyle('남자')} onClick={() => handleChange('gender', '남자')}>
               남자
             </button>
-            <button
-              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
-              onClick={() => handleChange('gender', '여자')}
-            >
+            <button className={getButtonStyle('여자')} onClick={() => handleChange('gender', '여자')}>
               여자
             </button>
           </div>
@@ -142,13 +150,13 @@ function CreateInfoPage() {
           </div>
           <div className="flex gap-5 w-[95%]  ">
             <button
-              className=" w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
+              className={getLanguageButtonStyle('ko', userInfo.language)}
               onClick={() => handleChange('language', 'ko')}
             >
               한글(Ko)
             </button>
             <button
-              className="w-1/2 h-10 bg-white text-[#898989] rounded-full text-2xl mt-3 font-jua focus:ring"
+              className={getLanguageButtonStyle('en', userInfo.language)}
               onClick={() => handleChange('language', 'en')}
             >
               영어(En)

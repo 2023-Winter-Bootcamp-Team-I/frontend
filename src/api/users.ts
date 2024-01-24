@@ -20,11 +20,13 @@ export const signUpUser = async (userData: SignUpData): Promise<void> => {
 
     Swal.fire({
       title: '회원가입 성공!',
-      text: '가입이 완료되었습니다.',
       icon: 'success',
-      showConfirmButton: false,
       timer: 1500,
     });
+
+    setTimeout(() => {
+      window.location.href = '/'; // 다른 방식으로 페이지 이동 가능
+    }, 1500);
   } catch (error: any) {
     console.error('Error creating user:', error.message);
     Swal.fire({

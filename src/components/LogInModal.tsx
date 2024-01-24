@@ -26,7 +26,9 @@ function LogInModal({ closeModal }) {
         setUserID(userID);
         setError('');
         closeModal();
-        navigate('/library');
+        setTimeout(() => {
+          navigate('/library');
+        }, 1500);
       } else {
         setError('유효하지 않은 아이디입니다.');
       }
