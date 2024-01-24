@@ -8,69 +8,80 @@ import HTMLFlipBook from 'react-pageflip';
 import { readBook } from '@/api/books';
 import { BookPage } from '@/api/books';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 function FrontCoverPage() {
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
   const book = useRef(null);
+  // const [bookData, setBookData] = useState<[]>();
   const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
+  const { book_id } = useParams();
 
-  const testData = [
-    {
-      page_num: 1,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 1',
-      en_content: 'english content blah blah blah 1',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-    {
-      page_num: 2,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 2',
-      en_content: 'english content blah blah blah 2',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-    {
-      page_num: 3,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 3',
-      en_content: 'english content blah blah blah 3',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-    {
-      page_num: 4,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 4',
-      en_content: 'english content blah blah blah 4',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-    {
-      page_num: 5,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 5',
-      en_content: 'english content blah blah blah 5',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-    {
-      page_num: 6,
-      ko_content: '대충 되게 긴 이야기 아하마어라어니아 6',
-      en_content: 'english content blah blah blah 6',
-      image_url: '대충 되게 긴 링크',
-      created_at: '2024-00-00',
-      update_at: '2023-00-22',
-    },
-  ];
+  // const testData = [
+  //   {
+  //     page_num: 1,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 1',
+  //     en_content: 'english content blah blah blah 1',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  //   {
+  //     page_num: 2,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 2',
+  //     en_content: 'english content blah blah blah 2',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  //   {
+  //     page_num: 3,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 3',
+  //     en_content: 'english content blah blah blah 3',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  //   {
+  //     page_num: 4,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 4',
+  //     en_content: 'english content blah blah blah 4',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  //   {
+  //     page_num: 5,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 5',
+  //     en_content: 'english content blah blah blah 5',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  //   {
+  //     page_num: 6,
+  //     ko_content: '대충 되게 긴 이야기 아하마어라어니아 6',
+  //     en_content: 'english content blah blah blah 6',
+  //     image_url: '대충 되게 긴 링크',
+  //     created_at: '2024-00-00',
+  //     update_at: '2023-00-22',
+  //   },
+  // ];
 
   useEffect(() => {
     const fetchBookData = async () => {
       try {
-        const result = await readBook(1); // bookID 가져와야함
-        setBookData(result);
+        const result = await readBook(book_id);
+        console.log('result in useeffect, ', result);
+        console.log('result.pages in useeffect, ', result.pages);
+        console.log('result.bookTitle in useeffect, ', result.bookTitle);
+
+        // const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
+        setBookData({ pages: result.pages, bookTitle: result.bookTitle });
+        // setBookData(result.pages);
+
+        if (bookData) {
+          console.log('bookdata in useeffect, ', bookData);
+        }
       } catch (error) {
         console.error('Error fetching book data:', error.message);
       }
@@ -130,11 +141,11 @@ function FrontCoverPage() {
               <FrontCover></FrontCover>
             </div>
 
-            {testData.map((pageData) => (
+            {/* {bookData?.pages.map((pageData) => (
               <div>
                 <Page props={pageData}></Page>
               </div>
-            ))}
+            ))} */}
 
             <div className="flex w-full h-[800px] pl-10">
               <BackCover></BackCover>
@@ -153,7 +164,6 @@ function FrontCoverPage() {
 }
 
 export default FrontCoverPage;
-
 const FrontCover = React.forwardRef(() => {
   return (
     <div className="flex h-full pb-6">

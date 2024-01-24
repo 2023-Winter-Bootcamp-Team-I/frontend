@@ -7,7 +7,7 @@ import { Book, getBooks, deleteBook } from '@/api/books';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState, userLanguage } from '@/states/atom';
 import ShareModal from '../components/ShareModal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LuShare } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
@@ -20,6 +20,7 @@ const LibraryPage = () => {
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
   const [currentBookId, setCurrentBookId] = useState<number>(0);
+  const navigate = useNavigate();
 
   const setUserID = useSetRecoilState(userIDState);
   const { t } = useTranslation();
@@ -31,6 +32,10 @@ const LibraryPage = () => {
 
   const handleLogout = () => {
     setUserID(null);
+  };
+
+  const navigateToPage = (book_id: number) => {
+    navigate(`/mybook/${book_id}`);
   };
 
   useEffect(() => {
@@ -109,41 +114,43 @@ const LibraryPage = () => {
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden m-8 gap-16 scrollbar-thumb-[#53B0FF] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-white hover:scrollbar-thumb-[#64c9f8] scrollbar">
               {books.map((book) => (
-                <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
-                  <div className="w-64 h-64">
-                    <img src={thumbnail} />
-                  </div>
-                  <div className="flex flex-row items-center">
-                    <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
-                    <div>
-                      <button>
-                        <LuShare
-                          className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#000000]"
-                          alt="Share Icon"
-                          onClick={() => openModal(book.book_id)}
-                        />
-                      </button>
+                <button onClick={() => navigateToPage(book.book_id)}>
+                  <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
+                    <div className="w-64 h-64">
+                      <img src={thumbnail} />
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke={hovered[book.book_id] ? '#ee0202' : '#797979'}
-                      className="w-6 h-6 ml-[1rem] cursor-pointer "
-                      onMouseEnter={() => handleMouseEnter(book.book_id)}
-                      onMouseLeave={() => handleMouseLeave(book.book_id)}
-                      onClick={() => deleteBook(book.book_id)}
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
+                    <div className="flex flex-row items-center">
+                      <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
+                      <div>
+                        <button>
+                          <LuShare
+                            className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#000000]"
+                            alt="Share Icon"
+                            onClick={() => openModal(book.book_id)}
+                          />
+                        </button>
+                      </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke={hovered[book.book_id] ? '#ee0202' : '#797979'}
+                        className="w-6 h-6 ml-[1rem] cursor-pointer "
+                        onMouseEnter={() => handleMouseEnter(book.book_id)}
+                        onMouseLeave={() => handleMouseLeave(book.book_id)}
+                        onClick={() => deleteBook(book.book_id)}
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                        />
+                      </svg>
+                    </div>
+                    {showModal && <ShareModal closeModal={closeModal} bookId={currentBookId} />}
                   </div>
-                  {showModal && <ShareModal closeModal={closeModal} bookId={currentBookId} />}
-                </div>
+                </button>
               ))}
             </div>
           </div>
