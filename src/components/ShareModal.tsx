@@ -91,7 +91,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray focus:outline-signupButtonBlue"
                       />
                     </div>
                     <div className="flex mb-[7vh] justify-center"></div>

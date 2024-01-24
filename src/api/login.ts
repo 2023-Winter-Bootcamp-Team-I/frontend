@@ -14,6 +14,7 @@ export const loginUser = async (loginData: LoginData): Promise<AxiosResponse> =>
       title: '로그인 성공!',
       icon: 'success',
       timer: 1500,
+      showConfirmButton: true,
     });
 
     return response;

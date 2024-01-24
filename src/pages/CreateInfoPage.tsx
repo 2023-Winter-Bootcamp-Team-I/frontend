@@ -108,7 +108,7 @@ function CreateInfoPage() {
             <input
               type="text"
               placeholder="이름 입력"
-              className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full  "
+              className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
               value={userInfo.userName}
               onChange={(e) => handleChange('userName', e.target.value)}
             />
@@ -137,7 +137,7 @@ function CreateInfoPage() {
             <input
               type="text"
               placeholder="나이 입력"
-              className=" w-[95%] h-10 mt-4  px-5 text-2xl font-['Jua'] rounded-full "
+              className=" w-[95%] h-10 mt-4  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
               value={userInfo.age}
               onChange={(e) => handleChange('age', e.target.value)}
             />

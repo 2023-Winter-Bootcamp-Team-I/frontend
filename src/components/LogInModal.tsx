@@ -85,7 +85,7 @@ function LogInModal({ closeModal }) {
                         type="email"
                         placeholder="이메일을 입력해주세요"
                         required
-                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray focus:outline-signupButtonBlue"
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
@@ -101,7 +101,7 @@ function LogInModal({ closeModal }) {
                         type="password"
                         placeholder="비밀번호를 입력해주세요"
                         required
-                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
+                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray focus:outline-signupButtonBlue"
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>

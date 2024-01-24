@@ -54,7 +54,7 @@ function SignUp() {
                     type="username"
                     placeholder="이름:"
                     required
-                    className="block w-full text-xl rounded-full px-7 py-4 focus:outline-[#6954df] "
+                    className="block w-full text-xl rounded-full px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue "
                     onChange={handleInputChange}
                   />
                 </div>
@@ -67,7 +67,7 @@ function SignUp() {
                     type="email"
                     placeholder="이메일:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-3 ring-inset"
+                    className="block w-full text-xl rounded-full border-2 border-shadowGray focus:outline-signupButtonBlue px-7 py-4 "
                     onChange={handleInputChange}
                   />
                 </div>
@@ -80,7 +80,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-1 ring-inset"
+                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -93,7 +93,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호 확인:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-1 ring-inset"
+                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
                     // onChange={handleInputChange}
                   />
                 </div>
