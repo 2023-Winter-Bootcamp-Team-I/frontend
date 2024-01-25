@@ -10,7 +10,7 @@ import { BookPage } from '@/api/books';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import FrontCover from '@/components/FrontCover';
-import ContentPage from '@/components/Content\bPage';
+import ContentPage from '@/components/ContentPage';
 
 function FrontCoverPage() {
   const book = useRef<FlipBookType | null>(null);
