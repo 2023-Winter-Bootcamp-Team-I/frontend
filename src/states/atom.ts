@@ -36,7 +36,7 @@ export const showModal = atom({
 
 export const originTitle = atom({
   key: 'originTitle',
-  default: 'a',
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
