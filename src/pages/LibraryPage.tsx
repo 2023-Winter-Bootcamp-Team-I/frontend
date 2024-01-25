@@ -65,6 +65,13 @@ const LibraryPage = () => {
     setHovered((prevHovered) => ({ ...prevHovered, [bookId]: false }));
   };
 
+  const handleDeleteBook = (bookId: number) => {
+    deleteBook(bookId);
+
+    const updatedBooks = books.filter((book) => book.book_id !== bookId);
+    setBooks(updatedBooks);
+  };
+
   const openModal = (bookId: number) => {
     setCurrentBookId(bookId);
     setShowModal(true);
@@ -133,7 +140,7 @@ const LibraryPage = () => {
                       className="w-6 h-6 ml-[1rem] cursor-pointer "
                       onMouseEnter={() => handleMouseEnter(book.book_id)}
                       onMouseLeave={() => handleMouseLeave(book.book_id)}
-                      onClick={() => deleteBook(book.book_id)}
+                      onClick={() => handleDeleteBook(book.book_id)}
                     >
                       <path
                         stroke-linecap="round"
