@@ -1,9 +1,9 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
-import { bookID, originTitle, showModal, userLanguage } from '@/states/atom';
+import { bookID, showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -21,7 +21,7 @@ const StoryChoiceModal = () => {
   const [choice, setChoice] = useState<number>(0); //선택한 스토리 기준 인덱스 (왼쪽 선택 시0 또는 2)
   const [boxNum, setBoxNum] = useState<number>(0); //선택한 박스 번호(왼쪽=1, 오른쪽=2)
   const [pageNum, setPageNum] = useState<number>(0);
-  const [socketSent, setSocketSend] = useState<boolean>(false);
+  // const [socketSent, setSocketSend] = useState<boolean>(false);
   // const setbookId = useSetRecoilState<number>(bookID);
   const [bookId, setbookId] = useRecoilState(bookID);
 
@@ -47,12 +47,12 @@ const StoryChoiceModal = () => {
 
   useEffect(() => {
     if (boxNum !== 0) {
-      setSocketSend(true);
+      // setSocketSend(true);
 
       //소켓 데이터 전송
       socket?.send(
         JSON.stringify({
-          type: pageNum === 3 ? 'end' : 'ing',
+          type: pageNum === 4 ? 'end' : 'ing',
           pageCnt: pageNum,
           choice: boxNum,
           koContent: storyChoice[choice],
@@ -68,9 +68,9 @@ const StoryChoiceModal = () => {
       setStoryChoice([]);
       setMessage('');
       setShowModal(false);
-      setSocketSend(false);
+      // setSocketSend(false);
 
-      if (bookId != 0 && pageNum === 2) {
+      if (bookId != 0 && pageNum === 3) {
         //unmounting이 되고 socket()실행이 돼서 pagenum -1
         console.log('socket closed');
         //소켓종료
@@ -85,7 +85,7 @@ const StoryChoiceModal = () => {
     }, 500);
 
     //socket 연결, pagenum<6이면
-    if (socket && pageNum < 3) {
+    if (socket && pageNum < 4) {
       //서버 응답 받기
       socket.onmessage = (event) => {
         // Buffer를 문자열로 변환
@@ -116,7 +116,7 @@ const StoryChoiceModal = () => {
       };
 
       // 마지막 페이지의 경우 bookId만 받음
-    } else if (socket && pageNum === 3) {
+    } else if (socket && pageNum === 4) {
       socket.onmessage = (event) => {
         const book = JSON.parse(event.data);
         setbookId(book.bookId);
