@@ -23,7 +23,11 @@ const ReadBookPage = () => {
     // 배경 색 흐릿하게
     <div className="w-screen h-screen bg-white bg-opacity-25 relative z-5">
       <div className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 z-20">
-        <img className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
+        <img
+          className="flex w-20 z-20 mx-auto -ml-[0.01px] mt-[0.02px] my-0 hover:scale-110"
+          src={prevButtonImg}
+          alt="prev_button"
+        />
       </div>
       <div className="flex mx-auto my-0 justify-center h-screen w-[1500px]">
         {/* 가장 큰 박스 */}

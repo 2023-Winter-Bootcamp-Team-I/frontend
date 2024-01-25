@@ -100,7 +100,7 @@ function CreateInfoPage() {
       <div className="flex w-[1300px] h-screen justify-center items-center">
         <Link to="/library">
           <button>
-            <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute" alt="BackArrow" />
+            <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute hover:scale-110" alt="BackArrow" />
           </button>
         </Link>
         <div className="flex flex-col justify-center items-center mr-10 gap-5">
@@ -189,8 +189,8 @@ function CreateInfoPage() {
       </div>
       <div className="flex flex-col justify-center">
         <button onClick={handleNextButtonClick}>
-          <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20">
-            <img className="w-20 z-20 mx-auto my-0" src={nextButtonImg} alt="next_button" />
+          <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
+            <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
         </button>
         <p className="mt-5 text-xl font-jua">동화책 만들기</p>

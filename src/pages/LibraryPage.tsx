@@ -94,7 +94,7 @@ const LibraryPage = () => {
           <div className="flex flex-row justify-between mb-1">
             <Link to="/">
               <button>
-                <img src={homeicon} className="h-[6.5rem] w-[6.5rem] -mt-6 -ml-8 hover:scale-150" />
+                <img src={homeicon} className="h-[6.5rem] w-[8.5rem] -mt-6 -ml-8 hover:scale-125" />
               </button>
             </Link>
             <div className="flex flex-row gap-8 font-dongle text-[2.5rem] -mr-8 ">
@@ -126,13 +126,16 @@ const LibraryPage = () => {
                 .map((book) => (
                   <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
                     <div className="w-64 h-64">
-                      <button onClick={() => navigateToPage(book.book_id)}>
+                      <button
+                        onClick={() => navigateToPage(book.book_id)}
+                        className=" hover:border-[#000000] hover:border-4 rounded-md"
+                      >
                         <img src={thumbnail} />
                       </button>
                     </div>
                     <div className="flex flex-row items-center">
                       <button onClick={() => navigateToPage(book.book_id)}>
-                        <div className="text-[#002050] font-dongle text-[2.2rem] p-4">{book.title}</div>
+                        <div className="text-[#002050] font-dongle text-[2.2rem] p-4 ">{book.title}</div>
                       </button>
                       <div>
                         <button>
