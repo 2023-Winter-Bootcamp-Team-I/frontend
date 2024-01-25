@@ -16,7 +16,6 @@ import LoadingPage from '@/pages/LoadingPage';
 import CreationStartPage from '@/pages/CreationStartPage';
 import CreationFinishPage from '@/pages/CreationFinishPage';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -47,7 +46,7 @@ const router = createBrowserRouter([
         element: <StoryChoiceModal />,
       },
       {
-        path: 'frontcover',
+        path: 'mybook/:book_id',
         element: <FrontCoverPage />,
       },
       {

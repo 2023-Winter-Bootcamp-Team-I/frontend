@@ -15,16 +15,21 @@ export interface BookPage {
   image_url: string;
 }
 
+interface ReadBookResult {
+  pages: BookPage[];
+  bookTitle: string;
+}
+
 // /books 에 대한 GET 요청입니다
 // 서재 페이지에서 책들을 처음으로 불러 올 때 사용 됩니다
 // user_id 를 input으로 받으며
 // interface Book을 array의 형태로 반환 합니다
-export const getBooks = async (user_id: number): Book[] => {
+export const getBooks = async (user_id: number): Promise<Book[]> => {
   try {
     const response = await api.get(`/books/?user_id=${user_id}`);
     return response.data.result as Book[];
   } catch (error) {
-    console.error('Error fetching books:', error.message);
+    console.error('Error fetching books:', error);
     throw error;
   }
 };
@@ -38,7 +43,7 @@ export const updateTitle = async (bookId: number, newTitle: string): Promise<Boo
     const response = await api.put(`/books/${bookId}`, { title: newTitle });
     return response.data.result as Book;
   } catch (error) {
-    console.error('Error updating title:', error.message);
+    console.error('Error updating title:', error);
     throw error;
   }
 };
@@ -50,21 +55,20 @@ export const deleteBook = async (bookId: number): Promise<void> => {
   try {
     await api.delete(`/books/${bookId}`);
   } catch (error) {
-    console.error('Error deleting book:', error.message);
+    console.error('Error deleting book:', error);
     throw error;
   }
 };
 
-export const readBook = async (bookId: number): Promise<ReadBookResult> => {
+export const readBook = async (bookId: string): Promise<ReadBookResult> => {
   try {
     const response = await api.get(`/books/${bookId}`);
-    const pages = response.data.result.content as BookPage[];
+    const pages = response.data.content as BookPage[];
 
-    const bookTitle = response.data.result.title;
-
+    const bookTitle = response.data.title;
     return { pages, bookTitle };
   } catch (error) {
-    console.error('Error fetching book content:', error.message);
+    console.error('Error fetching book content:', error);
     throw error;
   }
 };
