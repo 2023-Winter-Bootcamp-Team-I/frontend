@@ -6,7 +6,7 @@ import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { bookID, userIDState, userLanguage } from '@/states/atom';
+import { bookID, originTitle, userIDState, userLanguage } from '@/states/atom';
 
 type WsData = {
   userId?: number;
@@ -25,7 +25,8 @@ type WsData = {
 function CreateInfoPage() {
   const setUserLanState = useSetRecoilState(userLanguage);
   const [userId] = useRecoilState<number>(userIDState);
-  const [bookId, setbookId] = useRecoilState(bookID);
+  const setbookId = useSetRecoilState(bookID);
+  const setOriginTitle = useSetRecoilState<string>(originTitle);
 
   const navigate = useNavigate();
 
@@ -48,6 +49,8 @@ function CreateInfoPage() {
 
     if (field == 'language') {
       setUserLanState(value);
+    } else if (field == 'FairyTale') {
+      setOriginTitle(value);
     }
 
     // console.log(userLanState);
@@ -159,10 +162,10 @@ function CreateInfoPage() {
             className="w-2/3 mt-3 p-1 font-jua text-3xl"
             onChange={(e) => handleChange('FairyTale', e.target.value)}
           >
-            <option value="Snow White">백설 공주</option>
-            <option value="Three pig">아기 돼지 삼형제</option>
-            <option value="Cinderella">신데렐라</option>
-            <option value="Heungbu and Nolbu">흥부와 놀부</option>
+            <option value="백설공주">백설 공주</option>
+            <option value="아기 돼지 삼형제">아기 돼지 삼형제</option>
+            <option value="신데렐라">신데렐라</option>
+            <option value="흥부와 놀부">흥부와 놀부</option>
           </select>
         </div>
       </div>
