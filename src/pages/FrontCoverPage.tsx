@@ -1,7 +1,6 @@
 import robotImg from '@/assets/images/robot.svg';
 import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
-
 import barcodeImg from '@/assets/images/barcode.svg';
 import { useState, useRef, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
@@ -11,11 +10,18 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import FrontCover from '@/components/FrontCover';
 import ContentPage from '@/components/ContentPage';
+import { useTranslation } from 'react-i18next';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { userLanguage } from '@/states/atom';
+import i18n from '@/i18n';
 
 function FrontCoverPage() {
   const book = useRef<FlipBookType | null>(null);
   const [bookData, setBookData] = useState<{ pages: BookPage[]; bookTitle: string }>();
   const { book_id } = useParams();
+  const { t } = useTranslation();
+  const setUserLang = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
 
   type FlipBookType = {
     pageFlip: () => {
@@ -39,6 +45,11 @@ function FrontCoverPage() {
     };
     fetchBookData();
   }, [book_id]);
+
+  useEffect(() => {
+    setUserLang(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -83,7 +94,7 @@ function FrontCoverPage() {
                 </div>
                 <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20 gap-y-10">
                   <div className="flex justify-center font-dongle text-6xl w-2/3 leading-snug break-keep">
-                    그림과 함께 책을 읽어보자!
+                    {t('letsRead')}
                   </div>
                 </div>
               </div>
