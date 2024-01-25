@@ -25,7 +25,7 @@ const LibraryPage = () => {
   const setUserID = useSetRecoilState(userIDState);
   const { t } = useTranslation();
 
-  const handleLanguageChange = (newLanguage) => {
+  const handleLanguageChange = (newLanguage: string | undefined) => {
     setUserLang(newLanguage);
     i18n.changeLanguage(newLanguage);
   };
