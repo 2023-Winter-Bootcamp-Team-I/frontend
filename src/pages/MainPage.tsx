@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LogInModal from '../components/LogInModal';
 import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
@@ -11,7 +11,6 @@ const textVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
-
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -30,13 +29,7 @@ const MainPage = () => {
   return (
     <div className="flex flex-col">
       <div className="w-screen h-48 bg-mainBlue relative mt-24 flex items-center justify-center gap-52 ">
-        <motion.img
-          src={bookmark}
-          className="w-44 h-56 -ml-[35%] -mt-[3.5rem]"
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2 }}
-        />
+        <img src={bookmark} className="w-44 h-56 -ml-[35%] -mt-[3.5rem]" />
         <div className="relative w-auto z-10 h-36">
           {text.split('').map((char, index) => (
             <motion.p
@@ -83,13 +76,13 @@ const MainPage = () => {
               </Link>
             ) : (
               <motion.button
-              onClick={openModal}
-              className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              로그인
-            </motion.button>
+                onClick={openModal}
+                className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                로그인
+              </motion.button>
             )}
             {userID ? (
               <Link to="/createinfopage">
@@ -99,14 +92,14 @@ const MainPage = () => {
               </Link>
             ) : (
               <Link to="/signup">
-              <motion.button
-                className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                회원가입
-              </motion.button>
-            </Link>
+                <motion.button
+                  className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  회원가입
+                </motion.button>
+              </Link>
             )}
           </div>
         </div>
