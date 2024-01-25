@@ -1,9 +1,9 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
-import { bookID, showModal, userLanguage } from '@/states/atom';
+import { bookID, originTitle, showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -102,7 +102,7 @@ const StoryChoiceModal = () => {
         setStoryChoice((prevArr) => {
           const lastItem = prevArr[prevArr.length - 1]; //배열의 마지막 요소
 
-          if (msg === '국' || msg === '영' || msg === '.') {
+          if (msg === '1' || msg === '2') {
             // 다른언어 또는 다른 스토리 시작
             return [...prevArr, { language: msg, content: '' }];
           } else if (lastItem) {

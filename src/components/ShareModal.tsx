@@ -13,29 +13,25 @@ interface ShareModalProps {
 
 const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
   const [email, setEmail] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleShareButtonClick = async () => {
     try {
       if (!email) {
         console.error('이메일 주소를 입력해주세요.');
-        // 이메일이 비어있을 경우에 대한 처리
         return;
       }
-      // console.log(bookId);
       await sendEmail({
         email: email,
         book_id: bookId,
       });
       console.log('이메일 전송 요청이 성공했습니다.');
-      // 추가적인 성공 처리 (예: 리다이렉트)
     } catch (error) {
       console.error('이메일 전송 요청이 실패했습니다.', error);
-      // 실패 시의 처리
     }
   };
 
@@ -58,28 +54,32 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex justify-center text-center sm:items-center sm:p-0 w-full">
-            <div className="relative rounded-lg shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-2/5">
-              <div className="flex flex-row h-[65vh] ">
-                <div className="flex flex-col bg-loginBlue basis-1/3">
-                  <div className="flex basis-2/3 justify-center">
-                    <img className="mx-auto min-h-full mt-8 w-5/6" src={star} alt="star_character" />
+          <div className="flex justify-center text-center md:items-center md:p-0 w-full md:h-10">
+            <div className="relative rounded-md shadow-[0_8px_20px_-8px_rgba(0,0,0,0.2)] transition-all my-8 w-2/3 md:w-2/5">
+              <div className="flex flex-col md:flex-row h-[65vh]">
+                <div className="flex flex-col md:flex-col bg-loginBlue md:basis-1/3  ">
+                  <div className="flex basis-2/3 md:justify-center items-center justify-start">
+                    <img className="mx-auto min-h-full mt-8 md:w-full w-1/3" src={star} alt="star_character" />
                   </div>
-                  <div className="flex basis-1/3 font-dongle text-white text-8xl justify-center align-bottom">
+                  <div className="flex basis-1/3 font-dongle text-white xl:text-8xl  text-6xl md:justify-center md:align-bottom  justify-center">
                     북그북그
                   </div>
                 </div>
-                <div className="flex flex-col bg-mainColor basis-2/3 h-full justify-center">
+                <div className="flex flex-col bg-mainColor md:basis-2/3 basis-full h-full justify-center">
                   <button onClick={closeModal}>
-                    <img className="left-[90%] top-[5%] z-20 absolute hover:scale-110" src={Close} alt="close_button" />
+                    <img
+                      className="xl:left-[90%] md:left-[85%] left-[84%] mr-10 top-[5%] z-20 absolute hover:scale-110"
+                      src={Close}
+                      alt="close_button"
+                    />
                   </button>
-                  <div className="flex text-white font-jua text-4xl justify-center mt-10 mb-[7vh]">
+                  <div className="flex text-white font-jua px-3 xl:text-3xl md:text-xl text-3xl  justify-center mt-10 mb-[7vh]">
                     너의 동화책을 공유해봐!
                   </div>
-                  <div className="flex flex-col justify-center ">
+                  <div className="flex flex-col justify-center">
                     <div className="flex justify-center">
                       <img
-                        className="flex mx-auto min-h-full w-8 opacity-50 -mr-16 ml-10"
+                        className="flex mx-auto min-h-full md:w-8 w-7 opacity-50 -mr-16 ml-10"
                         src={letterImg}
                         alt="letter_image"
                       />
@@ -91,7 +91,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className="block w-[80%] h-[3.2rem] text-xs rounded-full px-20 py-[18px] border-2 border-shadowGray"
+                        className="block md:w-[80%] w-[70%] md:h-[3.2rem] h-[3.2rem] text-base  rounded-full px-20 py-[18px] border-2 border-shadowGray focus:outline-signupButtonBlue"
                       />
                     </div>
                     <div className="flex mb-[7vh] justify-center"></div>
@@ -102,7 +102,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ closeModal, bookId }) => {
                             handleShareButtonClick();
                             closeModal();
                           }}
-                          className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-loginBlue py-3.5 text-3xl leading-7 text-white ml-2 hover:scale-110"
+                          className="md:w-[9.5rem] w-[7.5rem]  md:h-[3.2rem] h-[2.2rem] mb-10  md:text-[1.4rem] text-[1.0rem]  font-jua rounded-2xl bg-loginBlue md:py-3.5 py-1 text text-3xl leading-7 text-white ml-2 hover:scale-110"
                         >
                           공유하기
                         </button>

@@ -7,6 +7,11 @@ import { motion } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
 
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);

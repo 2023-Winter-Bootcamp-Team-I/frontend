@@ -34,6 +34,12 @@ export const showModal = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const originTitle = atom({
+  key: 'originTitle',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
 // 혹시 몰라 카피해와서 주석처리해두는 코드.. import selector 만해주자
 // export const isLoggedInSelector = selector({
 //   key: 'isLoggedInSelector',

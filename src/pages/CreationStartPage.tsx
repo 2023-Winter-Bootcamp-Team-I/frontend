@@ -5,9 +5,19 @@ import { useEffect, useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { originTitle as originTitleAtom } from '@/states/atom';
+
+interface BookType {
+  pageFlip(): {
+    isFlipping: boolean;
+    flipNext(): void;
+  };
+}
 
 function CreationStartPage() {
-  const book = useRef(null);
+  const book = useRef<BookType>(null);
+  const originTitle = useRecoilValue<string>(originTitleAtom);
   const navigate = useNavigate();
   const navigateToCreateBookPage = () => {
     setTimeout(() => {
@@ -67,7 +77,7 @@ function CreationStartPage() {
               </div>
               <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20">
                 <div className="flex justify-center font-dongle -mt-20 text-6xl w-2/3 leading-snug break-keep">
-                  라푼젤의 주인공이 되어 이야기를 완성시켜봐!
+                  {originTitle}의 주인공이 되어 이야기를 완성시켜봐!
                 </div>
               </div>
             </div>
@@ -97,12 +107,14 @@ function CreationStartPage() {
 export default CreationStartPage;
 
 const FrontCover = React.forwardRef(() => {
+  const originTitle: string = useRecoilValue<string>(originTitleAtom);
+
   return (
     <div className="flex h-full pb-6">
       <div className="flex bg-bookCoverBack h-full w-full rounded-3xl">
         <div className="flex flex-col bg-bookCoverFront h-full w-full mt-5 z-20 -ml-6 mr-6 rounded-3xl items-center">
           <div className="flex bg-bookCoverTextBox h-[25%] w-4/5 rounded-3xl border-2 border-shadowGray border-solid font-dongle mt-16 text-[7rem] items-center justify-center">
-            <div className="p-10 break-keep text-titleColor align-bottom">백설 공주</div>
+            <div className="p-10 break-keep text-titleColor align-bottom">{originTitle}</div>
           </div>
           <div className="bg-bookCoverLine mt-48 h-1/5 w-full"></div>
         </div>
