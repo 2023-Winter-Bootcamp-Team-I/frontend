@@ -12,7 +12,6 @@ const textVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);
@@ -83,13 +82,13 @@ const MainPage = () => {
               </Link>
             ) : (
               <motion.button
-              onClick={openModal}
-              className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              로그인
-            </motion.button>
+                onClick={openModal}
+                className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF]"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                로그인
+              </motion.button>
             )}
             {userID ? (
               <Link to="/createinfopage">
@@ -99,14 +98,14 @@ const MainPage = () => {
               </Link>
             ) : (
               <Link to="/signup">
-              <motion.button
-                className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                회원가입
-              </motion.button>
-            </Link>
+                <motion.button
+                  className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff]"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  회원가입
+                </motion.button>
+              </Link>
             )}
           </div>
         </div>

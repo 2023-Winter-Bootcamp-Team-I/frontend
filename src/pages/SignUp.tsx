@@ -54,7 +54,7 @@ function SignUp() {
                     type="username"
                     placeholder="이름:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-1 ring-inset"
+                    className="block w-full text-xl rounded-full px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue "
                     onChange={handleInputChange}
                   />
                 </div>
@@ -67,7 +67,7 @@ function SignUp() {
                     type="email"
                     placeholder="이메일:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-3 ring-inset"
+                    className="block w-full text-xl rounded-full border-2 border-shadowGray focus:outline-signupButtonBlue px-7 py-4 "
                     onChange={handleInputChange}
                   />
                 </div>
@@ -80,7 +80,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-1 ring-inset"
+                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -93,7 +93,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호 확인:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 ring-1 ring-inset"
+                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
                     // onChange={handleInputChange}
                   />
                 </div>
@@ -112,7 +112,7 @@ function SignUp() {
                     가입 취소
                   </motion.button>
                 </Link>
-                <Link to="/" className="flex basis-1/2 justify-center">
+                <div className="flex basis-1/2 justify-center">
                   <motion.button
                     className="flex justify-center font-jua rounded-full bg-signupButtonBlue px-14 py-2.5 text-lg font-bold leading-6 text-white border-b-2 border-r-2 border-shadowGray ml-2"
                     whileHover={{ scale: 1.1 }}
@@ -121,7 +121,7 @@ function SignUp() {
                   >
                     가입 완료
                   </motion.button>
-                </Link>
+                </div>
               </div>
             </div>
           </div>
