@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import heartImg from '@/assets/images/heart.svg';
 import letterImg from '@/assets/images/letter.svg';
 import lockImg from '@/assets/images/lock.svg';
@@ -9,11 +9,15 @@ import { loginUser } from '@/api/login'; // 파일 경로 확인 필요
 import { useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
 
-function LogInModal({ closeModal }) {
+interface LogInModalProps {
+  closeModal: () => void;
+}
+
+function LogInModal({ closeModal }: LogInModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUserID = useSetRecoilState(userIDState);
-  const [error, setError] = useState('');
+  const [, setError] = useState('');
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -49,9 +53,9 @@ function LogInModal({ closeModal }) {
       {isModalOpen && (
         <motion.div
           className="z-10 absolute  w-screen h-screen bg-white  bg-opacity-20 "
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="flex justify-center text-center sm:items-center sm:p-0">
@@ -104,23 +108,23 @@ function LogInModal({ closeModal }) {
                       />
                     </div>
                     <div className="flex flex-row gap-2 ml-2 justify-center">
-                      <motion.button
-                        className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-white py-3.5 text-3xl leading-7 text-loginBlue mr-2"
-                        onClick={handleLogin}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        로그인
-                      </motion.button>
                       <Link to="/signup">
                         <motion.button
-                          className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-loginBlue py-3.5 text-3xl leading-7 text-white ml-2"
+                          className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-loginBlue py-3.5 text-3xl leading-7 text-white mr-2"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                         >
-                          회원 가입
+                          회원가입
                         </motion.button>
                       </Link>
+                      <motion.button
+                        className="w-[9.5rem] h-[3.2rem] text-[1.4rem] font-jua rounded-2xl bg-white py-3.5 text-3xl leading-7 text-loginBlue ml-2"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={handleLogin}
+                      >
+                        로그인
+                      </motion.button>
                     </div>
                   </div>
                 </div>

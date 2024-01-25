@@ -4,17 +4,13 @@ import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userIDState } from '@/states/atom';
-
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);
+  const setUserID = useSetRecoilState(userIDState);
 
   const text = '북그북그';
 
@@ -26,6 +22,10 @@ const MainPage = () => {
     setShowModal(false);
   };
 
+  const handleLogout = () => {
+    setUserID(null);
+  };
+
   return (
     <div className="flex flex-col">
       <div className="w-screen h-48 bg-mainBlue relative mt-24 flex items-center justify-center gap-52 ">
@@ -33,12 +33,7 @@ const MainPage = () => {
         <div className="relative w-auto z-10 h-36">
           {text.split('').map((char, index) => (
             <motion.p
-              key={index}
               className={`text-[150px] font-normal text-white font-dongle absolute -top-1 -left-1 z-0`}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.8, delay: index * 0.4 }}
               style={{
                 left: `${index * 4}rem`,
                 textShadow: '10px 5px 4px rgba(52, 98, 187, 1)', // 그림자 스타일
@@ -53,17 +48,17 @@ const MainPage = () => {
         <div className="flex flex-col gap-6 font-light pl-8 text-white w-2/3">
           <motion.div
             className="text-6xl font-[Dongle] mt-8"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 3.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.5 }}
           >
             우리 아이가 동화책 주인공이라면?
           </motion.div>
           <motion.div
             className="text-6xl font-[Dongle] mb-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 3.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.5, delay: 1.5 }}
           >
             AI와 함께 만드는 우리 아이 동화책
           </motion.div>
@@ -71,7 +66,7 @@ const MainPage = () => {
             {userID ? (
               <Link to="/library">
                 <button className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF] hover:scale-110">
-                  서재로 이동
+                  나의 서재
                 </button>
               </Link>
             ) : (
@@ -85,9 +80,12 @@ const MainPage = () => {
               </motion.button>
             )}
             {userID ? (
-              <Link to="/createinfopage">
-                <button className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110">
-                  책 생성하기
+              <Link to="/">
+                <button
+                  className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110"
+                  onClick={handleLogout}
+                >
+                  로그아웃
                 </button>
               </Link>
             ) : (
@@ -106,13 +104,8 @@ const MainPage = () => {
         <motion.img
           src={cutebook}
           className="w-[38rem] h-[25rem] -mt-4 -mr-12"
-          initial={{ scale: 2 }}
-          animate={{ rotate: 360, scale: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 40,
-            damping: 20,
-          }}
+          animate={{ y: [-40, 10, -40], rotate: [0, 0, 0] }}
+          transition={{ duration: 2, repeat: 1, ease: 'easeInOut' }}
         />
       </div>
       {showModal && <LogInModal closeModal={closeModal} />}
