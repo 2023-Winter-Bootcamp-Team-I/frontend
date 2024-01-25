@@ -5,6 +5,7 @@ import { updateTitle, Title } from '@/api/title';
 import pencil from '@/assets/images/pencil.svg';
 import { useRecoilValue } from 'recoil';
 import { bookID } from '@/states/atom';
+import { originTitle as originTitleAtom } from '@/states/atom';
 import { useNavigate } from 'react-router-dom';
 
 interface CreateTitleModalProps {
@@ -15,6 +16,8 @@ const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title }) => {
   // 상태 초기화
   const [bookTitle, setBookTitle] = useState(title || '');
   const bookId = useRecoilValue<number>(bookID);
+  const originTitle = useRecoilValue<string>(originTitleAtom);
+
   const navigate = useNavigate();
   // console.log(bookId);
 
@@ -48,7 +51,7 @@ const CreateTitleModal: React.FC<CreateTitleModalProps> = ({ title }) => {
               id="title"
               name="title"
               type="text"
-              placeholder="백설 공주"
+              placeholder={originTitle}
               value={bookTitle}
               onChange={(e) => setBookTitle(e.target.value)}
               className="w-[80%] h-[4.2rem] font-jua text-[#898989] text-3xl rounded-full pl-[2rem] focus:text-[#606060] outline-none"

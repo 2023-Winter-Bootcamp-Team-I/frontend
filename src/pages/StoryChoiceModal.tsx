@@ -1,9 +1,9 @@
 import Robot from '@/assets/image/StoryChoice/Robot.svg';
-import { bookID, showModal, userLanguage } from '@/states/atom';
+import { bookID, originTitle, showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
