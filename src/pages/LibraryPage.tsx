@@ -1,6 +1,5 @@
 import homeicon from '@/assets/images/Library/Home Page.svg';
 import translation from '@/assets/images/Library/Translation.svg';
-import thumbnail from '@/assets/images/Library/thumbnail.svg';
 import addbook from '@/assets/images/Library/addbook.svg';
 import { useState, useEffect } from 'react';
 import { Book, getBooks, deleteBook } from '@/api/books';
@@ -127,7 +126,7 @@ const LibraryPage = () => {
                   <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4 hover:bg-[#FF6E91]">
                     <div className="w-64 h-64">
                       <button onClick={() => navigateToPage(book.book_id)}>
-                        <img src={thumbnail} />
+                        <img src={book.image_url} />
                       </button>
                     </div>
                     <div className="flex flex-row items-center">
