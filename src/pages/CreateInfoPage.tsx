@@ -1,7 +1,7 @@
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
 import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -86,14 +86,14 @@ function CreateInfoPage() {
     setTimeout(() => {
       setbookId(0);
       sendDataToServer();
-    }, 1500);
+    }, 2500);
 
     console.log('User Info:', userInfo);
   };
 
-  // useEffect(() => {
-  //   handleChange('fairyTale', 'Snow White');
-  // }, []);
+  useEffect(() => {
+    handleChange('fairyTale', '백설 공주');
+  }, []);
 
   return (
     <div className="h-full w-full flex justify-center items-center">
@@ -179,10 +179,10 @@ function CreateInfoPage() {
               className="w-2/3 mt-3 p-1 font-jua text-3xl"
               onChange={(e) => handleChange('fairyTale', e.target.value)}
             >
-              <option value="snowWhite">백설 공주</option>
-              <option value="threeLittlePigs">아기 돼지 삼형제</option>
-              <option value="cinderella">신데렐라</option>
-              <option value="heungbuNolbu">흥부와 놀부</option>
+              <option value="백설 공주">백설 공주</option>
+              <option value="아기 돼지 삼형제">아기 돼지 삼형제</option>
+              <option value="신데렐라">신데렐라</option>
+              <option value="흥부와 놀부">흥부와 놀부</option>
             </select>
           </div>
         </div>
