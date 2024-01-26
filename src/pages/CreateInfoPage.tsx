@@ -63,15 +63,15 @@ function CreateInfoPage() {
   };
 
   const getButtonStyle = (gender: string) => {
-    return `w-1/2 h-10 bg-white text-[${
+    return `w-1/2 h-12 bg-white text-[${
       selectedGender === gender ? '#000000' : '#898989'
-    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#464fff]' : ''}`;
+    }] rounded-full text-2xl  font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#464fff]' : ''}`;
   };
 
   const getLanguageButtonStyle = (value: string, selectedLanguage: string) => {
-    return `w-1/2 h-10 bg-white text-[${
+    return `w-1/2 h-12 bg-white text-[${
       selectedLanguage === value ? '#000000' : '#898989'
-    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#464fff]' : ''}`;
+    }] rounded-full text-2xl  font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#464fff]' : ''}`;
   };
 
   //웹소켓 연결
@@ -96,35 +96,37 @@ function CreateInfoPage() {
   }, []);
 
   return (
-    <div className="h-full w-full flex justify-center items-center">
-      <div className="flex w-[1300px] h-screen justify-center items-center">
+    <div className="h-screen w-screen flex justify-center items-center ml-16">
+      <div className="flex gap-20 ">
+        <div className="text-3xl font-jua text-white">주인공의 정보를 입력해주세요</div>
+        {/* <div className="flex w-[1300px] h-screen justify-center items-center"> */}
         <Link to="/library">
           <button>
             <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute hover:scale-110" alt="BackArrow" />
           </button>
         </Link>
-        <div className="flex flex-col justify-center items-center mr-10 gap-5">
-          <div className="flex flex-col w-full mb-5 ">
-            <div className=" w-[95%] h-12 items-center flex flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-10">주인공의 이름은 뭐야?</p>
+        <div className="flex flex-col items-center justify-center gap-5 -mr-10">
+          <div className="flex flex-row w-[100%] mb-5  ">
+            <div className=" w-[50%] h-12 items-center flex flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl mt-1 text-white ">이름</p>
             </div>
-            <div className="flex w-full">
+            <div className="flex w-full ml-5">
               <input
                 type="text"
                 placeholder="이름 입력"
-                className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
+                className="h-12 w-[100%] px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
                 value={userInfo.userName}
                 onChange={(e) => handleChange('userName', e.target.value)}
               />
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5">
-            <div className="w-[95%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-10">주인공의 성별은 뭐야?</p>
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl text-white ">성별</p>
             </div>
-            <div className="flex flex-row w-[95%] gap-5">
+            <div className="flex flex-row w-[100%] gap-5 ml-5 ">
               <button className={getButtonStyle('남자')} onClick={() => handleChange('gender', '남자')}>
                 남자
               </button>
@@ -133,27 +135,27 @@ function CreateInfoPage() {
               </button>
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5 ">
-            <div className="w-[95%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-16">주인공은 몇 살이야?</p>
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl mt-1 text-white ">나이</p>
             </div>
-            <div className="">
+            <div className="flex w-full ml-5">
               <input
                 type="text"
                 placeholder="나이 입력"
-                className=" w-[95%] h-10 mt-4  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
+                className=" w-[100%] h-12  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
                 value={userInfo.age}
                 onChange={(e) => handleChange('age', e.target.value)}
               />
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5 ">
-            <div className="w-[95%] h-12  flex items-center flex-row bg-[#659AFF] rounded-full ">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white ">언어를 선택해줘!</p>
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-12  flex items-center flex-row bg-[#659AFF] rounded-full ">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl mt-1 text-white ">언어</p>
             </div>
-            <div className="flex gap-5 w-[95%]  ">
+            <div className="flex gap-5 w-[100%] ml-5 ">
               <button
                 className={getLanguageButtonStyle('ko', userInfo.language)}
                 onClick={() => handleChange('language', 'ko')}
@@ -168,26 +170,27 @@ function CreateInfoPage() {
               </button>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col w-[35%] ml-32">
-          <div className="w-full h-12 justify-center flex items-center  flex-row bg-[#659AFF] rounded-full">
-            <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-            <p className="w-full font-jua mt-1 text-3xl text-white">만들고싶은 동화책을 골라봐!</p>
+          <div className="flex flex-row w-[100%] mb-5  gap-5">
+            <div className="w-[55%] h-12  flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-jua mt-1 text-3xl text-white -ml-1">동화책</p>
+            </div>
+            <div className="flex w-full ">
+              <select
+                className="w-[100%] p-1 font-jua text-3xl"
+                onChange={(e) => handleChange('fairyTale', e.target.value)}
+              >
+                <option value="백설 공주">백설 공주</option>
+                <option value="아기 돼지 삼형제">아기 돼지 삼형제</option>
+                <option value="신데렐라">신데렐라</option>
+                <option value="흥부와 놀부">흥부와 놀부</option>
+              </select>
+            </div>
           </div>
-          <div className="flex justify-center items-center w-full">
-            <select
-              className="w-2/3 mt-3 p-1 font-jua text-3xl"
-              onChange={(e) => handleChange('fairyTale', e.target.value)}
-            >
-              <option value="백설 공주">백설 공주</option>
-              <option value="아기 돼지 삼형제">아기 돼지 삼형제</option>
-              <option value="신데렐라">신데렐라</option>
-              <option value="흥부와 놀부">흥부와 놀부</option>
-            </select>
-          </div>
         </div>
+        {/* </div> */}
       </div>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center ml-10 pl-44">
         <button onClick={handleNextButtonClick}>
           <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />

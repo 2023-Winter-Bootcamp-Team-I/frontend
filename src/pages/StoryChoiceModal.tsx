@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { useRecoilState } from 'recoil';
 
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
