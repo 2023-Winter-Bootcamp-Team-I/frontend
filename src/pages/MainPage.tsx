@@ -40,8 +40,8 @@ const MainPage = () => {
             <motion.p
               className={`text-[150px] font-normal text-white font-dongle absolute -top-1 -left-1 z-0`}
               style={{
-                left: `${index * 4}rem`,
-                textShadow: '10px 5px 4px rgba(52, 98, 187, 1)', // 그림자 스타일
+                left: `${index * 5}rem`,
+                textShadow: '5px 5px 0px #3462BB', // 그림자 스타일
               }}
             >
               {char}
@@ -52,7 +52,7 @@ const MainPage = () => {
       <div className="flex mt-24 mx-auto my-0 gap-8 w-[1100px] h-auto justify-evenly">
         <div className="flex flex-col gap-6 font-light pl-8 text-white w-2/3">
           <motion.div
-            className="text-6xl font-[Dongle] mt-8"
+            className="text-[3.5rem] font-[Dongle] mt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.5 }}
@@ -60,7 +60,7 @@ const MainPage = () => {
             우리 아이가 동화책 주인공이라면?
           </motion.div>
           <motion.div
-            className="text-6xl font-[Dongle] mb-8"
+            className="text-[3.5rem] font-[Dongle] mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.5, delay: 1.5 }}
@@ -109,7 +109,7 @@ const MainPage = () => {
         <motion.img
           src={cutebook}
           className="w-[38rem] h-[25rem] -mt-4 -mr-12"
-          animate={{ y: [-40, 10, -40], rotate: [0, 0, 0] }}
+          animate={{ y: [0, -20, 0], rotate: [0, 0, 0] }}
           transition={{ duration: 2, repeat: 1, ease: 'easeInOut' }}
         />
       </div>

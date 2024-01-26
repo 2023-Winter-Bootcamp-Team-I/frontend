@@ -124,12 +124,9 @@ const LibraryPage = () => {
                 .slice()
                 .reverse()
                 .map((book) => (
-                  <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4">
+                  <div className="flex-col w-64 h-[21rem] bg-[#f2f2f2] bg-opacity-65 rounded-2xl mt-4 hover:bg-[#FF6E91]">
                     <div className="w-64 h-64">
-                      <button
-                        onClick={() => navigateToPage(book.book_id)}
-                        className=" hover:border-[#000000] hover:border-4 rounded-md"
-                      >
+                      <button onClick={() => navigateToPage(book.book_id)}>
                         <img src={thumbnail} />
                       </button>
                     </div>

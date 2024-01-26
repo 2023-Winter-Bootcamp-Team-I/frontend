@@ -139,7 +139,7 @@ const StoryChoiceModal = () => {
           <motion.img
             src={Robot}
             className="w-[14%] mt-3 z-40"
-            animate={{ y: [-40, 10, -40], rotate: [0, 0, 0] }}
+            animate={{ y: [0, -20, 0], rotate: [0, 0, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           ></motion.img>
           <div className="font-dongle text-8xl -mt-4 text-[#002875] z-20">다음은 어떤 장면이 펼쳐질까?</div>

@@ -76,7 +76,7 @@ function CreationStartPage() {
               <div className="flex justify-center pr-8">
                 <motion.img
                   className="flex mx-auto min-h-full z-20 w-60 mt-36"
-                  animate={{ y: [-40, 10, -40], rotate: [0, 0, 0] }}
+                  animate={{ y: [0, -30, 0], rotate: [0, 0, 0] }}
                   transition={{ duration: 2, repeat: 1, ease: 'easeInOut' }}
                   src={robotImg}
                   alt="robot_character"
