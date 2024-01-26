@@ -3,7 +3,10 @@ import { bookID, showModal, userLanguage } from '@/states/atom';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { motion } from 'framer-motion';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useRecoilState } from 'recoil';
+
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
   language: string;
@@ -135,7 +138,12 @@ const StoryChoiceModal = () => {
       <div className=" flex flex-col mx-auto my-0 w-[75rem] relative z-20">
         {/* 로봇 이미지 + 멘트  */}
         <div className="flex flex-row justify-center items-center gap-8 -ml-32 z-50">
-          <img src={Robot} className="w-[14%] mt-3 z-40"></img>
+          <motion.img
+            src={Robot}
+            className="w-[14%] mt-3 z-40"
+            animate={{ y: [0, -20, 0], rotate: [0, 0, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          ></motion.img>
           <div className="font-dongle text-8xl -mt-4 text-[#002875] z-20">다음은 어떤 장면이 펼쳐질까?</div>
         </div>
         {/* 박스 3개 */}

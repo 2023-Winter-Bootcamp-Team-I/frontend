@@ -15,7 +15,11 @@ function BackCoverPage() {
           </div>
         </div>
         <div className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 z-20">
-          <img className="flex w-20 z-20 mx-auto mt-[0.02px] my-0" src={prevButtonImg} alt="prev_button" />
+          <img
+            className="flex w-20 z-20 mx-auto mt-[0.02px] my-0 hover:scale-110"
+            src={prevButtonImg}
+            alt="prev_button"
+          />
         </div>
         <div className="flex flex-col basis-1/2 h-screen justify-center">
           <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20 gap-y-10"></div>

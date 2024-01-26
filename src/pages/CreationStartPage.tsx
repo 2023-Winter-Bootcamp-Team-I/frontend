@@ -7,6 +7,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { originTitle as originTitleAtom } from '@/states/atom';
+import { motion } from 'framer-motion';
 
 interface BookType {
   pageFlip(): {
@@ -73,7 +74,13 @@ function CreationStartPage() {
           >
             <div className="flex flex-col w-full h-full">
               <div className="flex justify-center pr-8">
-                <img className="flex mx-auto min-h-full z-20 w-60 mt-36" src={robotImg} alt="robot_character" />
+                <motion.img
+                  className="flex mx-auto min-h-full z-20 w-60 mt-36"
+                  animate={{ y: [0, -30, 0], rotate: [0, 0, 0] }}
+                  transition={{ duration: 2, repeat: 1, ease: 'easeInOut' }}
+                  src={robotImg}
+                  alt="robot_character"
+                />
               </div>
               <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20">
                 <div className="flex justify-center font-dongle -mt-20 text-6xl w-2/3 leading-snug break-keep">
