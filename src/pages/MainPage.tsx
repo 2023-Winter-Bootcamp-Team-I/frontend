@@ -55,7 +55,7 @@ const MainPage = () => {
             className="text-[3.5rem] font-[Dongle] mt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 2.5 }}
+            transition={{ duration: 1.0 }}
           >
             우리 아이가 동화책 주인공이라면?
           </motion.div>
@@ -63,7 +63,7 @@ const MainPage = () => {
             className="text-[3.5rem] font-[Dongle] mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 2.5, delay: 1.5 }}
+            transition={{ duration: 1.0, delay: 1.0 }}
           >
             AI와 함께 만드는 우리 아이 동화책
           </motion.div>
