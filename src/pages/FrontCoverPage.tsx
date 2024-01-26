@@ -49,7 +49,7 @@ function FrontCoverPage() {
   useEffect(() => {
     setUserLang(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
-  }, []);
+  }, [selectedLanguage, setUserLang]);
 
   return (
     <div className="flex flex-col">
@@ -81,7 +81,7 @@ function FrontCoverPage() {
               showCover={false}
               mobileScrollSupport={true}
               clickEventForward={true}
-              useMouseEvents={true}
+              useMouseEvents={false}
               swipeDistance={3}
               showPageCorners={true}
               disableFlipByClick={false}
