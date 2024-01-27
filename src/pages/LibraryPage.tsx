@@ -137,7 +137,7 @@ const LibraryPage = () => {
                         <div>
                           <button>
                             <LuShare
-                              className="w-6 h-5 ml-10 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#002050]"
+                              className="w-6 h-5 mt-0.5 text-[#797979] transform transition duration-300 ease-in-out hover:text-[#002050]"
                               alt="Share Icon"
                               onClick={() => openModal(book.book_id)}
                             />
