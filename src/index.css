@@ -73,3 +73,34 @@ a {
     src: local('Jua'),
     url('./assets/fonts/Jua/Jua-Regular.ttf');
 }
+
+@font-face {
+  font-family: 'KCC';
+  src: local('KCC'),
+  url('./assets/fonts/KCC/KCC.ttf');
+}
+
+@font-face {
+  font-family: 'Pretty';
+  src: local('Pretty'),
+  url('./assets/fonts/Pretty/pretty.ttf');
+}
+
+@font-face {
+  font-family: 'NPS';
+  src: local('NPS'),
+  url('./assets/fonts/NPS/nps.ttf');
+}
+
+@font-face {
+  font-family: 'HS';
+  src: local('HS'),
+  url('./assets/fonts/HS/HS.ttf');
+}
+
+@font-face {
+  font-family: 'LotteMartHappy';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff');
+}
