@@ -1,6 +1,8 @@
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
 import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
+import input1 from '@/assets/image/CreateInfo/input1.png';
+import typing from '@/assets/image/CreateInfo/typing.svg';
 import { useEffect, useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
@@ -63,13 +65,13 @@ function CreateInfoPage() {
   };
 
   const getButtonStyle = (gender: string) => {
-    return `w-1/2 h-12 bg-white text-[${
+    return `w-1/2 h-[3.5rem] bg-white text-[${
       selectedGender === gender ? '#000000' : '#898989'
     }] rounded-full text-2xl  font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#464fff]' : ''}`;
   };
 
   const getLanguageButtonStyle = (value: string, selectedLanguage: string) => {
-    return `w-1/2 h-12 bg-white text-[${
+    return `w-1/2 h-[3.5rem] bg-white text-[${
       selectedLanguage === value ? '#000000' : '#898989'
     }] rounded-full text-2xl  font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#464fff]' : ''}`;
   };
@@ -96,18 +98,22 @@ function CreateInfoPage() {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center ml-16">
-      <div className="flex gap-20 ">
-        <div className="text-3xl font-jua text-white">주인공의 정보를 입력해주세요</div>
+    <div className="h-screen w-screen flex justify-center ">
+      <div className="flex gap-20 items-center  ">
+        <div className="flex flex-col items-center gap-20 ">
+          <img src={input1} className="w-[50%]" />
+          <div className="text-4xl font-jua text-white ">주인공의 정보를 입력해주세요</div>
+        </div>
         {/* <div className="flex w-[1300px] h-screen justify-center items-center"> */}
         <Link to="/library">
           <button>
             <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute hover:scale-110" alt="BackArrow" />
           </button>
         </Link>
-        <div className="flex flex-col items-center justify-center gap-5 -mr-10">
+        <div className="flex flex-col w-[60%] items-center justify-center gap-5 -mr-10 bg-[#6b84b8] bg-opacity-50 px-10  pb-12 rounded-2xl">
+          <img src={typing} className="w-[30%]" />
           <div className="flex flex-row w-[100%] mb-5  ">
-            <div className=" w-[50%] h-12 items-center flex flex-row bg-[#659AFF] rounded-full">
+            <div className=" w-[50%] h-[3.5rem] items-center flex flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-[Jua] text-3xl mt-1 text-white ">이름</p>
             </div>
@@ -115,14 +121,14 @@ function CreateInfoPage() {
               <input
                 type="text"
                 placeholder="이름 입력"
-                className="h-12 w-[100%] px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
+                className="h-[3.5rem] w-[100%] px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
                 value={userInfo.userName}
                 onChange={(e) => handleChange('userName', e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-row w-[100%] mb-5 ">
-            <div className="w-[50%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
+            <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-[Jua] text-3xl text-white ">성별</p>
             </div>
@@ -136,7 +142,7 @@ function CreateInfoPage() {
             </div>
           </div>
           <div className="flex flex-row w-[100%] mb-5 ">
-            <div className="w-[50%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
+            <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-[Jua] text-3xl mt-1 text-white ">나이</p>
             </div>
@@ -144,14 +150,14 @@ function CreateInfoPage() {
               <input
                 type="text"
                 placeholder="나이 입력"
-                className=" w-[100%] h-12  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
+                className=" w-[100%] h-[3.5rem]  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
                 value={userInfo.age}
                 onChange={(e) => handleChange('age', e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-row w-[100%] mb-5 ">
-            <div className="w-[50%] h-12  flex items-center flex-row bg-[#659AFF] rounded-full ">
+            <div className="w-[50%] h-[3.5rem]  flex items-center flex-row bg-[#659AFF] rounded-full ">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-[Jua] text-3xl mt-1 text-white ">언어</p>
             </div>
@@ -170,14 +176,14 @@ function CreateInfoPage() {
               </button>
             </div>
           </div>
-          <div className="flex flex-row w-[100%] mb-5  gap-5">
-            <div className="w-[55%] h-12  flex items-center  flex-row bg-[#659AFF] rounded-full">
+          <div className="flex flex-row w-[100%]  gap-5">
+            <div className="w-[50%] h-[3.5rem]  flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-jua mt-1 text-3xl text-white -ml-1">동화책</p>
             </div>
             <div className="flex w-full ">
               <select
-                className="w-[100%] p-1 font-jua text-3xl"
+                className="w-[100%]  font-jua text-3xl ml-1"
                 onChange={(e) => handleChange('fairyTale', e.target.value)}
               >
                 <option value="백설 공주">백설 공주</option>
@@ -190,8 +196,8 @@ function CreateInfoPage() {
         </div>
         {/* </div> */}
       </div>
-      <div className="flex flex-col justify-center ml-10 pl-44">
-        <button onClick={handleNextButtonClick}>
+      <div className="flex flex-col justify-center items-end ">
+        <button className="flex" onClick={handleNextButtonClick}>
           <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
