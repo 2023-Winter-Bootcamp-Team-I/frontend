@@ -10,13 +10,13 @@ const LoadingPage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate('/library');
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, [navigate]);
 
   return (
-    <div className="flex flex-col justify-center items-center w-screen h-screen bg-[#bddaff]">
+    <div className="flex flex-col justify-center items-center w-screen h-screen bg-mainColor">
       <Lottie animationData={book} className="-mt-32" />
       <p className="font-dongle text-white text-[2.5rem] -mt-32">책을 만들고 있어요!</p>
       {/* <Lottie animationData={bar} className="w-[20%] h-[30%] -mt-56" /> */}
