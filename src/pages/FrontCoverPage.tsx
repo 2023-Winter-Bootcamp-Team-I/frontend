@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { userLanguage } from '@/states/atom';
 import i18n from '@/i18n';
+import NavBar from '@/components/NavBar';
 
 function FrontCoverPage() {
   const book = useRef<FlipBookType | null>(null);
@@ -49,10 +50,11 @@ function FrontCoverPage() {
   useEffect(() => {
     setUserLang(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
-  }, []);
+  }, [selectedLanguage, setUserLang]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col -pt-100">
+      <NavBar />
       <div className="w-screen h-screen bg-mainColor bg-opacity-15 relative z-10">
         <button
           className="absolute top-[45%] left-[2%] bg-moveButtonColor rounded-full h-24 w-24 ml-10 z-20"
@@ -81,7 +83,7 @@ function FrontCoverPage() {
               showCover={false}
               mobileScrollSupport={true}
               clickEventForward={true}
-              useMouseEvents={true}
+              useMouseEvents={false}
               swipeDistance={3}
               showPageCorners={true}
               disableFlipByClick={false}
@@ -111,6 +113,7 @@ function FrontCoverPage() {
 
               <div className="flex w-full h-[800px] pl-10">
                 <BackCover></BackCover>
+                <img className="flex mx-auto min-h-full z-20 w-60 mt-36" src={robotImg} alt="robot_character" />
               </div>
             </HTMLFlipBook>
           )}

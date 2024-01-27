@@ -13,6 +13,8 @@ export interface BookPage {
   ko_content: string;
   en_content: string;
   image_url: string;
+  ko_tts_url: string;
+  en_tts_url: string;
 }
 
 interface ReadBookResult {

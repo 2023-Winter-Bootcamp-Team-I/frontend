@@ -5,9 +5,11 @@ import { useEffect, useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { originTitle as originTitleAtom } from '@/states/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { originTitle as originTitleAtom, userLanguage } from '@/states/atom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 interface BookType {
   pageFlip(): {
@@ -20,6 +22,10 @@ function CreationStartPage() {
   const book = useRef<BookType>(null);
   const originTitle = useRecoilValue<string>(originTitleAtom);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const setUserLang = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
+
   const navigateToCreateBookPage = () => {
     setTimeout(() => {
       navigate('../createbookpage');
@@ -40,6 +46,11 @@ function CreationStartPage() {
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []); // Run this effect only once on mount
+
+  useEffect(() => {
+    setUserLang(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+  }, []);
 
   return (
     <div className="w-screen h-screen">
@@ -84,7 +95,10 @@ function CreationStartPage() {
               </div>
               <div className="flex flex-col basis-1/2 items-center align-middle mt-24 ml-20">
                 <div className="flex justify-center font-dongle -mt-20 text-6xl w-2/3 leading-snug break-keep">
-                  {originTitle}의 주인공이 되어 이야기를 완성시켜봐!
+                  {/* {originTitle}의 주인공이 되어 이야기를 완성시켜봐! */}
+                  {selectedLanguage === 'ko'
+                    ? `${t(originTitle)}${t('completeStory')}`
+                    : `${t('completeStory')}${t(originTitle)}`}
                 </div>
               </div>
             </div>

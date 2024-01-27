@@ -67,21 +67,34 @@ const router = createBrowserRouter([
       },
       {
         path: 'title',
-        element: <CreateTitleModal />,
+        element: <CreateTitleModal title={''} />,
       },
       {
         path: 'loginmodal',
-        element: <LogInModal />,
+        element: (
+          <LogInModal
+            closeModal={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+        ),
       },
       {
         path: 'sharemodal',
-        element: <ShareModal />,
+        element: (
+          <ShareModal
+            closeModal={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+            bookId={0}
+          />
+        ),
+      },
+      {
+        path: '/loading',
+        element: <LoadingPage />,
       },
     ],
-  },
-  {
-    path: '/loading',
-    element: <LoadingPage />,
   },
 
   // {

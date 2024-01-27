@@ -4,7 +4,9 @@ import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 //웹 소켓 통신으로 스토리 보내고 받고
 interface Story {
@@ -18,7 +20,7 @@ const StoryChoiceModal = () => {
   const [storyChoice, setStoryChoice] = useState<Story[]>([]);
   const [isshowModal, setShowModal] = useRecoilState<boolean>(showModal);
   // const [prevChoiceArr, setPrevChoiceArr] = useState<Story[]>([]);
-  const [userLanState] = useRecoilState(userLanguage);
+  // const [userLanState] = useRecoilState(userLanguage);
   const [index, setIndex] = useState<number>(0); //화면에 출력할 배열의 인덱스 (한글은 0과 2, 영어는 1과 3)
   const [choice, setChoice] = useState<number>(0); //선택한 스토리 기준 인덱스 (왼쪽 선택 시0 또는 2)
   const [boxNum, setBoxNum] = useState<number>(0); //선택한 박스 번호(왼쪽=1, 오른쪽=2)
@@ -26,10 +28,13 @@ const StoryChoiceModal = () => {
   // const [socketSent, setSocketSend] = useState<boolean>(false);
   // const setbookId = useSetRecoilState<number>(bookID);
   const [bookId, setbookId] = useRecoilState(bookID);
+  const { t } = useTranslation();
+  const setUserLanState = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
 
   const navigate = useNavigate();
 
-  if (userLanState == 'en') {
+  if (selectedLanguage == 'en') {
     setIndex(1);
   }
 
@@ -79,7 +84,7 @@ const StoryChoiceModal = () => {
         socket?.close();
       }
     };
-  }, [bookId, pageNum]);
+  }, [bookId, boxNum, choice, pageNum, setShowModal, socket, storyChoice]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -126,53 +131,69 @@ const StoryChoiceModal = () => {
 
       navigate('/creationfinish');
     }
-  }, [isshowModal, socket, storyChoice, pageNum]);
+  }, [isshowModal, socket, storyChoice, pageNum, setShowModal, message, navigate, setbookId]);
 
   useEffect(() => {
     console.log(storyChoice);
   }, [storyChoice]);
 
+  useEffect(() => {
+    setUserLanState(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+  }, []);
+
   return (
-    <div className="flex flex-col bg-[#ffffff] bg-opacity-70 w-screen h-screen py-8 absolute top-0 left-0 z-10">
+    <div className="flex flex-col bg-[#f2f2f2] bg-opacity-80 w-screen h-screen py-8 absolute top-0 left-0 z-10">
       <div className=" flex flex-col mx-auto my-0 w-[75rem] relative z-20">
         {/* 로봇 이미지 + 멘트  */}
-        <div className="flex flex-row justify-center items-center gap-8 -ml-32 z-50">
+        <div className="flex flex-row justify-center items-center gap-8 -ml-28 z-50">
           <motion.img
             src={Robot}
             className="w-[14%] mt-3 z-40"
             animate={{ y: [0, -20, 0], rotate: [0, 0, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           ></motion.img>
-          <div className="font-dongle text-8xl -mt-4 text-[#002875] z-20">다음은 어떤 장면이 펼쳐질까?</div>
+          <div className="font-[HS] text-[4rem] -mt-4 text-[#002875] z-20">{t('nextPageStory')}</div>
         </div>
         {/* 박스 3개 */}
         <div className="flex flex-row justify-center h-[800px] -mt-16 pb-10 z-20">
           {/* 큰 박스 */}
-          <div className=" w-[97%] h-[70%] bg-[#E6E6E6] rounded-xl border-[#cbdbec] border-1 border-solid pt-4 flex flex-row gap-20 justify-center z-20">
+          <div className=" w-full h-[75%] pt-20 flex flex-row gap-10 justify-center z-20">
             {/* 왼쪽 박스 */}
             {isshowModal ? (
-              <>
-                <div
-                  onClick={() => {
-                    choiceStory(1);
-                  }}
-                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#D9D9D9] shadow-[3px_3px_2px_2px_rgba(0,0,0,0.20)]  rounded-3xl  z-30"
-                >
-                  <span className="font-dongle text-[#222222] text-4xl">
-                    {storyChoice[index] ? storyChoice[index]['content'] : ''}
-                  </span>
+              <div className="flex w-full h-full">
+                <div className="flex flex-col justify-center items-center w-[80%] h-[90%]">
+                  <div className="cursor-pointer w-[70%] h-[20%] p-1 bg-[#71B1FC] rounded-2xl z-20 -mb-4 font-[Pretty] flex justify-center pt-2 text-white text-4xl">
+                    첫번째 이야기
+                  </div>
+                  <div
+                    onClick={() => {
+                      choiceStory(1);
+                    }}
+                    className="flex justify-center p-8 font-[Pretty] text-[#01003B] text-3xl cursor-pointer w-[85%] h-full bg-[#ffffff] shadow-[0px_5px_4px_2px_rgba(0,0,0,0.20)] rounded-2xl z-30 border-[6px] border-solid border-[#ACD2FF] hover:border-[#5BA6FF]"
+                  >
+                    {/* <div className="font-[Pretty] w-[90%] h-[60%] text-[#01003B] text-3xl">
+                      {storyChoice[index] ? storyChoice[index]['content'] : ''}
+                    </div> */}
+                    <p>{storyChoice[index] ? storyChoice[index]['content'] : ''}</p>
+                  </div>
                 </div>
-                <div
-                  onClick={() => {
-                    choiceStory(2);
-                  }}
-                  className="cursor-pointer w-[42%] h-[77%] mt-[4.5rem] p-8 bg-[#D9D9D9] shadow-[3px_3px_2px_2px_rgba(0,0,0,0.20)] rounded-3xl  z-30"
-                >
-                  <span className="font-dongle text-[#222222] text-4xl">
-                    {storyChoice[index + 2] ? storyChoice[index + 2]['content'] : ''}
-                  </span>
+                <div className="flex flex-col justify-center items-center w-[80%] h-[90%]">
+                  <div className="cursor-pointer w-[70%] h-[20%] p-1 bg-[#71B1FC] rounded-2xl z-20 -mb-4 font-[Pretty] flex justify-center pt-2 text-white text-4xl">
+                    두번째 이야기
+                  </div>
+                  <div
+                    onClick={() => {
+                      choiceStory(2);
+                    }}
+                    className="flex justify-center p-8 cursor-pointer w-[85%] h-full bg-[#ffffff] shadow-[0px_5px_4px_2px_rgba(0,0,0,0.20)] rounded-2xl z-30 border-[6px] border-solid border-[#ACD2FF] hover:border-[#5BA6FF]"
+                  >
+                    <span className="font-[Pretty] text-[#01003B] text-3xl">
+                      {storyChoice[index + 2] ? storyChoice[index + 2]['content'] : ''}
+                    </span>
+                  </div>
                 </div>
-              </>
+              </div>
             ) : (
               <div></div>
             )}

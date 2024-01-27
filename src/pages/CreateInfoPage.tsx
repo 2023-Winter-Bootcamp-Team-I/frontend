@@ -7,8 +7,10 @@ import { useEffect, useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { bookID, originTitle, userIDState, userLanguage } from '@/states/atom';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 type WsData = {
   userId?: number;
@@ -31,6 +33,8 @@ function CreateInfoPage() {
   const setOriginTitle = useSetRecoilState<string>(originTitle);
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const selectedLanguage = useRecoilValue(userLanguage);
 
   const [userInfo, setUserInfo] = useState<WsData>({
     userId: userId,
@@ -94,7 +98,12 @@ function CreateInfoPage() {
   };
 
   useEffect(() => {
-    handleChange('fairyTale', '백설 공주');
+    handleChange('fairyTale', 'snowWhite');
+  }, []);
+
+  useEffect(() => {
+    setUserLanState(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
   }, []);
 
   return (
@@ -120,7 +129,7 @@ function CreateInfoPage() {
             <div className="flex w-full ml-5">
               <input
                 type="text"
-                placeholder="이름 입력"
+                placeholder={t('enterName')}
                 className="h-[3.5rem] w-[100%] px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
                 value={userInfo.userName}
                 onChange={(e) => handleChange('userName', e.target.value)}
@@ -130,26 +139,26 @@ function CreateInfoPage() {
           <div className="flex flex-row w-[100%] mb-5 ">
             <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl text-white ">성별</p>
+              <p className="font-[Jua] text-3xl text-white ">{t('genderQuestion')}</p>
             </div>
             <div className="flex flex-row w-[100%] gap-5 ml-5 ">
               <button className={getButtonStyle('남자')} onClick={() => handleChange('gender', '남자')}>
-                남자
+                {t('genderMale')}
               </button>
               <button className={getButtonStyle('여자')} onClick={() => handleChange('gender', '여자')}>
-                여자
+                {t('genderFemale')}
               </button>
             </div>
           </div>
           <div className="flex flex-row w-[100%] mb-5 ">
             <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white ">나이</p>
+              <p className="font-[Jua] text-3xl mt-1 text-white ">{t('ageQuestion')}</p>
             </div>
             <div className="flex w-full ml-5">
               <input
                 type="text"
-                placeholder="나이 입력"
+                placeholder={t('enterAge')}
                 className=" w-[100%] h-[3.5rem]  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
                 value={userInfo.age}
                 onChange={(e) => handleChange('age', e.target.value)}
@@ -159,37 +168,37 @@ function CreateInfoPage() {
           <div className="flex flex-row w-[100%] mb-5 ">
             <div className="w-[50%] h-[3.5rem]  flex items-center flex-row bg-[#659AFF] rounded-full ">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white ">언어</p>
+              <p className="font-[Jua] text-3xl mt-1 text-white ">{t('languageQuestion')}</p>
             </div>
             <div className="flex gap-5 w-[100%] ml-5 ">
               <button
-                className={getLanguageButtonStyle('ko', userInfo.language)}
+                className={getLanguageButtonStyle('ko', userInfo.language ?? '')}
                 onClick={() => handleChange('language', 'ko')}
               >
-                한국어
+                {t('selectKorean')}
               </button>
               <button
-                className={getLanguageButtonStyle('en', userInfo.language)}
+                className={getLanguageButtonStyle('en', userInfo.language ?? '')}
                 onClick={() => handleChange('language', 'en')}
               >
-                영어
+                {t('selectEnglish')}
               </button>
             </div>
           </div>
           <div className="flex flex-row w-[100%]  gap-5">
             <div className="w-[50%] h-[3.5rem]  flex items-center  flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
-              <p className="font-jua mt-1 text-3xl text-white -ml-1">동화책</p>
+              <p className="font-jua mt-1 text-3xl text-white -ml-1">{t('storyQuestion')}</p>
             </div>
             <div className="flex w-full ">
               <select
                 className="w-[100%]  font-jua text-3xl ml-1"
                 onChange={(e) => handleChange('fairyTale', e.target.value)}
               >
-                <option value="백설 공주">백설 공주</option>
-                <option value="아기 돼지 삼형제">아기 돼지 삼형제</option>
-                <option value="신데렐라">신데렐라</option>
-                <option value="흥부와 놀부">흥부와 놀부</option>
+                <option value="snowWhite">{t('snowWhite')}</option>
+                <option value="threeLittlePigs">{t('threeLittlePigs')}</option>
+                <option value="cinderella">{t('cinderella')}</option>
+                <option value="heungbuNolbu">{t('heungbuNolbu')}</option>
               </select>
             </div>
           </div>
@@ -203,6 +212,7 @@ function CreateInfoPage() {
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
         </button>
+        <p className="mt-5 text-xl font-jua">{t('createFairytale')}</p>
       </div>
     </div>
   );
