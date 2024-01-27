@@ -80,7 +80,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
+                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-shadowGray focus:outline-signupButtonBlue"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -93,7 +93,7 @@ function SignUp() {
                     type="password"
                     placeholder="비밀번호 확인:"
                     required
-                    className="block w-full text-xl rounded-full border-0 px-7 py-4 border-2 border-shadowGray focus:outline-signupButtonBlue"
+                    className="block w-full text-xl rounded-full px-7 py-4 border-shadowGray focus:outline-signupButtonBlue"
                     // onChange={handleInputChange}
                   />
                 </div>
@@ -125,7 +125,7 @@ function SignUp() {
               </div>
             </div>
           </div>
-        </div>{' '}
+        </div>
       </div>
     </>
   );

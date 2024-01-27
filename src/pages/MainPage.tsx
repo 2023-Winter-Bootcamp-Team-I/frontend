@@ -9,7 +9,6 @@ import { userLanguage, userIDState } from '@/states/atom';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 
-
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);
@@ -18,7 +17,7 @@ const MainPage = () => {
   const setUserLang = useSetRecoilState(userLanguage);
   const selectedLanguage = useRecoilValue(userLanguage);
 
-  const bookguBookgu = t('bookguBookgu');
+  const bookguBookgu = t('bookg');
 
   const openModal = () => {
     setShowModal(true);
