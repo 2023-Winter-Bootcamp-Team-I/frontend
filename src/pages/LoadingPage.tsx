@@ -17,7 +17,7 @@ const LoadingPage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate('/library');
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, [navigate]);
@@ -28,7 +28,7 @@ const LoadingPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center w-screen h-screen bg-[#bddaff]">
+    <div className="flex flex-col justify-center items-center w-screen h-screen bg-mainColor">
       <Lottie animationData={book} className="-mt-32" />
       <p className="font-dongle text-white text-[2.5rem] -mt-32">{t('loadingPage')}</p>
       {/* <Lottie animationData={bar} className="w-[20%] h-[30%] -mt-56" /> */}
