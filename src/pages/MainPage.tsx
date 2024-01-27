@@ -9,6 +9,7 @@ import { userLanguage, userIDState } from '@/states/atom';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 
+
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);
@@ -43,7 +44,7 @@ const MainPage = () => {
         <div className="relative w-auto z-10 h-36">
           {bookguBookgu.split('').map((char, index) => (
             <motion.p
-              className={`text-[150px] font-normal text-white font-dongle absolute -top-1 -left-1 z-0`}
+              className={`text-[100px] font-normal text-white font-[HS] absolute mt-3 -ml-8 z-0`}
               style={{
                 left: `${index * 5}rem`,
                 textShadow: '5px 5px 0px #3462BB', // 그림자 스타일
@@ -57,7 +58,7 @@ const MainPage = () => {
       <div className="flex mt-24 mx-auto my-0 gap-8 w-[1100px] h-auto justify-evenly">
         <div className="flex flex-col gap-6 font-light pl-8 text-white w-2/3">
           <motion.div
-            className="text-[3.5rem] font-[Dongle] mt-8"
+            className="text-[2.3rem] font-[HS] mt-16 -ml-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.0 }}
@@ -65,14 +66,14 @@ const MainPage = () => {
             우리 아이가 동화책 주인공이라면?
           </motion.div>
           <motion.div
-            className="text-[3.5rem] font-[Dongle] mb-8"
+            className="text-[2.3rem] font-[HS] mt-4 mb-12 -ml-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.0, delay: 1.0 }}
           >
             AI와 함께 만드는 우리 아이 동화책
           </motion.div>
-          <div className="flex gap-12 h-20 font-[Jua]">
+          <div className="flex gap-12 h-20 font-[Jua] font-semibold">
             {userID ? (
               <Link to="/library">
                 <button className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF] hover:scale-110">
