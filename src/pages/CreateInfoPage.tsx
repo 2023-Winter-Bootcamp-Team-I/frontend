@@ -110,7 +110,7 @@ function CreateInfoPage() {
             <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute hover:scale-110" alt="BackArrow" />
           </button>
         </Link>
-        <div className="flex flex-col w-[60%] items-center justify-center gap-5 -mr-10 bg-[#6b84b8] bg-opacity-50 px-10  pb-12 rounded-2xl">
+        <div className="flex flex-col w-[60%] items-center justify-center gap-5 -mr-10 bg-[#6b84b8] px-10  pb-12 rounded-2xl z-10">
           <img src={typing} className="w-[30%]" />
           <div className="flex flex-row w-[100%] mb-5  ">
             <div className=" w-[50%] h-[3.5rem] items-center flex flex-row bg-[#659AFF] rounded-full">
@@ -196,13 +196,13 @@ function CreateInfoPage() {
         </div>
         {/* </div> */}
       </div>
-      <div className="flex flex-col justify-center items-end ">
+      <div className="flex flex-col justify-center items-end absolute left-[88%] top-[40%] gap-5 ">
+        <p className="mt-5 text-[#3cb0fd] text-3xl font-jua">동화책 만들기</p>
         <button className="flex" onClick={handleNextButtonClick}>
           <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
         </button>
-        <p className="mt-5 text-xl font-jua">동화책 만들기</p>
       </div>
     </div>
   );
