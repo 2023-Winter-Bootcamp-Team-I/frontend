@@ -2,7 +2,7 @@ import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
 import { useState } from 'react';
 import StoryChoiceModal from './StoryChoiceModal';
 const CreateBookPage = () => {
-  const [showStoryChoiceModal, setShowStoryChoiceModal] = useState(true);
+  const [showStoryChoiceModal] = useState(true);
 
   return (
     // 배경 색 흐릿하게
