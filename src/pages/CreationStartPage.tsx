@@ -50,7 +50,7 @@ function CreationStartPage() {
   useEffect(() => {
     setUserLang(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
-  }, []);
+  }, [selectedLanguage, setUserLang]);
 
   return (
     <div className="w-screen h-screen">

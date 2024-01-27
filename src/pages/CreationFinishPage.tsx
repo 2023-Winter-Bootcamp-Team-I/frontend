@@ -6,8 +6,15 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+interface BookType {
+  pageFlip(): {
+    isFlipping: boolean;
+    flipNext(): void;
+  };
+}
+
 function CreationFinishPage() {
-  const book = useRef(null);
+  const book = useRef<BookType>(null);
   const navigate = useNavigate();
   const navigateToCreateBookPage = () => {
     setTimeout(() => {

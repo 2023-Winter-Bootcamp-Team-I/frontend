@@ -59,7 +59,7 @@ const LibraryPage = () => {
   useEffect(() => {
     setUserLang(selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
-  }, []);
+  }, [selectedLanguage, setUserLang]);
 
   const handleMouseEnter = (bookId: number) => {
     setHovered((prevHovered) => ({ ...prevHovered, [bookId]: true }));
