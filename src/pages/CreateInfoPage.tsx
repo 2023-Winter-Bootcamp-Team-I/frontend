@@ -1,6 +1,8 @@
 import nextButtonImg from '@/assets/images/nextButton.svg';
 import Pencil from '@/assets/image/CreateInfo/Pencil.svg';
 import BackArrow from '@/assets/image/CreateInfo/BackArrow.svg';
+import input1 from '@/assets/image/CreateInfo/input1.png';
+import typing from '@/assets/image/CreateInfo/typing.svg';
 import { useEffect, useState } from 'react';
 import { useWebSocket } from '@/websocket/WebSocketProvider';
 import { useNavigate } from 'react-router-dom';
@@ -67,15 +69,15 @@ function CreateInfoPage() {
   };
 
   const getButtonStyle = (gender: string) => {
-    return `w-1/2 h-10 bg-white text-[${
+    return `w-1/2 h-[3.5rem] bg-white text-[${
       selectedGender === gender ? '#000000' : '#898989'
-    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#464fff]' : ''}`;
+    }] rounded-full text-2xl  font-jua focus:ring ${selectedGender === gender ? 'ring-4 ring-[#464fff]' : ''}`;
   };
 
   const getLanguageButtonStyle = (value: string, selectedLanguage: string) => {
-    return `w-1/2 h-10 bg-white text-[${
+    return `w-1/2 h-[3.5rem] bg-white text-[${
       selectedLanguage === value ? '#000000' : '#898989'
-    }] rounded-full text-2xl mt-3 font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#464fff]' : ''}`;
+    }] rounded-full text-2xl  font-jua focus:ring ${selectedLanguage === value ? 'ring-4 ring-[#464fff]' : ''}`;
   };
 
   //웹소켓 연결
@@ -105,35 +107,41 @@ function CreateInfoPage() {
   }, []);
 
   return (
-    <div className="h-full w-full flex justify-center items-center">
-      <div className="flex w-[1300px] h-screen justify-center items-center">
+    <div className="h-screen w-screen flex justify-center ">
+      <div className="flex gap-20 items-center  ">
+        <div className="flex flex-col items-center gap-20 ">
+          <img src={input1} className="w-[50%]" />
+          <div className="text-4xl font-jua text-white ">주인공의 정보를 입력해주세요</div>
+        </div>
+        {/* <div className="flex w-[1300px] h-screen justify-center items-center"> */}
         <Link to="/library">
           <button>
             <img src={BackArrow} className="left-[0%] top-[0%] ml-5 mt-5 absolute hover:scale-110" alt="BackArrow" />
           </button>
         </Link>
-        <div className="flex flex-col justify-center items-center mr-10 gap-5">
-          <div className="flex flex-col w-full mb-5 ">
-            <div className=" w-[95%] h-12 items-center flex flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-10">{t('nameQuestion')}</p>
+        <div className="flex flex-col w-[60%] items-center justify-center gap-5 -mr-10 bg-[#6b84b8] px-10  pb-12 rounded-2xl z-10">
+          <img src={typing} className="w-[30%]" />
+          <div className="flex flex-row w-[100%] mb-5  ">
+            <div className=" w-[50%] h-[3.5rem] items-center flex flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl mt-1 text-white ">{t('nameQuestion')}</p>
             </div>
-            <div className="flex w-full">
+            <div className="flex w-full ml-5">
               <input
                 type="text"
                 placeholder={t('enterName')}
-                className="h-10 w-[95%] mt-4 px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
+                className="h-[3.5rem] w-[100%] px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue "
                 value={userInfo.userName}
                 onChange={(e) => handleChange('userName', e.target.value)}
               />
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5">
-            <div className="w-[95%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-10">{t('genderQuestion')}</p>
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl text-white ">{t('genderQuestion')}</p>
             </div>
-            <div className="flex flex-row w-[95%] gap-5">
+            <div className="flex flex-row w-[100%] gap-5 ml-5 ">
               <button className={getButtonStyle('남자')} onClick={() => handleChange('gender', '남자')}>
                 {t('genderMale')}
               </button>
@@ -142,67 +150,68 @@ function CreateInfoPage() {
               </button>
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5 ">
-            <div className="w-[95%] h-12 flex items-center  flex-row bg-[#659AFF] rounded-full">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white pr-16">{t('ageQuestion')}</p>
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-[3.5rem] flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-[Jua] text-3xl mt-1 text-white ">{t('ageQuestion')}</p>
             </div>
-            <div className="">
+            <div className="flex w-full ml-5">
               <input
                 type="text"
                 placeholder={t('enterAge')}
-                className=" w-[95%] h-10 mt-4  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
+                className=" w-[100%] h-[3.5rem]  px-5 text-2xl font-['Jua'] rounded-full focus:outline-signupButtonBlue"
                 value={userInfo.age}
                 onChange={(e) => handleChange('age', e.target.value)}
               />
             </div>
           </div>
-          <div className="flex flex-col w-full mb-5 ">
-            <div className="w-[95%] h-12  flex items-center flex-row bg-[#659AFF] rounded-full ">
-              <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
+          <div className="flex flex-row w-[100%] mb-5 ">
+            <div className="w-[50%] h-[3.5rem]  flex items-center flex-row bg-[#659AFF] rounded-full ">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
               <p className="font-[Jua] text-3xl mt-1 text-white ">{t('languageQuestion')}</p>
             </div>
-            <div className="flex gap-5 w-[95%]  ">
+            <div className="flex gap-5 w-[100%] ml-5 ">
               <button
-                className={getLanguageButtonStyle('ko', userInfo.language)}
+                className={getLanguageButtonStyle('ko', userInfo.language ?? '')}
                 onClick={() => handleChange('language', 'ko')}
               >
                 {t('selectKorean')}
               </button>
               <button
-                className={getLanguageButtonStyle('en', userInfo.language)}
+                className={getLanguageButtonStyle('en', userInfo.language ?? '')}
                 onClick={() => handleChange('language', 'en')}
               >
                 {t('selectEnglish')}
               </button>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col w-[35%] ml-32">
-          <div className="w-full h-12 justify-center flex items-center  flex-row bg-[#659AFF] rounded-full">
-            <img src={Pencil} className="w-1/5 mb-10 " alt="Pencil" />
-            <p className="w-full font-jua mt-1 text-3xl text-white">{t('storyQuestion')}</p>
+          <div className="flex flex-row w-[100%]  gap-5">
+            <div className="w-[50%] h-[3.5rem]  flex items-center  flex-row bg-[#659AFF] rounded-full">
+              <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
+              <p className="font-jua mt-1 text-3xl text-white -ml-1">{t('storyQuestion')}</p>
+            </div>
+            <div className="flex w-full ">
+              <select
+                className="w-[100%]  font-jua text-3xl ml-1"
+                onChange={(e) => handleChange('fairyTale', e.target.value)}
+              >
+                <option value="snowWhite">{t('snowWhite')}</option>
+                <option value="threeLittlePigs">{t('threeLittlePigs')}</option>
+                <option value="cinderella">{t('cinderella')}</option>
+                <option value="heungbuNolbu">{t('heungbuNolbu')}</option>
+              </select>
+            </div>
           </div>
-          <div className="flex justify-center items-center w-full">
-            <select
-              className="w-2/3 mt-3 p-1 font-jua text-3xl"
-              onChange={(e) => handleChange('fairyTale', e.target.value)}
-            >
-              <option value="snowWhite">{t('snowWhite')}</option>
-              <option value="threeLittlePigs">{t('threeLittlePigs')}</option>
-              <option value="cinderella">{t('cinderella')}</option>
-              <option value="heungbuNolbu">{t('heungbuNolbu')}</option>
-            </select>
-          </div>
         </div>
+        {/* </div> */}
       </div>
-      <div className="flex flex-col justify-center">
-        <button onClick={handleNextButtonClick}>
+      <div className="flex flex-col justify-center items-end absolute left-[88%] top-[40%] gap-5 ">
+        <p className="mt-5 text-[#3cb0fd] text-3xl font-jua">{t('createFairytale')}</p>
+        <button className="flex" onClick={handleNextButtonClick}>
           <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
         </button>
-        <p className="mt-5 text-xl font-jua">{t('createFairytale')}</p>
       </div>
     </div>
   );
