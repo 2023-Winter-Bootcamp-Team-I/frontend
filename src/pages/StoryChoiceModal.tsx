@@ -84,7 +84,7 @@ const StoryChoiceModal = () => {
         socket?.close();
       }
     };
-  }, [bookId, boxNum, choice, pageNum, setShowModal, socket, storyChoice]);
+  }, [bookId, pageNum]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -131,7 +131,7 @@ const StoryChoiceModal = () => {
 
       navigate('/creationfinish');
     }
-  }, [isshowModal, socket, storyChoice, pageNum, setShowModal, message, navigate, setbookId]);
+  }, [isshowModal, socket, storyChoice, pageNum]);
 
   useEffect(() => {
     console.log(storyChoice);
