@@ -1,23 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LogInModal from '../components/LogInModal';
 import bookmark from '@/assets/images/Background/bookmark.svg';
 import cutebook from '@/assets/images/Background/bookicon.svg';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userIDState } from '@/states/atom';
+import { userLanguage, userIDState } from '@/states/atom';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
-// const textVariants = {
-//   hidden: { opacity: 0, y: 20 },
-//   visible: { opacity: 1, y: 0 },
-// };
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
   const userID = useRecoilValue(userIDState);
   const setUserID = useSetRecoilState(userIDState);
+  const { t } = useTranslation();
+  const setUserLang = useSetRecoilState(userLanguage);
+  const selectedLanguage = useRecoilValue(userLanguage);
 
-  const text = '북그북그';
+  const bookguBookgu = t('bookguBookgu');
 
   const openModal = () => {
     setShowModal(true);
@@ -31,12 +32,17 @@ const MainPage = () => {
     setUserID(null);
   };
 
+  useEffect(() => {
+    setUserLang(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+  }, [selectedLanguage, setUserLang]);
+
   return (
     <div className="flex flex-col">
       <div className="w-screen h-48 bg-mainBlue relative mt-24 flex items-center justify-center gap-52 ">
         <img src={bookmark} className="w-44 h-56 -ml-[35%] -mt-[3.5rem]" />
         <div className="relative w-auto z-10 h-36">
-          {text.split('').map((char, index) => (
+          {bookguBookgu.split('').map((char, index) => (
             <motion.p
               className={`text-[100px] font-normal text-white font-[HS] absolute mt-3 -ml-8 z-0`}
               style={{
@@ -71,7 +77,7 @@ const MainPage = () => {
             {userID ? (
               <Link to="/library">
                 <button className="w-[13rem] h-[4.5rem] bg-mainBlue pt-2 text-[2rem] rounded-3xl border-[#4695D9] border-b-8 border-r-4 hover:bg-[#179EFF] hover:scale-110">
-                  나의 서재
+                  {t('library')}
                 </button>
               </Link>
             ) : (
@@ -81,7 +87,7 @@ const MainPage = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                로그인
+                {t('login')}
               </motion.button>
             )}
             {userID ? (
@@ -90,7 +96,7 @@ const MainPage = () => {
                   className="w-[13rem] h-[4.5rem] bg-[#F1F1F1] text-mainBlue pt-2 text-[2rem] rounded-3xl border-[#AAAAAA] border-b-8 border-r-4 hover:bg-[#ffffff] hover:scale-110"
                   onClick={handleLogout}
                 >
-                  로그아웃
+                  {t('logout')}
                 </button>
               </Link>
             ) : (
@@ -100,7 +106,7 @@ const MainPage = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  회원가입
+                  {t('signup')}
                 </motion.button>
               </Link>
             )}
