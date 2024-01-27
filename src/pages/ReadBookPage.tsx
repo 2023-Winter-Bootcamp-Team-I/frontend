@@ -1,8 +1,6 @@
 import QuestionMark from '@/assets/image/CreateBook/QuestionMark.svg';
 import prevButtonImg from '@/assets/images/prevButton.svg';
 import nextButtonImg from '@/assets/images/nextButton.svg';
-import FlipBook from '@/components/FlipBook';
-import HTMLFlipBook from 'react-pageflip';
 
 // function ReadBookPage(props) {
 //   return (
