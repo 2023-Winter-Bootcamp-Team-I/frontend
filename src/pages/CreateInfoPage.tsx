@@ -124,7 +124,7 @@ function CreateInfoPage() {
           <div className="flex flex-row w-[100%] mb-5  ">
             <div className=" w-[50%] h-[3.5rem] items-center flex flex-row bg-[#659AFF] rounded-full">
               <img src={Pencil} className="w-2/5 mb-10 " alt="Pencil" />
-              <p className="font-[Jua] text-3xl mt-1 text-white ">이름</p>
+              <p className="font-[Jua] text-3xl mt-1 text-white ">{t('nameQuestion')}</p>
             </div>
             <div className="flex w-full ml-5">
               <input
@@ -206,13 +206,12 @@ function CreateInfoPage() {
         {/* </div> */}
       </div>
       <div className="flex flex-col justify-center items-end absolute left-[88%] top-[40%] gap-5 ">
-        <p className="mt-5 text-[#3cb0fd] text-3xl font-jua">동화책 만들기</p>
+        <p className="mt-5 text-[#3cb0fd] text-3xl font-jua">{t('createFairytale')}</p>
         <button className="flex" onClick={handleNextButtonClick}>
           <div className="bg-moveButtonColor rounded-full h-24 w-24 z-20 hover:scale-110">
             <img className="w-20 z-20 mx-auto my-0 hover:scale-110" src={nextButtonImg} alt="next_button" />
           </div>
         </button>
-        <p className="mt-5 text-xl font-jua">{t('createFairytale')}</p>
       </div>
     </div>
   );
